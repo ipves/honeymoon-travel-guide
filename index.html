@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#143a4a" />
+    <title>Lila & Noah Honeymoon Guide</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <img src="assets/amalfi-paris-hero.png" alt="" />
+        <div class="hero__shade"></div>
+        <div class="hero__content">
+          <p class="eyebrow">June 20 - July 1</p>
+          <h1>Lila & Noah Honeymoon</h1>
+          <p>Paris, Praiano, Pompeii, and the calm little decisions in between.</p>
+        </div>
+      </header>
+
+      <main>
+        <section class="search-panel" aria-label="Search the guide">
+          <label for="searchInput">Search anything</label>
+          <div class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" autocomplete="off" placeholder="restaurant, transfer, passport, Eiffel..." />
+            <button id="clearSearch" type="button" aria-label="Clear search">×</button>
+          </div>
+        </section>
+
+        <section id="searchResults" class="results" hidden></section>
+
+        <section class="view is-active" data-view="today">
+          <div class="section-heading">
+            <p>Open first</p>
+            <h2>Trip Dashboard</h2>
+          </div>
+          <div id="dashboardGrid" class="dashboard"></div>
+        </section>
+
+        <section class="view" data-view="days">
+          <div class="section-heading">
+            <p>Day by day</p>
+            <h2>Itinerary</h2>
+          </div>
+          <div id="dayList" class="timeline"></div>
+        </section>
+
+        <section class="view" data-view="food">
+          <div class="section-heading">
+            <p>By mood and location</p>
+            <h2>Dining</h2>
+          </div>
+          <div id="foodList" class="grid"></div>
+        </section>
+
+        <section class="view" data-view="move">
+          <div class="section-heading">
+            <p>When you need the next step</p>
+            <h2>Transport</h2>
+          </div>
+          <div id="transportList" class="stack"></div>
+        </section>
+
+        <section class="view" data-view="pack">
+          <div class="section-heading">
+            <p>Saved on this phone</p>
+            <h2>Checklist</h2>
+          </div>
+          <div id="checklistList" class="stack"></div>
+        </section>
+
+        <section class="view" data-view="docs">
+          <div class="section-heading">
+            <p>Offline source library</p>
+            <h2>Documents</h2>
+          </div>
+          <div id="docList" class="stack"></div>
+        </section>
+      </main>
+
+      <nav class="tabbar" aria-label="Guide sections">
+        <button class="is-active" data-tab="today" type="button"><span>⌂</span>Home</button>
+        <button data-tab="days" type="button"><span>◷</span>Days</button>
+        <button data-tab="food" type="button"><span>♨</span>Food</button>
+        <button data-tab="move" type="button"><span>↗</span>Move</button>
+        <button data-tab="pack" type="button"><span>✓</span>Pack</button>
+        <button data-tab="docs" type="button"><span>☰</span>Docs</button>
+      </nav>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
