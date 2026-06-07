@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#143a4a" />
     <title>Lila & Noah Honeymoon Guide</title>
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="styles.css?v=23" />
+    <link rel="stylesheet" href="styles.css?v=24" />
   </head>
   <body>
     <div class="app-shell">
@@ -21,13 +21,14 @@
       </header>
 
       <main>
-        <section class="search-panel" aria-label="Search the guide">
-          <label for="searchInput">Search anything</label>
-          <div class="search-box">
-            <span aria-hidden="true">⌕</span>
-            <input id="searchInput" autocomplete="off" placeholder="restaurant, transfer, passport, Eiffel..." />
-            <button id="clearSearch" type="button" aria-label="Clear search">×</button>
-          </div>
+        <section class="search-panel" aria-label="Ask the guide">
+          <label for="searchInput">Ask the guide</label>
+          <form class="search-box" id="askForm">
+            <span aria-hidden="true">?</span>
+            <input id="searchInput" autocomplete="off" placeholder="Ask about tickets, timing, packing, restaurants..." />
+            <button id="askButton" type="submit">Ask</button>
+            <button id="clearSearch" type="button" aria-label="Clear question">×</button>
+          </form>
         </section>
 
         <section id="searchResults" class="results" hidden></section>
@@ -91,7 +92,7 @@
       </nav>
     </div>
 
-    <script src="data.js?v=23"></script>
-    <script src="app.js?v=23"></script>
+    <script src="data.js?v=24"></script>
+    <script src="app.js?v=24"></script>
   </body>
 </html>

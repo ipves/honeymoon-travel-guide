@@ -296,9 +296,68 @@ const state = { query: "", checks: loadChecks() };
 
 const views = [...document.querySelectorAll(".view")];
 const tabs = [...document.querySelectorAll("[data-tab]")];
+const askForm = document.querySelector("#askForm");
 const searchInput = document.querySelector("#searchInput");
 const clearSearch = document.querySelector("#clearSearch");
 const results = document.querySelector("#searchResults");
+const STOP_WORDS = new Set([
+  "a",
+  "about",
+  "after",
+  "an",
+  "and",
+  "are",
+  "at",
+  "be",
+  "can",
+  "do",
+  "does",
+  "for",
+  "from",
+  "get",
+  "go",
+  "have",
+  "how",
+  "i",
+  "in",
+  "is",
+  "it",
+  "me",
+  "need",
+  "of",
+  "on",
+  "or",
+  "our",
+  "should",
+  "the",
+  "their",
+  "they",
+  "to",
+  "we",
+  "what",
+  "when",
+  "where",
+  "with",
+]);
+const QUERY_ALIASES = {
+  cash: ["cash", "euros", "atm", "cooking"],
+  euro: ["euros", "atm", "cash"],
+  euros: ["euros", "atm", "cash"],
+  money: ["euros", "atm", "cash"],
+  champagne: ["champagne", "seine", "cruise", "booking"],
+  cruise: ["champagne", "seine", "cruise", "pont", "neuf"],
+  eiffel: ["eiffel", "tower", "summit"],
+  louvre: ["louvre", "mona", "venus", "winged"],
+  versailles: ["versailles", "palace", "gardens"],
+  capri: ["capri", "boat", "bellavita", "charter"],
+  pompeii: ["pompeii", "moxy", "porta", "marina"],
+  cooking: ["cooking", "ristorante", "km0", "euros"],
+  food: ["dinner", "lunch", "restaurant", "dining"],
+  eat: ["dinner", "lunch", "restaurant", "dining"],
+  pack: ["pack", "packing", "bring", "carry"],
+  ticket: ["ticket", "booking", "confirmation", "reference"],
+  tickets: ["ticket", "booking", "confirmation", "reference"],
+};
 
 function loadChecks() {
   try {
@@ -413,6 +472,24 @@ function flattenContent() {
 
 const searchIndex = flattenContent();
 
+function termsFromQuery(query) {
+  const raw = query
+    .toLowerCase()
+    .replace(/[^a-z0-9+]+/g, " ")
+    .split(/\s+/)
+    .filter((term) => term.length > 1 && !STOP_WORDS.has(term));
+  const expanded = raw.flatMap((term) => [term, ...(QUERY_ALIASES[term] || [])]);
+  return [...new Set(expanded)];
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
 function snippet(text, terms) {
   const lower = text.toLowerCase();
   const hits = terms.map((term) => lower.indexOf(term)).filter((index) => index >= 0);
@@ -421,8 +498,31 @@ function snippet(text, terms) {
   return text.slice(start, start + 180).replace(/\s+/g, " ").trim();
 }
 
-function runSearch() {
-  const query = state.query.trim().toLowerCase();
+function scoreItem(item, terms) {
+  const title = item.title.toLowerCase();
+  const type = item.type.toLowerCase();
+  const text = item.text.toLowerCase();
+  return terms.reduce((sum, term) => {
+    let points = 0;
+    if (title.includes(term)) points += 5;
+    if (type.includes(term)) points += 3;
+    if (text.includes(term)) points += 1;
+    return sum + points;
+  }, 0);
+}
+
+function answerIntro(query, matches) {
+  const q = query.toLowerCase();
+  if (!matches.length) return "I could not find that in the offline guide.";
+  if (q.includes("when") || q.includes("time")) return "Here is the timing I found in the offline guide.";
+  if (q.includes("where") || q.includes("map") || q.includes("address")) return "Here is the place information I found in the offline guide.";
+  if (q.includes("bring") || q.includes("pack")) return "Here is the packing guidance I found in the offline guide.";
+  if (q.includes("book") || q.includes("ticket") || q.includes("confirmation") || q.includes("reference")) return "Here are the booking details I found in the offline guide.";
+  return "Here is the best match I found in the offline guide.";
+}
+
+function runAsk() {
+  const query = state.query.trim();
   clearSearch.hidden = !query;
   if (!query) {
     results.hidden = true;
@@ -431,32 +531,53 @@ function runSearch() {
     return;
   }
 
-  const terms = query.split(/\s+/).filter(Boolean);
+  const terms = termsFromQuery(query);
   const matches = searchIndex
     .map((item) => {
-      const haystack = `${item.title} ${item.type} ${item.text}`.toLowerCase();
-      const score = terms.reduce((sum, term) => sum + (haystack.includes(term) ? 1 : 0), 0);
-      return { ...item, score };
+      return { ...item, score: scoreItem(item, terms) };
     })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 30);
+    .slice(0, 8);
 
   results.hidden = false;
-  results.innerHTML = matches.length
-    ? matches.map((item) => `<article class="result"><p>${item.type}</p><h3>${item.title}</h3><div>${snippet(item.text, terms)}</div></article>`).join("")
-    : `<article class="empty"><h3>No matches yet</h3><p>Try a broader term like airport, dinner, passport, Amalfi, or Paris.</p></article>`;
+  if (!matches.length || !terms.length) {
+    results.innerHTML = `<article class="empty"><h3>I could not find that in the offline guide.</h3><p>Try asking about a specific day, place, booking, ticket, restaurant, packing item, or transfer.</p></article>`;
+    return;
+  }
+
+  const [best, ...related] = matches;
+  results.innerHTML = `
+    <article class="answer-card">
+      <p>Offline answer</p>
+      <h3>${escapeHtml(answerIntro(query, matches))}</h3>
+      <div class="answer-question">${escapeHtml(query)}</div>
+      <section class="answer-source">
+        <p>${escapeHtml(best.type)}</p>
+        <h4>${escapeHtml(best.title)}</h4>
+        <div>${escapeHtml(snippet(best.text, terms))}</div>
+      </section>
+    </article>
+    ${related
+      .slice(0, 5)
+      .map((item) => `<article class="result"><p>${escapeHtml(item.type)}</p><h3>${escapeHtml(item.title)}</h3><div>${escapeHtml(snippet(item.text, terms))}</div></article>`)
+      .join("")}`;
 }
 
 tabs.forEach((tab) => tab.addEventListener("click", () => setView(tab.dataset.tab)));
+askForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  state.query = searchInput.value;
+  runAsk();
+});
 searchInput.addEventListener("input", (event) => {
   state.query = event.target.value;
-  runSearch();
+  clearSearch.hidden = !state.query.trim();
 });
 clearSearch.addEventListener("click", () => {
   searchInput.value = "";
   state.query = "";
-  runSearch();
+  runAsk();
   searchInput.focus();
 });
 document.addEventListener("change", (event) => {
@@ -473,7 +594,7 @@ renderFood();
 renderTransport();
 renderChecklist();
 renderDocs();
-runSearch();
+runAsk();
 
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   navigator.serviceWorker.register("service-worker.js");
