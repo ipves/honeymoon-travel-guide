@@ -287,35 +287,6 @@ main {
   line-height: 1.32;
 }
 
-.home-confirmations {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 14px 16px 16px;
-}
-
-.home-confirmations a {
-  display: inline-flex;
-  min-height: 34px;
-  align-items: center;
-  padding: 7px 11px;
-  border: 1px solid rgba(20, 58, 74, 0.14);
-  border-radius: 8px;
-  background: #f7fbfa;
-  color: var(--blue);
-  font-size: 0.82rem;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-.home-confirmations a::before {
-  content: "Doc";
-  margin-right: 6px;
-  color: var(--rose);
-  font-size: 0.7rem;
-  font-weight: 900;
-}
-
 .card,
 .route,
 .check-group,
@@ -391,12 +362,20 @@ main {
   margin-top: 10px;
 }
 
-.dash-row .map-links {
+.dash-row .map-links,
+.dash-actions {
   grid-column: 2;
   margin-top: 2px;
 }
 
-.map-links a {
+.dash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.map-links a,
+.dash-actions a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -413,12 +392,28 @@ main {
   text-decoration: none;
 }
 
-.map-links a::before {
+.map-links a::before,
+.dash-map-link::before {
   content: "↗";
   font-size: 0.8rem;
 }
 
 .map-links span {
+  overflow: hidden;
+  max-width: 170px;
+  color: var(--muted);
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dash-doc-link::before {
+  content: "Doc";
+  color: var(--rose);
+  font-size: 0.7rem;
+}
+
+.dash-map-link span {
   overflow: hidden;
   max-width: 170px;
   color: var(--muted);

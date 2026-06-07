@@ -113,18 +113,6 @@ const CONFIRMATION_DOCS = {
   capri: ["Capri Boat Tour", "CapriTour.pdf"],
   moxy: ["Moxy Pompeii", "MarriottHotelPompeii.pdf"],
 };
-const HOME_CONFIRMATIONS = [
-  "weddingNight",
-  "delta",
-  "parisAirbnb",
-  "champagneCruise",
-  "bigBus",
-  "easyJet",
-  "villa",
-  "cooking",
-  "capri",
-  "moxy",
-];
 const DAY_CONFIRMATIONS = [
   ["weddingNight"],
   ["delta"],
@@ -244,15 +232,24 @@ function renderConfirmations(keys = []) {
   </nav>`;
 }
 
-function renderConfirmationButtons(keys = []) {
+function renderConfirmationButtons(keys = [], className = "") {
+  const classAttr = className ? ` class="${className}"` : "";
   return keys
     .map((key) => {
       const doc = CONFIRMATION_DOCS[key];
       if (!doc) return "";
       const [label, file] = doc;
-      return `<a href="docs/${encodeURIComponent(file)}" target="_blank" rel="noopener">${label}</a>`;
+      return `<a${classAttr} href="docs/${encodeURIComponent(file)}" target="_blank" rel="noopener">${label}</a>`;
     })
     .join("");
+}
+
+function renderDashboardActions(maps = [], confirmations = []) {
+  if (!maps.length && !confirmations.length) return "";
+  const mapLinks = maps
+    .map((label) => `<a class="dash-map-link" href="${mapUrl(label)}" target="_blank" rel="noopener" aria-label="Open ${label} in Google Maps">Map<span>${label}</span></a>`)
+    .join("");
+  return `<nav class="dash-actions" aria-label="Quick links">${mapLinks}${renderConfirmationButtons(confirmations, "dash-doc-link")}</nav>`;
 }
 
 const trip = {
@@ -260,30 +257,30 @@ const trip = {
     {
       title: "Travel Timeline",
       items: [
-        ["June 20", "Wedding Night", "The Barn Loft, Carrollton", ["The Barn Loft"]],
-        ["June 21", "Depart Atlanta", "Delta DL84 to Paris at 9:50 PM", []],
-        ["June 22-25", "Paris", "Airbnb on Rue Sebastien Mercier", ["Paris Airbnb"]],
-        ["June 25-30", "Praiano", "Villa Gianlica, Amalfi Coast", ["Villa Gianlica", "Praiano"]],
-        ["June 30-July 1", "Pompeii", "Moxy Pompeii / Torre Annunziata", ["Pompeii", "Moxy Pompeii"]],
-        ["July 1", "Return Home", "Delta DL279 Naples to Atlanta at 9:05 AM", []],
+        ["June 20", "Wedding Night", "The Barn Loft, Carrollton", ["The Barn Loft"], ["weddingNight"]],
+        ["June 21", "Depart Atlanta", "Delta DL84 to Paris at 9:50 PM", [], ["delta"]],
+        ["June 22-25", "Paris", "Airbnb on Rue Sebastien Mercier", ["Paris Airbnb"], ["parisAirbnb", "champagneCruise", "bigBus"]],
+        ["June 25-30", "Praiano", "Villa Gianlica, Amalfi Coast", ["Villa Gianlica", "Praiano"], ["easyJet", "villa", "cooking", "capri"]],
+        ["June 30-July 1", "Pompeii", "Moxy Pompeii / Torre Annunziata", ["Pompeii", "Moxy Pompeii"], ["moxy"]],
+        ["July 1", "Return Home", "Delta DL279 Naples to Atlanta at 9:05 AM", [], ["delta"]],
       ],
     },
     {
       title: "Flight Confirmations",
       items: [
-        ["Delta", "HW6MPS", "DL84 Atlanta to Paris; DL279 Naples to Atlanta", []],
-        ["EasyJet", "KC8B7PH", "Paris Orly to Naples, Thursday June 25", []],
-        ["EasyJet Bags", "2 x 23kg checked bags", "Bag drop 11:15 AM-12:35 PM", []],
-        ["Seats", "Noah 11A · Lila 11B", "EasyJet Paris Orly to Naples", []],
+        ["Delta", "HW6MPS", "DL84 Atlanta to Paris; DL279 Naples to Atlanta", [], ["delta"]],
+        ["EasyJet", "KC8B7PH", "Paris Orly to Naples, Thursday June 25", [], ["easyJet"]],
+        ["EasyJet Bags", "2 x 23kg checked bags", "Bag drop 11:15 AM-12:35 PM", [], ["easyJet"]],
+        ["Seats", "Noah 11A · Lila 11B", "EasyJet Paris Orly to Naples", [], ["easyJet"]],
       ],
     },
     {
       title: "Lodging",
       items: [
-        ["The Barn Loft", "2545 Tyus Carrollton Road", "Check-in June 20 at 4:00 PM; check-out June 21 at 1:00 PM", ["The Barn Loft"]],
-        ["Paris Airbnb", "Rue Sebastien Mercier, 75015 Paris", "Host Jade; confirmation HMZ2ES5JK9; exact street number pending", ["Paris Airbnb"]],
-        ["Villa Gianlica", "Praiano", "June 25-30 on the Amalfi Coast", ["Villa Gianlica"]],
-        ["Moxy Pompeii", "Torre Annunziata", "June 30-July 1", ["Moxy Pompeii"]],
+        ["The Barn Loft", "2545 Tyus Carrollton Road", "Check-in June 20 at 4:00 PM; check-out June 21 at 1:00 PM", ["The Barn Loft"], ["weddingNight"]],
+        ["Paris Airbnb", "Rue Sebastien Mercier, 75015 Paris", "Host Jade; confirmation HMZ2ES5JK9; exact street number pending", ["Paris Airbnb"], ["parisAirbnb"]],
+        ["Villa Gianlica", "Praiano", "June 25-30 on the Amalfi Coast", ["Villa Gianlica"], ["villa"]],
+        ["Moxy Pompeii", "Torre Annunziata", "June 30-July 1", ["Moxy Pompeii"], ["moxy"]],
       ],
     },
     {
@@ -541,18 +538,13 @@ function card(title, meta, body, tags = []) {
 }
 
 function renderDashboard() {
-  const dashboard = trip.dashboardGroups
+  document.querySelector("#dashboardGrid").innerHTML = trip.dashboardGroups
     .map(
       (group) => `<article class="dash-group"><h3>${group.title}</h3><div>${group.items
-        .map(([label, value, note, maps]) => `<section class="dash-row"><p>${label}</p><strong>${value}</strong><span>${note}</span>${renderMapLinks(maps)}</section>`)
+        .map(([label, value, note, maps = [], confirmations = []]) => `<section class="dash-row"><p>${label}</p><strong>${value}</strong><span>${note}</span>${renderDashboardActions(maps, confirmations)}</section>`)
         .join("")}</div></article>`
     )
     .join("");
-  const confirmations = `<article class="dash-group dash-group--confirmations">
-    <h3>Confirmations</h3>
-    <div class="home-confirmations">${renderConfirmationButtons(HOME_CONFIRMATIONS)}</div>
-  </article>`;
-  document.querySelector("#dashboardGrid").innerHTML = `${dashboard}${confirmations}`;
 }
 
 function renderDays() {
@@ -618,7 +610,7 @@ function renderDocs() {
 function flattenContent() {
   const curated = [
     ...trip.dashboardGroups.flatMap((group) =>
-      group.items.map(([label, value, note, maps = []]) => ({ title: `${group.title}: ${label}`, type: "Dashboard", text: `${value} ${note} ${maps.join(" ")}` }))
+      group.items.map(([label, value, note, maps = [], confirmations = []]) => ({ title: `${group.title}: ${label}`, type: "Dashboard", text: `${value} ${note} ${maps.join(" ")} ${confirmations.join(" ")}` }))
     ),
     ...trip.days.map(([date, title, body, maps = [], agenda = []]) => ({
       title,
