@@ -86,6 +86,7 @@ const DAY_THUMBNAILS = [
   ["assets/day-12-return-home.jpg", "Return home airport morning"],
 ];
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
+const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const BIG_BUS_STOPS = [
   "Louvre-Pyramide",
   "Louvre / Pont des Arts",
@@ -98,6 +99,20 @@ const BIG_BUS_STOPS = [
   "Champ de Mars",
   "Opera Garnier",
 ];
+const SITA_ROUTES = {
+  positano: {
+    eyebrow: "SITA Bus",
+    title: "Praiano to Positano",
+    note: "Use the Amalfi-Positano-Sorrento schedule. Buy tickets before boarding; tickets are not sold on the bus.",
+    steps: ["Praiano / SS163 stop", "Bus toward Positano / Sorrento", "Exit Sponda", "Walk down to Spiaggia Grande", "Return toward Praiano / Amalfi"],
+  },
+  path: {
+    eyebrow: "SITA Bus",
+    title: "Praiano to Bomerano via Amalfi",
+    note: "Use Amalfi-bound buses plus the Amalfi-Agerola-Naples route for Bomerano / Path of the Gods. Verify times the morning of travel.",
+    steps: ["Praiano / SS163 stop", "Bus toward Amalfi", "Amalfi Bus Terminal", "Bus toward Agerola / Bomerano", "Return Bomerano to Amalfi to Praiano"],
+  },
+};
 
 function mapUrl(label) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_LINKS[label] || label)}`;
@@ -119,6 +134,20 @@ function renderBigBusRouteCard() {
     </div>
     <ol>${BIG_BUS_STOPS.map((stop) => `<li>${stop}</li>`).join("")}</ol>
     <a href="${BIG_BUS_ROUTE_URL}" target="_blank" rel="noopener">Open official route & map</a>
+  </aside>`;
+}
+
+function renderSitaRouteCard(kind) {
+  const route = SITA_ROUTES[kind];
+  if (!route) return "";
+  return `<aside class="route-card route-card--sita" aria-label="${route.title}">
+    <div>
+      <p>${route.eyebrow}</p>
+      <h4>${route.title}</h4>
+      <span>${route.note}</span>
+    </div>
+    <ol>${route.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
+    <a href="${SITA_ROUTE_URL}" target="_blank" rel="noopener">Open SITA schedule & route map</a>
   </aside>`;
 }
 
@@ -426,7 +455,8 @@ function renderDays() {
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${renderMapLinks(maps)}</div></article>`;
+      const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${renderMapLinks(maps)}</div></article>`;
     })
     .join("");
 }

@@ -565,6 +565,19 @@ main {
   text-decoration: none;
 }
 
+.route-card--sita {
+  border-color: rgba(38, 119, 122, 0.24);
+  background: linear-gradient(180deg, rgba(38, 119, 122, 0.08), rgba(255, 255, 255, 0.86));
+}
+
+.route-card--sita p {
+  color: var(--sea);
+}
+
+.route-card--sita li::before {
+  background: var(--sea);
+}
+
 .route,
 .doc,
 .result,
