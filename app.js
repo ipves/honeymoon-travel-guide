@@ -38,6 +38,7 @@ const MAP_LINKS = {
   "Paris Airbnb": "Rue Sebastien Mercier 75015 Paris France",
   "Rue Sebastien Mercier": "Rue Sebastien Mercier 75015 Paris France",
   "Cafe de Flore": "Cafe de Flore Paris France",
+  "Square du Vert-Galant": "Square du Vert-Galant 15 Place du Pont Neuf Paris France",
   "Le Volant": "Le Volant Paris France",
   "Pink Mamma": "Pink Mamma Paris France",
   "Eiffel Tower": "Eiffel Tower Paris France",
@@ -46,6 +47,12 @@ const MAP_LINKS = {
   "Palace of Versailles": "Palace of Versailles France",
   "Villa Gianlica": "Villa Gianlica Praiano Italy",
   "Praiano": "Praiano Amalfi Coast Italy",
+  "Ristorante km0": "Ristorante km0 Via Guglielmo Marconi 45 Praiano Italy",
+  "Marina di Praia": "Marina di Praia Praiano Italy",
+  "Positano": "Positano Italy",
+  "Spiaggia Grande": "Spiaggia Grande Positano Italy",
+  "Da Vincenzo": "Da Vincenzo Positano Italy",
+  "Church of Santa Maria Assunta": "Church of Santa Maria Assunta Positano Italy",
   "Kasai": "Kasai Praiano Italy",
   "Che Bonta Gastronomia": "Che Bonta Gastronomia Praiano Italy",
   "Amalfi Bus Terminal": "Amalfi Bus Terminal Amalfi Italy",
@@ -59,6 +66,8 @@ const MAP_LINKS = {
   "Capri": "Capri Italy",
   "Pompeii": "Pompeii Archaeological Park Italy",
   "Moxy Pompeii": "Moxy Pompeii Torre Annunziata Italy",
+  "Porta Marina Entrance": "Porta Marina Entrance Pompeii Italy",
+  "Bosco de' Medici": "Bosco de Medici Pompeii Italy",
   "Torre Annunziata": "Torre Annunziata Italy",
   "Naples": "Naples Italy",
 };
@@ -125,18 +134,125 @@ const trip = {
     },
   ],
   days: [
-    ["Sat Jun 20", "Wedding Night - Carrollton", "The Barn Loft check-in at 4:00 PM. Park in front of the barn on the gravel driveway. Relax, sleep, and place passports, wallets, chargers, rings, Delta flight info, medications, and travel clothes together.", ["The Barn Loft"]],
-    ["Sun Jun 21", "Departure Day - Atlanta to Paris", "Start final packing around noon. Pre-booked Uber pickup at 1:00 PM to ATL International Terminal F. Arrive around 2:00-2:30 PM, check luggage, clear security, eat dinner at the airport, then board Delta DL84 at 9:50 PM.", []],
-    ["Mon Jun 22", "Arrive in Paris", "Land at CDG at 12:30 PM. Use official airport taxi to Rue Sebastien Mercier, 75015 Paris. Check in after 3:00 PM. Keep food simple and familiar if the travel day catches up with you.", ["Paris Airbnb"]],
-    ["Tue Jun 23", "Paris Icons", "Big Bus and Louvre day. Use Cafe de Flore late afternoon for the classic cafe moment. Dinner can be Le Volant for French comfort or Pink Mamma if atmosphere matters most.", ["Louvre", "Cafe de Flore", "Le Volant", "Pink Mamma"]],
-    ["Wed Jun 24", "Versailles + Champagne Cruise", "Take the train to Versailles Chateau Rive Gauche and walk to the palace gates. Later, enjoy the Seine Champagne Cruise. Keep dinner flexible around energy level.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
-    ["Thu Jun 25", "Paris to Praiano", "Bolt or taxi pickup at 10:15 AM for Orly. EasyJet bag drop opens 11:15 AM and closes 12:35 PM. Flight departs 1:15 PM, arrives Naples 3:30 PM. Use villa-arranged private transfer to Villa Gianlica.", ["Villa Gianlica"]],
-    ["Fri Jun 26", "Praiano Recovery Day", "Keep this soft. Beach, villa time, and nearby dinner. Kasai is the reliable honeymoon dinner choice; Che Bonta works when takeaway sounds better than a sit-down meal.", ["Praiano", "Kasai", "Che Bonta Gastronomia"]],
-    ["Sat Jun 27", "Capri Boat Day", "Use La Bellavita Charter for day-of questions. Bring swimsuit, sunscreen, sunglasses, waterproof phone pouch, towel if desired, and hat. Avoid outside food, outside drinks, and large heavy bags.", ["Capri"]],
-    ["Sun Jun 28", "Path of the Gods + Amalfi", "Bus to Amalfi, transfer toward Agerola/Bomerano, and do only 20-30 minutes into the trail before turning around. Lunch options: Da Gemma, L'Abside, or Pasticceria Pansa. Return to Praiano for a relaxed evening.", ["Amalfi Bus Terminal", "Bomerano", "Path of the Gods", "Da Gemma", "L'Abside", "Pasticceria Pansa", "Praiano"]],
-    ["Mon Jun 29", "Amalfi Coast Free Day", "Protect the honeymoon pace. Use the day for beach time, villa rest, shopping, or a simple dinner nearby. Do not turn this into a transportation challenge.", ["Praiano"]],
-    ["Tue Jun 30", "Pompeii Finale", "Check out of Villa Gianlica and transfer to Moxy Pompeii/Torre Annunziata. Pompeii is hot, uneven, and large: sneakers, water, hat, portable charger, and sunglasses matter.", ["Villa Gianlica", "Moxy Pompeii", "Pompeii"]],
-    ["Wed Jul 1", "Return Home", "Delta DL279 Naples to Atlanta departs 9:05 AM and arrives 2:31 PM. Leave earlier than feels necessary.", []],
+    ["Sat Jun 20", "Wedding Night - Carrollton", "The Barn Loft is the only planned stop. Keep the night simple and stage the essentials for international travel.", ["The Barn Loft"], [
+      ["4:00 PM", "Check in at The Barn Loft, 2545 Tyus Carrollton Road."],
+      ["Arrival", "Pull into the driveway, turn right toward the barn, and park directly in front of the barn on the gravel driveway. Do not park in the grass."],
+      ["Evening", "No agenda: relax, enjoy the space, and get sleep."],
+      ["Before bed", "Place passports, wallets, phone chargers, wedding rings, Delta flight information, medications, and Sunday travel clothes together."],
+    ]],
+    ["Sun Jun 21", "Departure Day - Atlanta to Paris", "The goal is to get to ATL early, check luggage, clear security, and start the honeymoon calmly before Delta DL84.", [], [
+      ["Morning", "Sleep in if possible, have an easy breakfast or brunch, and begin packing slowly."],
+      ["12:00 PM", "Start final packing. Check bathroom, outlets, under bed, nightstands, closet, car, wedding items, and chargers."],
+      ["12:30 PM", "Final walkthrough. Put passports and phones in carry-on, not checked luggage."],
+      ["1:00 PM", "Pre-booked Uber pickup to Atlanta Airport International Terminal, Terminal F."],
+      ["2:00-2:30 PM", "Arrival goal at ATL. Enter International Terminal, find Delta international check-in, check the large bag, clear security, find gate area once posted, and eat dinner at the airport."],
+      ["9:50 PM", "Delta DL84 departs Atlanta for Paris Charles de Gaulle. Drink water, try to sleep, keep passport and arrival documents accessible."],
+    ]],
+    ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to the Airbnb safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Paris Airbnb", "Square du Vert-Galant"], [
+      ["12:30 PM", "Arrive at Paris Charles de Gaulle. Follow signs to passport control, collect checked luggage, go through customs, use ATM if convenient, then follow signs to the official taxi queue."],
+      ["Taxi", "Use only the official taxi line. Destination: Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
+      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when they appear."],
+      ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
+      ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
+      ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1401765745; confirmation 1784184935. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
+      ["After cruise", "Short walk near the river if they feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
+    ]],
+    ["Tue Jun 23", "Big Bus + Louvre / Eiffel Tower Decision Day", "This day is built around the Big Bus reservation and one main Paris attraction choice unless both tickets are already booked.", ["Louvre", "Eiffel Tower", "Cafe de Flore", "Le Volant", "Pink Mamma"], [
+      ["8:00-8:30 AM", "Wake up and get breakfast near the Eiffel Tower: croissant, pain au chocolat, coffee, orange juice."],
+      ["Morning", "Paris Big Bus Hop-On Hop-Off Tour. Booking reference 1401767595; confirmation 1784186781. Board near the Eiffel Tower area and use the Big Bus app for the closest stop and live tracking."],
+      ["Bus strategy", "Do not immediately hop off. Ride most of the route first to get oriented. Expected sights include Eiffel Tower, Arc de Triomphe, Champs-Elysees, Place de la Concorde, Louvre area, Notre-Dame area, Seine, and Opera district."],
+      ["Option A", "Louvre priority: enter with timed ticket late morning or early afternoon, spend 2-3 hours maximum, and focus on Mona Lisa, Venus de Milo, Winged Victory, then exit before exhaustion."],
+      ["After Louvre", "Tuileries Garden picnic: sandwiches, fruit, pastry, water, optional wine, sit near the fountains."],
+      ["Option B", "Eiffel Tower priority: use pre-booked summit tickets, go to the top, have champagne if available, take photos, then relax on Champ de Mars. If tickets are not booked, do not spend hours waiting in line."],
+      ["Late afternoon", "Cafe de Flore stop for 45-60 minutes. Order coffee, dessert, champagne, or wine."],
+      ["Dinner", "Use one dinner option tonight and the other Wednesday: Le Volant for classic Paris dinner, or Pink Mamma for the interior and younger energy."],
+      ["Evening", "If near Eiffel Tower after dinner, watch the sparkle. Otherwise return to Airbnb."],
+    ]],
+    ["Wed Jun 24", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
+      ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
+      ["Eiffel window", "Use this time only if Eiffel Tower was not completed Tuesday. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If they do not have tickets, do not burn the whole day in a long line."],
+      ["Lunch", "Keep it light before Versailles: bakery sandwich, cafe lunch, or picnic item."],
+      ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
+      ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
+      ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
+      ["4:30 PM", "Timed Palace entry if available. Focus on Hall of Mirrors, King's Apartments, and Queen's Apartments. Do not try to see everything."],
+      ["6:00-6:30 PM", "Begin return to Paris."],
+    ]],
+    ["Thu Jun 25", "Paris to Praiano", "Major travel day: Paris Airbnb to Orly, EasyJet to Naples, then Villa Gianlica private transfer to Praiano.", ["Villa Gianlica"], [
+      ["7:30 AM", "Wake up and pack completely. Check passports, chargers, AirPods, toiletries, under bed, outlets, lockbox instructions, and EasyJet boarding passes."],
+      ["10:15 AM", "Taxi or Bolt pickup to Paris Orly Airport. Airbnb check-out is by 11:00 AM, but leave earlier."],
+      ["11:00 AM", "Goal arrival at Orly. EasyJet bag drop opens 11:15 AM and closes 12:35 PM."],
+      ["1:15-3:30 PM", "EasyJet EJU4953 Paris Orly to Naples. Booking reference KC8B7PH. Seats: Noah 11A, Lila 11B. Checked bags: 2 x 23kg included."],
+      ["Naples arrival", "Deplane, collect checked bags, exit arrivals, and look for private driver. Get euros from an ATM at the airport or along the way so they have cash for the Praiano cooking class."],
+      ["Transfer", "Private transfer to Praiano arranged through Villa Gianlica. Cost: EUR190 total for two. Driver needs flight number, arrival time, passenger names, and mobile phone number. Drive time about 90-120 minutes."],
+      ["Villa arrival", "Villa Gianlica address: Via Asciola 2, 84010 Praiano SA Italy. Check in, unpack, shower, and take in the view."],
+      ["Dinner", "Keep it close and easy: Kasai, Che Bonta Gastronomia, or Il Pirata."],
+    ]],
+    ["Fri Jun 26", "Cooking Class + Marina di Praia Beach", "The day depends on the confirmed cooking class time. The source notes a timing conflict that must be verified before finalizing the day.", ["Ristorante km0", "Marina di Praia"], [
+      ["Cash reminder", "Have euros ready for the Praiano cooking class. If they did not use an ATM on arrival day, get cash before class."],
+      ["Timing note", "Current confirmation appears to show 5:00-8:00 PM, while the working plan says 11:00 AM. Verify before departure."],
+      ["If 11:00 AM", "Breakfast at Villa Gianlica, leave around 10:30 AM for Ristorante km0, Via Guglielmo Marconi 45, Praiano. Cooking class and lunch run 11:00 AM-2:00 PM."],
+      ["After 11:00 class", "Arrive Marina di Praia around 2:30 PM, rent loungers if available, swim, relax, then have a light dinner in Praiano: Kasai, Che Bonta, gelato and wine."],
+      ["If 5:00 PM", "Use 10:30 AM-3:00 PM for Marina di Praia beach first. Rent loungers, swim, relax, have a light snack."],
+      ["4:30 PM", "Head to Ristorante km0 for the 5:00-8:00 PM cooking class and dinner. Afterward, return to villa; no additional dinner needed."],
+      ["Beach note", "Marina di Praia is a casual beach afternoon: lounge chairs, swimming, drinks, relaxation."],
+    ]],
+    ["Sat Jun 27", "Positano Day", "Positano is the postcard Amalfi Coast day: shopping, beach, lunch, lemon dessert, and photos.", ["Positano", "Spiaggia Grande", "Da Vincenzo", "Church of Santa Maria Assunta", "Praiano"], [
+      ["Morning", "Breakfast at Villa Gianlica. Do not rush."],
+      ["Transport", "Walk from Villa Gianlica toward the SS163 / Via Guglielmo Marconi bus stop. Stand on the Positano / Sorrento-bound side, board SITA bus toward Positano / Sorrento, exit at Sponda, and walk downhill to Spiaggia Grande."],
+      ["First stop", "Spiaggia Grande for photos before the beach gets too crowded."],
+      ["Explore", "Boutiques, linen clothing, ceramics, lemon products, sandals, souvenirs. No strict route; wandering is the point."],
+      ["Lunch", "Primary: Da Vincenzo. Alternative: Posides. Budget: beach cafe or casual panini."],
+      ["Dessert mission", "Find Delizia al Limone, lemon granita, or lemon sorbet served in a lemon."],
+      ["Afternoon", "Beach time, rent loungers if available, swim, relax, and have a spritz or soda."],
+      ["Photo stops", "Church of Santa Maria Assunta tiled dome, Le Sirenuse viewpoint as photo stop only, and Spiaggia Grande classic beach photos."],
+      ["Return", "Walk back to Sponda, board bus toward Praiano / Amalfi, exit near Villa Gianlica area."],
+      ["Dinner", "Eat back in Praiano: Kasai, Il Pirata, Che Bonta, or villa terrace night."],
+    ]],
+    ["Sun Jun 28", "Path of the Gods + Amalfi", "This day is designed for views without turning the honeymoon into an exhausting hike.", ["Amalfi Bus Terminal", "Bomerano", "Path of the Gods", "Da Gemma", "L'Abside", "Pasticceria Pansa", "Praiano"], [
+      ["7:00 AM", "Wake up, eat a real breakfast at Villa Gianlica, and bring water, sunglasses, hat, comfortable sneakers, sunscreen, and phone charger. Leave beach gear behind."],
+      ["To Amalfi", "Walk to the nearest SITA bus stop along Via Guglielmo Marconi / SS163, stand on the Amalfi-bound side, board bus toward Amalfi, and exit at Amalfi Bus Terminal."],
+      ["To Bomerano", "At Amalfi Bus Terminal ask for Bomerano or Path of the Gods. Board bus toward Agerola / Bomerano."],
+      ["Trail strategy", "Walk only 20-30 minutes into the trail, stop often, take photos, enjoy the scenery, and turn around when satisfied. Estimated hiking time 45-90 minutes total."],
+      ["Return to Amalfi", "Walk back to Bomerano and board return bus to Amalfi."],
+      ["Lunch", "Da Gemma for most romantic, L'Abside for best balance, or Pasticceria Pansa for light lunch and pastries."],
+      ["Amalfi", "Choose only a few highlights: Amalfi Cathedral, Piazza del Duomo, and up to about one hour of shopping for lemon products, ceramics, and souvenirs."],
+      ["3:00 PM goal", "Leave Amalfi around 3:00 PM to protect relaxation time."],
+      ["Evening", "Back at Villa Gianlica: relax, nap, pool, balcony, wine, sunset. Dinner can be villa terrace, Kasai, Che Bonta, or Il Pirata."],
+    ]],
+    ["Mon Jun 29", "Capri Boat Excursion", "This is the signature Amalfi Coast boat day with La Bellavita Charter.", ["Marina di Praia", "Capri", "Praiano"], [
+      ["7:00 AM", "Wake up and have breakfast at Villa Gianlica."],
+      ["Bring", "Swimsuit, sunglasses, sunscreen, waterproof pouch, and phone charger. Do not bring large bags, outside food, or outside drinks."],
+      ["8:15 AM", "Leave Villa Gianlica."],
+      ["8:45 AM", "Arrival goal at Marina di Praia."],
+      ["9:00 AM-5:00 PM", "La Bellavita Charter boat excursion. Booking 352541107. If confused, call +39 089 288 1694."],
+      ["Expected highlights", "Potential stops include Capri coastline, swimming locations, Faraglioni rocks, Marina Piccola, Capri town free time, and Blue Grotto if sea conditions allow."],
+      ["5:00 PM", "Return to Praiano."],
+      ["Final Amalfi evening", "Recommended dinner: Che Bonta takeaway back to the villa, open wine, watch sunset, pack luggage, and enjoy final Amalfi Coast views."],
+      ["Before bed", "Verify passports, chargers, AirPods, camera, souvenirs, and wallets."],
+    ]],
+    ["Tue Jun 30", "Pompeii Day", "Final full day: transfer to Moxy Pompeii, see Pompeii without trying to do everything, then final honeymoon dinner.", ["Villa Gianlica", "Moxy Pompeii", "Porta Marina Entrance", "Pompeii", "Bosco de' Medici"], [
+      ["Morning", "Breakfast at Villa Gianlica, finish packing, and check room carefully."],
+      ["Transfer", "Private transfer from Villa Gianlica to Moxy Pompeii, quoted EUR160 total. Moxy Pompeii address: Via Castriota 43, Torre Annunziata."],
+      ["Arrival", "If room is not ready, leave luggage with the front desk and proceed directly to Pompeii."],
+      ["To Pompeii", "Recommended Bolt or taxi to Porta Marina Entrance."],
+      ["Pompeii strategy", "Do not attempt to see everything. Focus on Forum, Temple of Apollo, House of the Faun, Large Theatre, and Garden of the Fugitives."],
+      ["3-4 hours max", "When tired, leave. There is no prize for staying longer."],
+      ["After Pompeii", "Return to hotel, check in, shower, rest, and recharge."],
+      ["6:30 PM", "Recommended departure for Bosco de' Medici."],
+      ["7:00 PM", "Final honeymoon dinner at Bosco de' Medici. After dinner, return to hotel, finish packing, charge phones, set alarms, and sleep early."],
+    ]],
+    ["Wed Jul 1", "Return Home", "Departure day is about a comfortable early airport buffer and a clean trip home.", [], [
+      ["5:45 AM", "Wake up."],
+      ["Final room check", "Verify passports, wallets, phones, chargers, AirPods, souvenirs, boat photos, and wedding items."],
+      ["6:00 AM", "Request Bolt to Naples International Airport."],
+      ["Backup plan", "If Bolt availability appears limited, ask Moxy front desk Tuesday evening to arrange taxi service."],
+      ["6:15 AM", "Departure goal."],
+      ["6:45-7:00 AM", "Airport arrival goal for a comfortable buffer."],
+      ["9:05 AM", "Delta DL279 Naples to Atlanta departs."],
+      ["2:31 PM", "Arrive Atlanta. After landing: immigration, collect luggage, customs, exit arrivals area."],
+      ["Final transport", "Request Uber after luggage is collected. Destination: Woodstock, Georgia, home."],
+    ]],
   ],
   food: [
     ["McDonald's / Beaugrenelle", "Paris", "Arrival-day rescue food when you are tired, hungry, and done making decisions.", ["McDonald's Beaugrenelle"]],
@@ -165,7 +281,7 @@ const trip = {
     ["Capri Boat Day", ["Swimsuit", "Sunscreen", "Sunglasses", "Waterproof phone pouch", "Towel if desired", "Hat"], ["Capri"]],
     ["Path of the Gods", ["Sneakers", "Water", "Hat", "Sunscreen", "Light clothing"], ["Path of the Gods", "Bomerano", "Amalfi Bus Terminal"]],
     ["Pompeii Packing", ["Sneakers", "Water", "Hat", "Portable charger", "Sunglasses"], ["Pompeii", "Moxy Pompeii"]],
-    ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Uber to ATL", "Confirm villa transfer details", "Confirm ticket bookings"], ["Villa Gianlica"]],
+    ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Uber to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
   ],
 };
 
@@ -213,7 +329,12 @@ function renderDashboard() {
 
 function renderDays() {
   document.querySelector("#dayList").innerHTML = trip.days
-    .map(([date, title, body, maps]) => `<article class="day"><time>${date}</time><div><h3>${title}</h3><p>${body}</p>${renderMapLinks(maps)}</div></article>`)
+    .map(([date, title, body, maps, agenda = []]) => {
+      const agendaHtml = agenda.length
+        ? `<div class="day-agenda">${agenda.map(([time, detail]) => `<section><strong>${time}</strong><p>${detail}</p></section>`).join("")}</div>`
+        : "";
+      return `<article class="day"><time>${date}</time><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${renderMapLinks(maps)}</div></article>`;
+    })
     .join("");
 }
 
@@ -261,7 +382,11 @@ function flattenContent() {
     ...trip.dashboardGroups.flatMap((group) =>
       group.items.map(([label, value, note, maps = []]) => ({ title: `${group.title}: ${label}`, type: "Dashboard", text: `${value} ${note} ${maps.join(" ")}` }))
     ),
-    ...trip.days.map(([date, title, body, maps = []]) => ({ title, type: date, text: `${body} ${maps.join(" ")}` })),
+    ...trip.days.map(([date, title, body, maps = [], agenda = []]) => ({
+      title,
+      type: date,
+      text: `${body} ${agenda.map(([time, detail]) => `${time} ${detail}`).join(" ")} ${maps.join(" ")}`,
+    })),
     ...trip.food.map(([title, location, body, maps = []]) => ({ title, type: `Dining · ${location}`, text: `${body} ${maps.join(" ")}` })),
     ...trip.transport.map(([title, body, maps = []]) => ({ title, type: "Transport", text: `${body} ${maps.join(" ")}` })),
     ...trip.checklists.flatMap(([group, items, maps = []]) => items.map((item) => ({ title: item, type: `Checklist · ${group}`, text: `${item} ${maps.join(" ")}` }))),
