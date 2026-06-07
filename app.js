@@ -85,6 +85,19 @@ const DAY_THUMBNAILS = [
   ["assets/day-11-pompeii.jpg", "Pompeii ruins"],
   ["assets/day-12-return-home.jpg", "Return home airport morning"],
 ];
+const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
+const BIG_BUS_STOPS = [
+  "Louvre-Pyramide",
+  "Louvre / Pont des Arts",
+  "Notre Dame",
+  "Musee d'Orsay",
+  "Champs-Elysees",
+  "Grand Palais",
+  "Trocadero",
+  "Tour Eiffel",
+  "Champ de Mars",
+  "Opera Garnier",
+];
 
 function mapUrl(label) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_LINKS[label] || label)}`;
@@ -95,6 +108,18 @@ function renderMapLinks(labels = []) {
   return `<nav class="map-links" aria-label="Map links">${labels
     .map((label) => `<a href="${mapUrl(label)}" target="_blank" rel="noopener" aria-label="Open ${label} in Google Maps">Map<span>${label}</span></a>`)
     .join("")}</nav>`;
+}
+
+function renderBigBusRouteCard() {
+  return `<aside class="route-card" aria-label="Big Bus Paris Red Route">
+    <div>
+      <p>Big Bus Red Route</p>
+      <h4>Classic Paris loop</h4>
+      <span>Official route: about 2 hr 15 min, buses every 10-20 min.</span>
+    </div>
+    <ol>${BIG_BUS_STOPS.map((stop) => `<li>${stop}</li>`).join("")}</ol>
+    <a href="${BIG_BUS_ROUTE_URL}" target="_blank" rel="noopener">Open official route & map</a>
+  </aside>`;
 }
 
 const trip = {
@@ -400,7 +425,8 @@ function renderDays() {
         : "";
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${renderMapLinks(maps)}</div></article>`;
+      const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${renderMapLinks(maps)}</div></article>`;
     })
     .join("");
 }
