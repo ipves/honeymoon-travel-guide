@@ -981,7 +981,6 @@ main {
     align-items: start;
   }
 
-  .dash-group:nth-child(2),
   .dash-group:nth-child(5) {
     grid-column: span 2;
   }

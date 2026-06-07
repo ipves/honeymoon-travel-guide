@@ -93,6 +93,13 @@ const SAILY_APP_STORE_URL = "https://apps.apple.com/us/app/saily-travel-esim-dat
 const G7_APP_STORE_URL = "https://apps.apple.com/us/app/g7-taxi-book-a-taxi/id402196027";
 const BIG_BUS_APP_STORE_URL = "https://apps.apple.com/us/app/big-bus-tours/id590746945";
 const DELTA_APP_STORE_URL = "https://apps.apple.com/us/app/fly-delta/id388491656";
+const CHATGPT_URL = "https://chatgpt.com/";
+const TRAVEL_RESOURCE_LINKS = {
+  paris: "https://www.tripadvisor.com/Tourism-g187147-Paris_Ile_de_France-Vacations.html",
+  amalfi: "https://www.tripadvisor.com/Tourism-g187779-Amalfi_Coast_Province_of_Salerno_Campania-Vacations.html",
+  pompeii: "https://www.tripadvisor.com/Tourism-g187786-Pompeii_Province_of_Naples_Campania-Vacations.html",
+  naples: "https://www.tripadvisor.com/Tourism-g187785-Naples_Province_of_Naples_Campania-Vacations.html",
+};
 const BIG_BUS_STOPS = [
   "Louvre-Pyramide",
   "Louvre / Pont des Arts",
@@ -271,6 +278,16 @@ const trip = {
       ],
     },
     {
+      title: "Destination Tips",
+      items: [
+        ["Paris", "Tripadvisor Paris", "Traveler tips, restaurants, attractions, and neighborhood ideas.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.paris]]],
+        ["Amalfi", "Tripadvisor Amalfi Coast", "Coast-wide ideas for Praiano, Positano, Amalfi, restaurants, beaches, and tours.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.amalfi]]],
+        ["Pompeii", "Tripadvisor Pompeii", "Ruins tips, tours, restaurants, and visit planning.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.pompeii]]],
+        ["Naples", "Tripadvisor Naples", "Airport-area backup ideas, food tips, and Naples context.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.naples]]],
+        ["ChatGPT", "Ask for suggestions", "Use when they want fresh ideas for food, backup plans, rainy-day swaps, or quick local tips.", [], [], [["Ask ChatGPT", CHATGPT_URL]]],
+      ],
+    },
+    {
       title: "Flight Confirmations",
       items: [
         ["Delta", "HW6MPS", "DL84 Atlanta to Paris; DL279 Naples to Atlanta", [], ["delta"]],
@@ -291,11 +308,12 @@ const trip = {
     {
       title: "Still Needed",
       items: [
+        ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
+        ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
         ["Book", "Louvre timed entry", "Major remaining ticket", ["Louvre"]],
         ["Book", "Versailles Passport", "Use late Palace entry", ["Palace of Versailles"]],
-        ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
-        ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
+        ["Get", "500 Euros from ATM", "For Cooking Class and Tips"],
         ["Confirm", "Capri boarding and cooking class time", "Pending activity details", ["Capri"]],
       ],
     },
