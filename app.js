@@ -100,6 +100,32 @@ const BIG_BUS_STOPS = [
   "Champ de Mars",
   "Opera Garnier",
 ];
+const CONFIRMATION_DOCS = {
+  weddingNight: ["Wedding Night Airbnb", "WeddingNightAirbnb.pdf"],
+  delta: ["Delta Flights", "DeltaHW6MPS.pdf"],
+  parisAirbnb: ["Paris Airbnb", "ParisAirbnb.pdf"],
+  champagneCruise: ["Seine Champagne Cruise", "ParisSunsetChampagneCruise.pdf"],
+  bigBus: ["Big Bus Paris", "ParisBigBus.pdf"],
+  easyJet: ["EasyJet Flight", "EasyJetKC8B7PH.pdf"],
+  villa: ["Villa Gianlica", "PraianoVillaGianlica.pdf"],
+  cooking: ["Cooking Class", "CookingClass.pdf"],
+  capri: ["Capri Boat Tour", "CapriTour.pdf"],
+  moxy: ["Moxy Pompeii", "MarriottHotelPompeii.pdf"],
+};
+const DAY_CONFIRMATIONS = [
+  ["weddingNight"],
+  ["delta"],
+  ["delta", "parisAirbnb", "champagneCruise"],
+  ["bigBus"],
+  [],
+  ["easyJet", "villa"],
+  ["cooking"],
+  [],
+  [],
+  ["capri"],
+  ["villa", "moxy"],
+  ["delta"],
+];
 const SITA_ROUTES = {
   positano: {
     eyebrow: "SITA Bus",
@@ -153,6 +179,21 @@ function renderSitaRouteCard(kind) {
       <a href="${UNICO_APP_STORE_URL}" target="_blank" rel="noopener">Get UNICO app for tickets</a>
     </div>
   </aside>`;
+}
+
+function renderConfirmations(keys = []) {
+  if (!keys.length) return "";
+  return `<nav class="confirm-links" aria-label="Confirmation documents">
+    <p>Confirmations</p>
+    <div>${keys
+      .map((key) => {
+        const doc = CONFIRMATION_DOCS[key];
+        if (!doc) return "";
+        const [label, file] = doc;
+        return `<a href="docs/${encodeURIComponent(file)}" target="_blank" rel="noopener">${label}</a>`;
+      })
+      .join("")}</div>
+  </nav>`;
 }
 
 const trip = {
@@ -460,7 +501,8 @@ function renderDays() {
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${renderMapLinks(maps)}</div></article>`;
+      const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }

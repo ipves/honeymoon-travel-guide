@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v29";
+const CACHE_NAME = "honeymoon-guide-v30";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=29",
-  "./app.js?v=29",
-  "./data.js?v=29",
+  "./styles.css?v=30",
+  "./app.js?v=30",
+  "./data.js?v=30",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
@@ -28,6 +28,16 @@ const ASSETS = [
   "./docs/Pre-Trip%20Checklist%20%26%20Travel%20Preparation.pdf",
   "./docs/Transportation%20Guide.pdf",
   "./docs/Wedding%20and%20Honeymoon%20Itinerary.pdf",
+  "./docs/CapriTour.pdf",
+  "./docs/CookingClass.pdf",
+  "./docs/DeltaHW6MPS.pdf",
+  "./docs/EasyJetKC8B7PH.pdf",
+  "./docs/MarriottHotelPompeii.pdf",
+  "./docs/ParisAirbnb.pdf",
+  "./docs/ParisBigBus.pdf",
+  "./docs/ParisSunsetChampagneCruise.pdf",
+  "./docs/PraianoVillaGianlica.pdf",
+  "./docs/WeddingNightAirbnb.pdf",
 ];
 
 self.addEventListener("install", (event) => {
