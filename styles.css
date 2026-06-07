@@ -562,7 +562,10 @@ main {
 
 .tabbar button {
   display: grid;
+  grid-template-rows: 26px 14px;
   place-items: center;
+  align-content: center;
+  gap: 1px;
   min-width: 0;
   min-height: 54px;
   border: 0;
@@ -573,11 +576,16 @@ main {
   font-weight: 850;
 }
 
-.tabbar span {
+.tabbar svg {
   display: block;
+  width: 24px;
+  height: 24px;
   color: inherit;
-  font-size: 1.1rem;
-  line-height: 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .tabbar button.is-active {

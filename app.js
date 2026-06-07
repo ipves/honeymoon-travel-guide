@@ -100,14 +100,6 @@ function renderMapLinks(labels = []) {
 const trip = {
   dashboardGroups: [
     {
-      title: "Need It Fast",
-      items: [
-        ["Emergency Services", "112", "France & Italy", []],
-        ["La Bellavita Charter", "+39 089 288 1694", "Capri tour questions and day-of issues", ["Capri"]],
-        ["Moxy Pompeii", "+39 081 19716440", "Late arrival, taxi help, airport backup", ["Moxy Pompeii"]],
-      ],
-    },
-    {
       title: "Travel Timeline",
       items: [
         ["June 20", "Wedding Night", "The Barn Loft, Carrollton", ["The Barn Loft"]],
