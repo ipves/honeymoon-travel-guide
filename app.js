@@ -87,6 +87,7 @@ const DAY_THUMBNAILS = [
 ];
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
+const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
 const BIG_BUS_STOPS = [
   "Louvre-Pyramide",
   "Louvre / Pont des Arts",
@@ -147,7 +148,10 @@ function renderSitaRouteCard(kind) {
       <span>${route.note}</span>
     </div>
     <ol>${route.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
-    <a href="${SITA_ROUTE_URL}" target="_blank" rel="noopener">Open SITA schedule & route map</a>
+    <div class="route-card-actions">
+      <a href="${SITA_ROUTE_URL}" target="_blank" rel="noopener">Open SITA schedule & route map</a>
+      <a href="${UNICO_APP_STORE_URL}" target="_blank" rel="noopener">Get UNICO app for tickets</a>
+    </div>
   </aside>`;
 }
 

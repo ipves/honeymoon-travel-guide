@@ -552,6 +552,12 @@ main {
   background: var(--rose);
 }
 
+.route-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .route-card a {
   display: inline-flex;
   min-height: 32px;
@@ -563,6 +569,10 @@ main {
   font-size: 0.82rem;
   font-weight: 900;
   text-decoration: none;
+}
+
+.route-card--sita a:last-child {
+  background: var(--sea);
 }
 
 .route-card--sita {
