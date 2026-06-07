@@ -88,6 +88,7 @@ const DAY_THUMBNAILS = [
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
+const BOLT_APP_STORE_URL = "https://apps.apple.com/gb/app/bolt-request-a-ride/id675033630";
 const BIG_BUS_STOPS = [
   "Louvre-Pyramide",
   "Louvre / Pont des Arts",
@@ -112,6 +113,18 @@ const CONFIRMATION_DOCS = {
   capri: ["Capri Boat Tour", "CapriTour.pdf"],
   moxy: ["Moxy Pompeii", "MarriottHotelPompeii.pdf"],
 };
+const HOME_CONFIRMATIONS = [
+  "weddingNight",
+  "delta",
+  "parisAirbnb",
+  "champagneCruise",
+  "bigBus",
+  "easyJet",
+  "villa",
+  "cooking",
+  "capri",
+  "moxy",
+];
 const DAY_CONFIRMATIONS = [
   ["weddingNight"],
   ["delta"],
@@ -138,6 +151,30 @@ const SITA_ROUTES = {
     title: "Praiano to Bomerano via Amalfi",
     note: "Use Amalfi-bound buses plus the Amalfi-Agerola-Naples route for Bomerano / Path of the Gods. Verify times the morning of travel.",
     steps: ["Praiano / SS163 stop", "Bus toward Amalfi", "Amalfi Bus Terminal", "Bus toward Agerola / Bomerano", "Return Bomerano to Amalfi to Praiano"],
+  },
+};
+const BOLT_RIDES = {
+  orly: {
+    title: "Paris Airbnb to Orly",
+    note: "Use Bolt or taxi for the transfer from Paris to Orly before the EasyJet flight to Naples.",
+    details: [
+      ["Pickup", "Paris Airbnb, Rue Sebastien Mercier, 75015 Paris"],
+      ["Destination", "Paris Orly Airport"],
+      ["Pickup time", "10:15 AM"],
+      ["Goal arrival", "11:00 AM"],
+      ["Flight timing", "EasyJet bag drop opens 11:15 AM and closes 12:35 PM"],
+    ],
+  },
+  naplesAirport: {
+    title: "Moxy Pompeii to Naples Airport",
+    note: "Use Bolt for the early airport transfer. If availability looks limited, ask Moxy front desk Tuesday evening to arrange taxi service.",
+    details: [
+      ["Pickup", "Moxy Pompeii, Via Castriota 43, Torre Annunziata"],
+      ["Destination", "Naples International Airport"],
+      ["Request Bolt", "6:00 AM"],
+      ["Departure goal", "6:15 AM"],
+      ["Goal arrival", "6:45-7:00 AM for Delta DL279 at 9:05 AM"],
+    ],
   },
 };
 
@@ -181,19 +218,41 @@ function renderSitaRouteCard(kind) {
   </aside>`;
 }
 
+function renderBoltRideCard(kind) {
+  const ride = BOLT_RIDES[kind];
+  if (!ride) return "";
+  return `<aside class="route-card route-card--bolt" aria-label="Bolt ride: ${ride.title}">
+    <div>
+      <p>Bolt / Taxi</p>
+      <h4>${ride.title}</h4>
+      <span>${ride.note}</span>
+    </div>
+    <dl class="ride-details">${ride.details
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("")}</dl>
+    <div class="route-card-actions">
+      <a href="${BOLT_APP_STORE_URL}" target="_blank" rel="noopener">Open / get Bolt app</a>
+    </div>
+  </aside>`;
+}
+
 function renderConfirmations(keys = []) {
   if (!keys.length) return "";
   return `<nav class="confirm-links" aria-label="Confirmation documents">
     <p>Confirmations</p>
-    <div>${keys
-      .map((key) => {
-        const doc = CONFIRMATION_DOCS[key];
-        if (!doc) return "";
-        const [label, file] = doc;
-        return `<a href="docs/${encodeURIComponent(file)}" target="_blank" rel="noopener">${label}</a>`;
-      })
-      .join("")}</div>
+    <div>${renderConfirmationButtons(keys)}</div>
   </nav>`;
+}
+
+function renderConfirmationButtons(keys = []) {
+  return keys
+    .map((key) => {
+      const doc = CONFIRMATION_DOCS[key];
+      if (!doc) return "";
+      const [label, file] = doc;
+      return `<a href="docs/${encodeURIComponent(file)}" target="_blank" rel="noopener">${label}</a>`;
+    })
+    .join("");
 }
 
 const trip = {
@@ -482,13 +541,18 @@ function card(title, meta, body, tags = []) {
 }
 
 function renderDashboard() {
-  document.querySelector("#dashboardGrid").innerHTML = trip.dashboardGroups
+  const dashboard = trip.dashboardGroups
     .map(
       (group) => `<article class="dash-group"><h3>${group.title}</h3><div>${group.items
         .map(([label, value, note, maps]) => `<section class="dash-row"><p>${label}</p><strong>${value}</strong><span>${note}</span>${renderMapLinks(maps)}</section>`)
         .join("")}</div></article>`
     )
     .join("");
+  const confirmations = `<article class="dash-group dash-group--confirmations">
+    <h3>Confirmations</h3>
+    <div class="home-confirmations">${renderConfirmationButtons(HOME_CONFIRMATIONS)}</div>
+  </article>`;
+  document.querySelector("#dashboardGrid").innerHTML = `${dashboard}${confirmations}`;
 }
 
 function renderDays() {
@@ -501,8 +565,13 @@ function renderDays() {
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
+      const boltCard = title.includes("Paris to Praiano")
+        ? renderBoltRideCard("orly")
+        : title.includes("Return Home")
+          ? renderBoltRideCard("naplesAirport")
+          : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
