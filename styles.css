@@ -379,7 +379,7 @@ main {
 
 .day {
   display: grid;
-  grid-template-columns: 82px 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
   padding: 14px;
   border: 1px solid var(--line);
@@ -389,6 +389,13 @@ main {
 }
 
 .day time {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(185, 86, 94, 0.1);
   color: var(--rose);
   font-size: 0.84rem;
   font-weight: 900;
@@ -584,7 +591,7 @@ main {
   }
 
   .day {
-    grid-template-columns: 120px 1fr;
+    grid-template-columns: 1fr;
     padding: 18px;
   }
 
