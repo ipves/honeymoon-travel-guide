@@ -88,7 +88,11 @@ const DAY_THUMBNAILS = [
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
-const BOLT_APP_STORE_URL = "https://apps.apple.com/gb/app/bolt-request-a-ride/id675033630";
+const BOLT_APP_STORE_URL = "https://apps.apple.com/us/app/bolt-request-a-ride/id675033630";
+const SAILY_APP_STORE_URL = "https://apps.apple.com/us/app/saily-travel-esim-data/id6475045151";
+const G7_APP_STORE_URL = "https://apps.apple.com/us/app/g7-taxi-book-a-taxi/id402196027";
+const BIG_BUS_APP_STORE_URL = "https://apps.apple.com/us/app/big-bus-tours/id590746945";
+const DELTA_APP_STORE_URL = "https://apps.apple.com/us/app/fly-delta/id388491656";
 const BIG_BUS_STOPS = [
   "Louvre-Pyramide",
   "Louvre / Pont des Arts",
@@ -244,12 +248,13 @@ function renderConfirmationButtons(keys = [], className = "") {
     .join("");
 }
 
-function renderDashboardActions(maps = [], confirmations = []) {
-  if (!maps.length && !confirmations.length) return "";
+function renderDashboardActions(maps = [], confirmations = [], links = []) {
+  if (!maps.length && !confirmations.length && !links.length) return "";
   const mapLinks = maps
     .map((label) => `<a class="dash-map-link" href="${mapUrl(label)}" target="_blank" rel="noopener" aria-label="Open ${label} in Google Maps">Map<span>${label}</span></a>`)
     .join("");
-  return `<nav class="dash-actions" aria-label="Quick links">${mapLinks}${renderConfirmationButtons(confirmations, "dash-doc-link")}</nav>`;
+  const actionLinks = links.map(([label, url]) => `<a class="dash-app-link" href="${url}" target="_blank" rel="noopener">${label}</a>`).join("");
+  return `<nav class="dash-actions" aria-label="Quick links">${mapLinks}${renderConfirmationButtons(confirmations, "dash-doc-link")}${actionLinks}</nav>`;
 }
 
 const trip = {
@@ -289,6 +294,7 @@ const trip = {
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
         ["Book", "Louvre timed entry", "Major remaining ticket", ["Louvre"]],
         ["Book", "Versailles Passport", "Use late Palace entry", ["Palace of Versailles"]],
+        ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
         ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Confirm", "Capri boarding and cooking class time", "Pending activity details", ["Capri"]],
       ],
@@ -444,6 +450,13 @@ const trip = {
     ["Pompeii Packing", ["Sneakers", "Water", "Hat", "Portable charger", "Sunglasses"], ["Pompeii", "Moxy Pompeii"]],
     ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Uber to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
   ],
+  apps: [
+    ["Bolt", "Rides in Paris and Naples", "Use for the Paris Airbnb to Orly ride and the Moxy Pompeii to Naples Airport ride. Schedule ahead where possible and keep taxi backup plans in mind.", BOLT_APP_STORE_URL],
+    ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while they still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
+    ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or they want a licensed taxi option.", G7_APP_STORE_URL],
+    ["Big Bus Tours", "Paris bus route and ticket access", "Use for the Paris Big Bus booking, route map, stops, service updates, and bus tracking.", BIG_BUS_APP_STORE_URL],
+    ["UNICO Campania", "Amalfi Coast bus tickets", "Use in Campania to buy tickets before boarding SITA buses around Praiano, Positano, Amalfi, and Bomerano.", UNICO_APP_STORE_URL],
+  ],
 };
 
 const data = window.GUIDE_DATA || { documents: [] };
@@ -541,7 +554,7 @@ function renderDashboard() {
   document.querySelector("#dashboardGrid").innerHTML = trip.dashboardGroups
     .map(
       (group) => `<article class="dash-group"><h3>${group.title}</h3><div>${group.items
-        .map(([label, value, note, maps = [], confirmations = []]) => `<section class="dash-row"><p>${label}</p><strong>${value}</strong><span>${note}</span>${renderDashboardActions(maps, confirmations)}</section>`)
+        .map(([label, value, note, maps = [], confirmations = [], links = []]) => `<section class="dash-row"><p>${label}</p><strong>${value}</strong><span>${note}</span>${renderDashboardActions(maps, confirmations, links)}</section>`)
         .join("")}</div></article>`
     )
     .join("");
@@ -596,6 +609,21 @@ function renderChecklist() {
     .join("");
 }
 
+function renderApps() {
+  document.querySelector("#appList").innerHTML = trip.apps
+    .map(
+      ([name, meta, body, url]) => `<article class="app-card">
+        <div>
+          <p>${meta}</p>
+          <h3>${name}</h3>
+          <span>${body}</span>
+        </div>
+        <a href="${url}" target="_blank" rel="noopener">Open App Store</a>
+      </article>`
+    )
+    .join("");
+}
+
 function renderDocs() {
   document.querySelector("#docList").innerHTML = [...data.documents]
     .sort((a, b) => (SECTION_ORDER[a.filename] || 99) - (SECTION_ORDER[b.filename] || 99))
@@ -610,7 +638,7 @@ function renderDocs() {
 function flattenContent() {
   const curated = [
     ...trip.dashboardGroups.flatMap((group) =>
-      group.items.map(([label, value, note, maps = [], confirmations = []]) => ({ title: `${group.title}: ${label}`, type: "Dashboard", text: `${value} ${note} ${maps.join(" ")} ${confirmations.join(" ")}` }))
+      group.items.map(([label, value, note, maps = [], confirmations = [], links = []]) => ({ title: `${group.title}: ${label}`, type: "Dashboard", text: `${value} ${note} ${maps.join(" ")} ${confirmations.join(" ")} ${links.map(([linkLabel]) => linkLabel).join(" ")}` }))
     ),
     ...trip.days.map(([date, title, body, maps = [], agenda = []]) => ({
       title,
@@ -620,6 +648,7 @@ function flattenContent() {
     ...trip.food.map(([title, location, body, maps = []]) => ({ title, type: `Dining · ${location}`, text: `${body} ${maps.join(" ")}` })),
     ...trip.transport.map(([title, body, maps = []]) => ({ title, type: "Transport", text: `${body} ${maps.join(" ")}` })),
     ...trip.checklists.flatMap(([group, items, maps = []]) => items.map((item) => ({ title: item, type: `Checklist · ${group}`, text: `${item} ${maps.join(" ")}` }))),
+    ...trip.apps.map(([name, meta, body]) => ({ title: name, type: "Apps", text: `${meta} ${body}` })),
   ];
 
   const docs = data.documents.flatMap((doc) =>
@@ -756,6 +785,7 @@ renderDays();
 renderFood();
 renderTransport();
 renderChecklist();
+renderApps();
 renderDocs();
 runAsk();
 

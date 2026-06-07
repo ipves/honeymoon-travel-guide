@@ -355,6 +355,63 @@ main {
   text-decoration: none;
 }
 
+.app-list {
+  display: grid;
+  gap: 10px;
+}
+
+.app-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.app-card p,
+.app-card h3,
+.app-card span {
+  margin: 0;
+}
+
+.app-card p {
+  color: var(--sea);
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.app-card h3 {
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.app-card span {
+  display: block;
+  margin-top: 5px;
+  color: #435960;
+  font-size: 0.9rem;
+  line-height: 1.38;
+}
+
+.app-card a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: white;
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .map-links {
   display: flex;
   flex-wrap: wrap;
@@ -410,6 +467,12 @@ main {
 .dash-doc-link::before {
   content: "Doc";
   color: var(--rose);
+  font-size: 0.7rem;
+}
+
+.dash-app-link::before {
+  content: "App";
+  color: var(--blue);
   font-size: 0.7rem;
 }
 
@@ -846,7 +909,7 @@ main {
   left: 0;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
