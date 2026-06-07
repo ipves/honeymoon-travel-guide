@@ -388,6 +388,22 @@ main {
   box-shadow: var(--shadow);
 }
 
+.day-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.day-thumb {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(220, 228, 225, 0.9);
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 6px 14px rgba(20, 58, 74, 0.12);
+}
+
 .day time {
   display: inline-flex;
   width: fit-content;

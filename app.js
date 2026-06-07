@@ -71,6 +71,20 @@ const MAP_LINKS = {
   "Torre Annunziata": "Torre Annunziata Italy",
   "Naples": "Naples Italy",
 };
+const DAY_THUMBNAILS = [
+  ["assets/day-01-wedding-night.jpg", "Rustic barn for wedding night"],
+  ["assets/day-02-departure-flight.jpg", "Overnight flight to Paris"],
+  ["assets/day-03-paris-arrival-cruise.jpg", "Seine cruise in Paris"],
+  ["assets/day-04-paris-icons.jpg", "Paris landmarks with Eiffel Tower and Louvre"],
+  ["assets/day-05-versailles.jpg", "Versailles gardens"],
+  ["assets/day-06-paris-to-praiano.jpg", "Travel from Paris to the Amalfi Coast"],
+  ["assets/day-07-cooking-beach.jpg", "Praiano cooking class and beach"],
+  ["assets/day-08-positano.jpg", "Positano cliffside village"],
+  ["assets/day-09-path-amalfi.jpg", "Path of the Gods and Amalfi coast"],
+  ["assets/day-10-capri-boat.jpg", "Capri boat excursion"],
+  ["assets/day-11-pompeii.jpg", "Pompeii ruins"],
+  ["assets/day-12-return-home.jpg", "Return home airport morning"],
+];
 
 function mapUrl(label) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_LINKS[label] || label)}`;
@@ -329,11 +343,13 @@ function renderDashboard() {
 
 function renderDays() {
   document.querySelector("#dayList").innerHTML = trip.days
-    .map(([date, title, body, maps, agenda = []]) => {
+    .map(([date, title, body, maps, agenda = []], index) => {
       const agendaHtml = agenda.length
         ? `<div class="day-agenda">${agenda.map(([time, detail]) => `<section><strong>${time}</strong><p>${detail}</p></section>`).join("")}</div>`
         : "";
-      return `<article class="day"><time>${date}</time><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${renderMapLinks(maps)}</div></article>`;
+      const [src, alt] = DAY_THUMBNAILS[index] || [];
+      const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${renderMapLinks(maps)}</div></article>`;
     })
     .join("");
 }
