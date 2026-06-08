@@ -98,6 +98,9 @@ const SAILY_APP_STORE_URL = "https://apps.apple.com/us/app/saily-travel-esim-dat
 const G7_APP_STORE_URL = "https://apps.apple.com/us/app/g7-taxi-book-a-taxi/id402196027";
 const BIG_BUS_APP_STORE_URL = "https://apps.apple.com/us/app/big-bus-tours/id590746945";
 const DELTA_APP_STORE_URL = "https://apps.apple.com/us/app/fly-delta/id388491656";
+const VIATOR_APP_STORE_URL = "https://apps.apple.com/us/app/viator-tours-attractions/id434832826";
+const SEINE_CRUISE_VIATOR_URL = "https://www.viator.com/account/booking/detail/1401765745?m=63070&nid=VR.f2811c2f-d258-499e-928f-5497cefcc358.VT_EMAIL_TRV";
+const BIG_BUS_VIATOR_URL = "https://www.viator.com/account/booking/212033288/1784186781/1401767595";
 const CHATGPT_URL = "https://chatgpt.com/";
 const TRAVEL_RESOURCE_LINKS = {
   paris: "https://www.tripadvisor.com/Tourism-g187147-Paris_Ile_de_France-Vacations.html",
@@ -213,7 +216,24 @@ function renderBigBusTicketCard() {
       <span>Booking reference 1401767595. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
     </div>
     <img src="assets/big-bus-ticket-qr.png" alt="Scannable Big Bus ticket QR code" />
-    <a href="${BIG_BUS_TICKET_PDF}" target="_blank" rel="noopener">Open full Big Bus ticket</a>
+    <div class="ticket-card-actions">
+      <a href="${BIG_BUS_TICKET_PDF}" target="_blank" rel="noopener">Open full Big Bus ticket</a>
+      <a href="${BIG_BUS_VIATOR_URL}" target="_blank" rel="noopener">Open Viator booking</a>
+    </div>
+  </aside>`;
+}
+
+function renderViatorBookingCard() {
+  return `<aside class="booking-card" aria-label="Seine Champagne Cruise Viator booking">
+    <div>
+      <p>Viator Booking</p>
+      <h4>Seine Champagne Cruise</h4>
+      <span>Booking reference 1401765745. Open the Viator booking page for the cruise ticket, details, and any day-of updates.</span>
+    </div>
+    <div class="booking-card-actions">
+      <a href="${SEINE_CRUISE_VIATOR_URL}" target="_blank" rel="noopener">Open Viator booking</a>
+      <a href="${VIATOR_APP_STORE_URL}" target="_blank" rel="noopener">Get Viator app</a>
+    </div>
   </aside>`;
 }
 
@@ -491,6 +511,7 @@ const trip = {
     ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while they still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
     ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or they want a licensed taxi option.", G7_APP_STORE_URL],
     ["Big Bus Tours", "Paris bus route and ticket access", "Use for the Paris Big Bus booking, route map, stops, service updates, and bus tracking.", BIG_BUS_APP_STORE_URL],
+    ["Viator", "Tour tickets and bookings", "Use for the Seine Champagne Cruise booking, tickets, day-of details, and activity updates.", VIATOR_APP_STORE_URL],
     ["UNICO Campania", "Amalfi Coast bus tickets", "Use in Campania to buy tickets before boarding SITA buses around Praiano, Positano, Amalfi, and Bomerano.", UNICO_APP_STORE_URL],
   ],
 };
@@ -604,6 +625,7 @@ function renderDays() {
         : "";
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
+      const viatorCard = title.includes("Seine Champagne Cruise") ? renderViatorBookingCard() : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
@@ -613,7 +635,7 @@ function renderDays() {
           ? renderBoltRideCard("naplesAirport")
           : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${ticketCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }

@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v46";
+const CACHE_NAME = "honeymoon-guide-v48";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=46",
-  "./app.js?v=46",
-  "./data.js?v=46",
+  "./styles.css?v=48",
+  "./app.js?v=48",
+  "./data.js?v=48",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
