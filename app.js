@@ -2,13 +2,16 @@ const STORE_KEY = "honeymoon-guide-checks-v1";
 const SECTION_ORDER = {
   "Pre-Trip Checklist & Travel Preparation.pdf": 1,
   "Packing Guide and Travel Tips.pdf": 2,
-  "Honeymoon Itinerary.pdf": 3,
-  "Wedding and Honeymoon Itinerary.pdf": 4,
-  "Amalfi Coast Honeymoon Itinerary.pdf": 5,
-  "Transportation Guide.pdf": 6,
-  "Dining Guide.pdf": 7,
+  "AllianzIns.pdf": 3,
+  "Honeymoon Itinerary.pdf": 4,
+  "Wedding and Honeymoon Itinerary.pdf": 5,
+  "Amalfi Coast Honeymoon Itinerary.pdf": 6,
+  "Transportation Guide.pdf": 7,
+  "Dining Guide.pdf": 8,
 };
 const DOC_SUMMARIES = {
+  "AllianzIns.pdf":
+    "The Allianz travel insurance policy for the honeymoon. Open this if you need policy details, assistance information, coverage terms, claim instructions, or emergency travel support.",
   "Honeymoon Itinerary.pdf":
     "The quick-reference vault for emergencies, flights, lodging, confirmations, and critical trip details. Open this first when plans get delayed or you need the next important number, address, or booking code.",
   "Pre-Trip Checklist & Travel Preparation.pdf":
@@ -25,6 +28,7 @@ const DOC_SUMMARIES = {
     "Packing lists, daily carry reminders, ticket tracking, and final-week prep for Paris, Amalfi, Capri, Path of the Gods, and Pompeii. It is the practical final check before heading out each day.",
 };
 const DOC_MAPS = {
+  "AllianzIns.pdf": [],
   "Honeymoon Itinerary.pdf": ["The Barn Loft", "Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"],
   "Pre-Trip Checklist & Travel Preparation.pdf": ["Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"],
   "Wedding and Honeymoon Itinerary.pdf": ["The Barn Loft", "Paris Airbnb", "Villa Gianlica"],
@@ -86,6 +90,7 @@ const DAY_THUMBNAILS = [
   ["assets/day-12-return-home.jpg", "Return home airport morning"],
 ];
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
+const BIG_BUS_TICKET_PDF = "docs/ParisBigBus.pdf";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
 const BOLT_APP_STORE_URL = "https://apps.apple.com/us/app/bolt-request-a-ride/id675033630";
@@ -197,6 +202,18 @@ function renderBigBusRouteCard() {
     </div>
     <ol>${BIG_BUS_STOPS.map((stop) => `<li>${stop}</li>`).join("")}</ol>
     <a href="${BIG_BUS_ROUTE_URL}" target="_blank" rel="noopener">Open official route & map</a>
+  </aside>`;
+}
+
+function renderBigBusTicketCard() {
+  return `<aside class="ticket-card" aria-label="Big Bus scannable ticket">
+    <div>
+      <p>Big Bus Ticket</p>
+      <h4>Scan at boarding</h4>
+      <span>Booking reference 1401767595. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
+    </div>
+    <img src="assets/big-bus-ticket-qr.png" alt="Scannable Big Bus ticket QR code" />
+    <a href="${BIG_BUS_TICKET_PDF}" target="_blank" rel="noopener">Open full Big Bus ticket</a>
   </aside>`;
 }
 
@@ -588,6 +605,7 @@ function renderDays() {
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
+      const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
       const boltCard = title.includes("Paris to Praiano")
         ? renderBoltRideCard("orly")
@@ -595,7 +613,7 @@ function renderDays() {
           ? renderBoltRideCard("naplesAirport")
           : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${routeCard}${ticketCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }

@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v42";
+const CACHE_NAME = "honeymoon-guide-v46";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=42",
-  "./app.js?v=42",
-  "./data.js?v=42",
+  "./styles.css?v=46",
+  "./app.js?v=46",
+  "./data.js?v=46",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
@@ -21,6 +21,8 @@ const ASSETS = [
   "./assets/day-10-capri-boat.jpg",
   "./assets/day-11-pompeii.jpg",
   "./assets/day-12-return-home.jpg",
+  "./assets/big-bus-ticket-qr.png",
+  "./docs/AllianzIns.pdf",
   "./docs/Amalfi%20Coast%20Honeymoon%20Itinerary.pdf",
   "./docs/Dining%20Guide.pdf",
   "./docs/Honeymoon%20Itinerary.pdf",
