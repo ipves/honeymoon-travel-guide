@@ -689,6 +689,33 @@ main {
   background: var(--sea);
 }
 
+.route-card--pickup-alert {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  border-color: rgba(185, 86, 94, 0.32);
+  background: linear-gradient(135deg, rgba(185, 86, 94, 0.12), rgba(224, 179, 90, 0.13) 58%, rgba(255, 255, 255, 0.92));
+}
+
+.route-card--pickup-alert p {
+  color: var(--rose);
+}
+
+.pickup-alert-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--rose);
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(185, 86, 94, 0.2);
+}
+
 .ticket-card {
   display: grid;
   justify-items: start;
@@ -829,6 +856,42 @@ main {
 
 .route-card--bolt p {
   color: var(--blue);
+}
+
+.route-card--flight {
+  border-color: rgba(255, 102, 0, 0.28);
+  background: linear-gradient(180deg, rgba(255, 102, 0, 0.09), rgba(255, 255, 255, 0.9));
+}
+
+.route-card--flight p {
+  color: #d85600;
+}
+
+.flight-card-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.easyjet-badge {
+  display: inline-grid;
+  min-width: 78px;
+  min-height: 42px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #ff6600;
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(255, 102, 0, 0.2);
+}
+
+.route-card--flight .ride-details dt {
+  color: #d85600;
 }
 
 .ride-details {

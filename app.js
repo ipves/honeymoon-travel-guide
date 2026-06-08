@@ -272,6 +272,41 @@ function renderBoltRideCard(kind) {
   </aside>`;
 }
 
+function renderEasyJetTransferCard() {
+  const details = [
+    ["Flight", "EasyJet EJU4953, Paris Orly to Naples"],
+    ["Time", "1:15-3:30 PM, Thursday June 25"],
+    ["Booking", "KC8B7PH"],
+    ["Seats", "Noah 11A, Lila 11B"],
+    ["Bags", "2 x 23kg checked bags included"],
+    ["Naples arrival", "Collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with their names on it."],
+  ];
+  return `<aside class="route-card route-card--flight" aria-label="EasyJet flight and Naples transfer reminder">
+    <div class="flight-card-head">
+      <div>
+        <p>Flight + Transfer</p>
+        <h4>Orly to Naples, then private driver</h4>
+        <span>Keep this visible after landing so the Naples airport pickup step does not get missed.</span>
+      </div>
+      <div class="easyjet-badge" aria-label="EasyJet">easyJet</div>
+    </div>
+    <dl class="ride-details">${details
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("")}</dl>
+  </aside>`;
+}
+
+function renderPompeiiTransferAlert() {
+  return `<aside class="route-card route-card--pickup-alert" aria-label="Private transfer pickup reminder">
+    <div class="pickup-alert-icon" aria-hidden="true">!</div>
+    <div>
+      <p>Private Transfer Reminder</p>
+      <h4>Stay at Villa Gianlica for pickup</h4>
+      <span>Do not leave for Pompeii on your own. After checkout, the private transfer driver will meet them at the villa lobby / entrance for the ride to Moxy Pompeii.</span>
+    </div>
+  </aside>`;
+}
+
 function renderConfirmations(keys = []) {
   if (!keys.length) return "";
   return `<nav class="confirm-links" aria-label="Confirmation documents">
@@ -629,13 +664,15 @@ function renderDays() {
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
+      const pompeiiTransferAlert = title.includes("Pompeii Day") ? renderPompeiiTransferAlert() : "";
       const boltCard = title.includes("Paris to Praiano")
         ? renderBoltRideCard("orly")
         : title.includes("Return Home")
           ? renderBoltRideCard("naplesAirport")
           : "";
+      const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${boltCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${boltCard}${easyJetCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
