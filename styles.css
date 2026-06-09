@@ -894,6 +894,32 @@ main {
   color: #d85600;
 }
 
+.route-card--delta {
+  border-color: rgba(0, 49, 111, 0.24);
+  background: linear-gradient(180deg, rgba(0, 49, 111, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.route-card--delta p,
+.route-card--delta .ride-details dt {
+  color: #00316f;
+}
+
+.delta-badge {
+  display: inline-grid;
+  min-width: 76px;
+  min-height: 42px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #c8102e 0 42%, #00316f 42% 100%);
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(0, 49, 111, 0.18);
+}
+
 .ride-details {
   display: grid;
   gap: 7px;

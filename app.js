@@ -279,7 +279,7 @@ function renderEasyJetTransferCard() {
     ["Booking", "KC8B7PH"],
     ["Seats", "Noah 11A, Lila 11B"],
     ["Bags", "2 x 23kg checked bags included"],
-    ["Naples arrival", "Collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with their names on it."],
+    ["Naples arrival", "Collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with your names on it."],
   ];
   return `<aside class="route-card route-card--flight" aria-label="EasyJet flight and Naples transfer reminder">
     <div class="flight-card-head">
@@ -296,13 +296,55 @@ function renderEasyJetTransferCard() {
   </aside>`;
 }
 
+function renderDeltaFlightCard(kind) {
+  const flights = {
+    outbound: {
+      title: "Atlanta to Paris",
+      note: "International overnight flight to Paris Charles de Gaulle.",
+      details: [
+        ["Flight", "Delta DL84, Atlanta to Paris CDG"],
+        ["Time", "9:50 PM Sunday June 21 - 12:30 PM Monday June 22"],
+        ["Booking", "HW6MPS"],
+        ["Airport", "Atlanta International Terminal, Terminal F"],
+        ["Reminder", "Keep passports, phones, chargers, and arrival documents accessible in your carry-on."],
+      ],
+    },
+    return: {
+      title: "Naples to Atlanta",
+      note: "Early airport morning for the flight home.",
+      details: [
+        ["Flight", "Delta DL279, Naples to Atlanta"],
+        ["Time", "9:05 AM-2:31 PM, Wednesday July 1"],
+        ["Booking", "HW6MPS"],
+        ["Airport", "Naples International Airport"],
+        ["Reminder", "Leave Moxy Pompeii early, keep passports handy, and request Uber only after luggage is collected in Atlanta."],
+      ],
+    },
+  };
+  const flight = flights[kind];
+  if (!flight) return "";
+  return `<aside class="route-card route-card--delta" aria-label="Delta flight reminder">
+    <div class="flight-card-head">
+      <div>
+        <p>Delta Flight</p>
+        <h4>${flight.title}</h4>
+        <span>${flight.note}</span>
+      </div>
+      <div class="delta-badge" aria-label="Delta">DELTA</div>
+    </div>
+    <dl class="ride-details">${flight.details
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("")}</dl>
+  </aside>`;
+}
+
 function renderPompeiiTransferAlert() {
   return `<aside class="route-card route-card--pickup-alert" aria-label="Private transfer pickup reminder">
     <div class="pickup-alert-icon" aria-hidden="true">!</div>
     <div>
       <p>Private Transfer Reminder</p>
       <h4>Stay at Villa Gianlica for pickup</h4>
-      <span>Do not leave for Pompeii on your own. After checkout, the private transfer driver will meet them at the villa lobby / entrance for the ride to Moxy Pompeii.</span>
+      <span>Do not leave for Pompeii on your own. After checkout, the private transfer driver will meet you at the villa lobby / entrance for the ride to Moxy Pompeii.</span>
     </div>
   </aside>`;
 }
@@ -356,7 +398,7 @@ const trip = {
         ["Amalfi", "Tripadvisor Amalfi Coast", "Coast-wide ideas for Praiano, Positano, Amalfi, restaurants, beaches, and tours.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.amalfi]]],
         ["Pompeii", "Tripadvisor Pompeii", "Ruins tips, tours, restaurants, and visit planning.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.pompeii]]],
         ["Naples", "Tripadvisor Naples", "Airport-area backup ideas, food tips, and Naples context.", [], [], [["Open guide", TRAVEL_RESOURCE_LINKS.naples]]],
-        ["ChatGPT", "Ask for suggestions", "Use when they want fresh ideas for food, backup plans, rainy-day swaps, or quick local tips.", [], [], [["Ask ChatGPT", CHATGPT_URL]]],
+        ["ChatGPT", "Ask for suggestions", "Use when you want fresh ideas for food, backup plans, rainy-day swaps, or quick local tips.", [], [], [["Ask ChatGPT", CHATGPT_URL]]],
       ],
     },
     {
@@ -409,11 +451,11 @@ const trip = {
     ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to the Airbnb safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Paris Airbnb", "Square du Vert-Galant"], [
       ["12:30 PM", "Arrive at Paris Charles de Gaulle. Follow signs to passport control, collect checked luggage, go through customs, use ATM if convenient, then follow signs to the official taxi queue."],
       ["Taxi", "Use only the official taxi line. Destination: Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
-      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when they appear."],
+      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when available in the app."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
       ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1401765745; confirmation 1784184935. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
-      ["After cruise", "Short walk near the river if they feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
+      ["After cruise", "Take a short walk near the river if you feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
     ]],
     ["Tue Jun 23", "Big Bus + Louvre / Eiffel Tower Decision Day", "This day is built around the Big Bus reservation and one main Paris attraction choice unless both tickets are already booked.", ["Louvre", "Eiffel Tower", "Cafe de Flore", "Le Volant", "Pink Mamma"], [
       ["8:00-8:30 AM", "Wake up and get breakfast near the Eiffel Tower: croissant, pain au chocolat, coffee, orange juice."],
@@ -428,7 +470,7 @@ const trip = {
     ]],
     ["Wed Jun 24", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
-      ["Eiffel window", "Use this time only if Eiffel Tower was not completed Tuesday. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If they do not have tickets, do not burn the whole day in a long line."],
+      ["Eiffel window", "Use this time only if Eiffel Tower was not completed Tuesday. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
       ["Lunch", "Keep it light before Versailles: bakery sandwich, cafe lunch, or picnic item."],
       ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
@@ -441,13 +483,13 @@ const trip = {
       ["10:15 AM", "Taxi or Bolt pickup to Paris Orly Airport. Airbnb check-out is by 11:00 AM, but leave earlier."],
       ["11:00 AM", "Goal arrival at Orly. EasyJet bag drop opens 11:15 AM and closes 12:35 PM."],
       ["1:15-3:30 PM", "EasyJet EJU4953 Paris Orly to Naples. Booking reference KC8B7PH. Seats: Noah 11A, Lila 11B. Checked bags: 2 x 23kg included."],
-      ["Naples arrival", "Deplane, collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with their names on it. Get euros from an ATM at the airport or along the way so they have cash for the Praiano cooking class."],
+      ["Naples arrival", "Deplane, collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with your names on it. Get euros from an ATM at the airport or along the way so you have cash for the Praiano cooking class."],
       ["Transfer", "Private transfer to Praiano arranged through Villa Gianlica. Cost: EUR190 total for two. Driver needs flight number, arrival time, passenger names, and mobile phone number. Drive time about 90-120 minutes."],
       ["Villa arrival", "Villa Gianlica address: Via Asciola 2, 84010 Praiano SA Italy. Check in, unpack, shower, and take in the view."],
       ["Dinner", "Keep it close and easy: Kasai, Che Bonta Gastronomia, or Il Pirata."],
     ]],
     ["Fri Jun 26", "Cooking Class + Marina di Praia Beach", "The day depends on the confirmed cooking class time. The source notes a timing conflict that must be verified before finalizing the day.", ["Ristorante km0", "Marina di Praia"], [
-      ["Cash reminder", "Have euros ready for the Praiano cooking class. If they did not use an ATM on arrival day, get cash before class."],
+      ["Cash reminder", "Have euros ready for the Praiano cooking class. If you did not use an ATM on arrival day, get cash before class."],
       ["Timing note", "Current confirmation appears to show 5:00-8:00 PM, while the working plan says 11:00 AM. Verify before departure."],
       ["If 11:00 AM", "Breakfast at Villa Gianlica, leave around 10:30 AM for Ristorante km0, Via Guglielmo Marconi 45, Praiano. Cooking class and lunch run 11:00 AM-2:00 PM."],
       ["After 11:00 class", "Arrive Marina di Praia around 2:30 PM, rent loungers if available, swim, relax, then have a light dinner in Praiano: Kasai, Che Bonta, gelato and wine."],
@@ -491,7 +533,7 @@ const trip = {
     ]],
     ["Tue Jun 30", "Pompeii Day", "Final full day: transfer to Moxy Pompeii, see Pompeii without trying to do everything, then final honeymoon dinner.", ["Villa Gianlica", "Moxy Pompeii", "Porta Marina Entrance", "Pompeii", "Bosco de' Medici"], [
       ["Morning", "Breakfast at Villa Gianlica, finish packing, and check room carefully."],
-      ["Transfer", "Private transfer from Villa Gianlica to Moxy Pompeii, quoted EUR160 total. The driver will pick them up directly at Villa Gianlica after checkout. Moxy Pompeii address: Via Castriota 43, Torre Annunziata."],
+      ["Transfer", "Private transfer from Villa Gianlica to Moxy Pompeii, quoted EUR160 total. The driver will pick you up directly at Villa Gianlica after checkout. Moxy Pompeii address: Via Castriota 43, Torre Annunziata."],
       ["Arrival", "If room is not ready, leave luggage with the front desk and proceed directly to Pompeii."],
       ["To Pompeii", "Recommended Bolt or taxi to Porta Marina Entrance."],
       ["Pompeii strategy", "Do not attempt to see everything. Focus on Forum, Temple of Apollo, House of the Faun, Large Theatre, and Garden of the Fugitives."],
@@ -527,7 +569,7 @@ const trip = {
     ["CDG Airport to Paris Airbnb", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell driver Rue Sebastien Mercier, 75015 Paris. Expected EUR50-60 and 45-60 minutes.", ["Paris Airbnb"]],
     ["Paris Airbnb to Orly", "Use Bolt or taxi. Pickup at 10:15 AM. Goal arrival 11:00 AM because EasyJet bag drop opens 11:15 AM and closes 12:35 PM.", ["Paris Airbnb"]],
     ["Paris to Versailles", "Use Google Maps that morning to Versailles Chateau Rive Gauche. After exiting, follow signs and crowds to the palace gates, about a 10-minute walk.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
-    ["Naples Airport to Villa Gianlica", "Use villa-arranged private transfer, EUR190 total for two. Provide flight number, arrival time, passenger names, and mobile number. After baggage claim, exit arrivals and look for the driver holding a sign with their names on it.", ["Villa Gianlica"]],
+    ["Naples Airport to Villa Gianlica", "Use villa-arranged private transfer, EUR190 total for two. Provide flight number, arrival time, passenger names, and mobile number. After baggage claim, exit arrivals and look for the driver holding a sign with your names on it.", ["Villa Gianlica"]],
     ["Amalfi Coast Buses", "Verify timing the morning of travel. Summer traffic and full buses are normal. If a bus is full, wait for the next one.", ["Praiano", "Amalfi Bus Terminal", "Bomerano"]],
     ["Stressful Short Connections", "Use Bolt, taxi, or private transfer. This is a honeymoon, not a transportation challenge.", ["Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"]],
   ],
@@ -543,8 +585,8 @@ const trip = {
   ],
   apps: [
     ["Bolt", "Rides in Paris and Naples", "Use for the Paris Airbnb to Orly ride and the Moxy Pompeii to Naples Airport ride. Schedule ahead where possible and keep taxi backup plans in mind.", BOLT_APP_STORE_URL],
-    ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while they still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
-    ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or they want a licensed taxi option.", G7_APP_STORE_URL],
+    ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while you still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
+    ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or you want a licensed taxi option.", G7_APP_STORE_URL],
     ["Big Bus Tours", "Paris bus route and ticket access", "Use for the Paris Big Bus booking, route map, stops, service updates, and bus tracking.", BIG_BUS_APP_STORE_URL],
     ["Viator", "Tour tickets and bookings", "Use for the Seine Champagne Cruise booking, tickets, day-of details, and activity updates.", VIATOR_APP_STORE_URL],
     ["UNICO Campania", "Amalfi Coast bus tickets", "Use in Campania to buy tickets before boarding SITA buses around Praiano, Positano, Amalfi, and Bomerano.", UNICO_APP_STORE_URL],
@@ -665,6 +707,11 @@ function renderDays() {
       const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
       const pompeiiTransferAlert = title.includes("Pompeii Day") ? renderPompeiiTransferAlert() : "";
+      const deltaCard = title.includes("Departure Day")
+        ? renderDeltaFlightCard("outbound")
+        : title.includes("Return Home")
+          ? renderDeltaFlightCard("return")
+          : "";
       const boltCard = title.includes("Paris to Praiano")
         ? renderBoltRideCard("orly")
         : title.includes("Return Home")
@@ -674,7 +721,7 @@ function renderDays() {
       const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
       const routeTransferCards = title.includes("Paris to Praiano") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${deltaCard}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
