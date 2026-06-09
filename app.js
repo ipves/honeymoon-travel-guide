@@ -418,6 +418,17 @@ function renderDashboardActions(maps = [], confirmations = [], links = []) {
   return `<nav class="dash-actions" aria-label="Quick links">${mapLinks}${renderConfirmationButtons(confirmations, "dash-doc-link")}${actionLinks}</nav>`;
 }
 
+function renderAgenda(agenda, insertBeforeLabel = "", insertHtml = "") {
+  if (!agenda.length) return "";
+  const sections = agenda
+    .map(([time, detail]) => {
+      const insert = insertHtml && time === insertBeforeLabel ? insertHtml : "";
+      return `${insert}<section><strong>${time}</strong><p>${detail}</p></section>`;
+    })
+    .join("");
+  return `<div class="day-agenda">${sections}</div>`;
+}
+
 const trip = {
   dashboardGroups: [
     {
@@ -737,9 +748,6 @@ function renderDashboard() {
 function renderDays() {
   document.querySelector("#dayList").innerHTML = trip.days
     .map(([date, title, body, maps, agenda = []], index) => {
-      const agendaHtml = agenda.length
-        ? `<div class="day-agenda">${agenda.map(([time, detail]) => `<section><strong>${time}</strong><p>${detail}</p></section>`).join("")}</div>`
-        : "";
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
       const viatorCard = title.includes("Seine Champagne Cruise") ? renderViatorBookingCard() : "";
@@ -764,14 +772,15 @@ function renderDays() {
           : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
-      const flightDayCards = title.includes("Departure Day")
-        ? `${uberCard}${deltaCard}`
-        : title.includes("Return Home")
-          ? `${boltCard}${deltaCard}${uberCard}`
+      const preSummaryCards = title.includes("Departure Day") ? `${uberCard}${deltaCard}` : "";
+      const flightDayCards = title.includes("Return Home")
+          ? boltCard
           : "";
+      const agendaInsert = title.includes("Return Home") ? `${deltaCard}${uberCard}` : "";
+      const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
