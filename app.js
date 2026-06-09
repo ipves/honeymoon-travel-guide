@@ -671,8 +671,10 @@ function renderDays() {
           ? renderBoltRideCard("naplesAirport")
           : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
+      const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
+      const routeTransferCards = title.includes("Paris to Praiano") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${boltCard}${easyJetCard}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
