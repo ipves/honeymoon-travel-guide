@@ -317,7 +317,7 @@ function renderDeltaFlightCard(kind) {
         ["Time", "9:05 AM-2:31 PM, Wednesday July 1"],
         ["Booking", "HW6MPS"],
         ["Airport", "Naples International Airport"],
-        ["Reminder", "Leave Moxy Pompeii early, keep passports handy, and request Uber only after luggage is collected in Atlanta."],
+        ["Reminder", "Leave Moxy Pompeii early, keep passports handy, and use the Uber Reserved ride after luggage is collected in Atlanta."],
       ],
     },
   };
@@ -333,6 +333,46 @@ function renderDeltaFlightCard(kind) {
       <div class="delta-badge" aria-label="Delta">DELTA</div>
     </div>
     <dl class="ride-details">${flight.details
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("")}</dl>
+  </aside>`;
+}
+
+function renderUberReservedCard(kind) {
+  const rides = {
+    atlOutbound: {
+      title: "Carrollton to ATL",
+      note: "Reserved ride to Atlanta Airport for the international departure.",
+      details: [
+        ["Pickup", "The Barn Loft, Carrollton"],
+        ["Destination", "Atlanta Airport International Terminal, Terminal F"],
+        ["Reserved for", "1:00 PM, Sunday June 21"],
+        ["Flight", "Delta DL84 to Paris at 9:50 PM"],
+      ],
+    },
+    atlReturn: {
+      title: "ATL to Woodstock",
+      note: "Reserved ride home after the return flight and luggage pickup.",
+      details: [
+        ["Pickup", "Atlanta Airport arrivals area"],
+        ["Destination", "Woodstock, Georgia, home"],
+        ["Timing", "After Delta DL279 arrives at 2:31 PM and luggage is collected"],
+        ["Reminder", "Clear immigration, collect luggage, go through customs, then head to the reserved pickup area."],
+      ],
+    },
+  };
+  const ride = rides[kind];
+  if (!ride) return "";
+  return `<aside class="route-card route-card--uber" aria-label="Uber reserved ride: ${ride.title}">
+    <div class="flight-card-head">
+      <div>
+        <p>Uber Reserved</p>
+        <h4>${ride.title}</h4>
+        <span>${ride.note}</span>
+      </div>
+      <div class="uber-badge" aria-label="Uber">Uber</div>
+    </div>
+    <dl class="ride-details">${ride.details
       .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
       .join("")}</dl>
   </aside>`;
@@ -423,7 +463,7 @@ const trip = {
       title: "Still Needed",
       items: [
         ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
-        ["Pre-reserve", "Ubers to and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
+        ["Uber Reserved", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
         ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
         ["Book", "Louvre timed entry", "Major remaining ticket", ["Louvre"]],
@@ -444,7 +484,7 @@ const trip = {
       ["Morning", "Sleep in if possible, have an easy breakfast or brunch, and begin packing slowly."],
       ["12:00 PM", "Start final packing. Check bathroom, outlets, under bed, nightstands, closet, car, wedding items, and chargers."],
       ["12:30 PM", "Final walkthrough. Put passports and phones in carry-on, not checked luggage."],
-      ["1:00 PM", "Pre-booked Uber pickup to Atlanta Airport International Terminal, Terminal F."],
+      ["1:00 PM", "Uber Reserved to Atlanta Airport International Terminal, Terminal F."],
       ["2:00-2:30 PM", "Arrival goal at ATL. Enter International Terminal, find Delta international check-in, check the large bag, clear security, find gate area once posted, and eat dinner at the airport."],
       ["9:50 PM", "Delta DL84 departs Atlanta for Paris Charles de Gaulle. Drink water, try to sleep, keep passport and arrival documents accessible."],
     ]],
@@ -551,7 +591,7 @@ const trip = {
       ["6:45-7:00 AM", "Airport arrival goal for a comfortable buffer."],
       ["9:05 AM", "Delta DL279 Naples to Atlanta departs."],
       ["2:31 PM", "Arrive Atlanta. After landing: immigration, collect luggage, customs, exit arrivals area."],
-      ["Final transport", "Request Uber after luggage is collected. Destination: Woodstock, Georgia, home."],
+      ["Final transport", "Uber Reserved after luggage is collected. Destination: Woodstock, Georgia, home."],
     ]],
   ],
   food: [
@@ -712,6 +752,11 @@ function renderDays() {
         : title.includes("Return Home")
           ? renderDeltaFlightCard("return")
           : "";
+      const uberCard = title.includes("Departure Day")
+        ? renderUberReservedCard("atlOutbound")
+        : title.includes("Return Home")
+          ? renderUberReservedCard("atlReturn")
+          : "";
       const boltCard = title.includes("Paris to Praiano")
         ? renderBoltRideCard("orly")
         : title.includes("Return Home")
@@ -719,9 +764,14 @@ function renderDays() {
           : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
-      const routeTransferCards = title.includes("Paris to Praiano") ? "" : boltCard;
+      const flightDayCards = title.includes("Departure Day")
+        ? `${uberCard}${deltaCard}`
+        : title.includes("Return Home")
+          ? `${boltCard}${deltaCard}${uberCard}`
+          : "";
+      const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${deltaCard}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
