@@ -504,6 +504,7 @@ const trip = {
       ["Taxi", "Use only the official taxi line. Destination: Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
       ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when available in the app."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
+      ["Outfits", "Lila: cute A-line black dress with a white cardigan sweater. Noah: black knitted polo with white linen pants."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
       ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1401765745; confirmation 1784184935. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
       ["After cruise", "Take a short walk near the river if you feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
