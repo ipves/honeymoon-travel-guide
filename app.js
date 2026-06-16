@@ -114,6 +114,7 @@ const G7_APP_STORE_URL = "https://apps.apple.com/us/app/g7-taxi-book-a-taxi/id40
 const BIG_BUS_APP_STORE_URL = "https://apps.apple.com/us/app/big-bus-tours/id590746945";
 const DELTA_APP_STORE_URL = "https://apps.apple.com/us/app/fly-delta/id388491656";
 const VIATOR_APP_STORE_URL = "https://apps.apple.com/us/app/viator-tours-attractions/id434832826";
+const AIRBNB_APP_STORE_URL = "https://apps.apple.com/us/app/airbnb/id401626263";
 const SEINE_CRUISE_VIATOR_URL = "https://www.viator.com/account/booking/detail/1401765745?m=63070&nid=VR.f2811c2f-d258-499e-928f-5497cefcc358.VT_EMAIL_TRV";
 const BIG_BUS_VIATOR_URL = "https://www.viator.com/account/booking/212033288/1784186781/1401767595";
 const CHATGPT_URL = "https://chatgpt.com/";
@@ -771,6 +772,7 @@ const trip = {
     ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Uber to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
   ],
   apps: [
+    ["Airbnb", "Lodging details and check-in", "Use for the Paris Airbnb exact address, lockbox instructions, host messages, and any last-minute stay updates. Check it about 24 hours before Paris arrival.", AIRBNB_APP_STORE_URL],
     ["Bolt", "Rides in Paris and Naples", "Use for the Paris Airbnb to Orly ride and the Moxy Pompeii to Naples Airport ride. Schedule ahead where possible and keep taxi backup plans in mind.", BOLT_APP_STORE_URL],
     ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while you still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
     ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or you want a licensed taxi option.", G7_APP_STORE_URL],
