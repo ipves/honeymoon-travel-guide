@@ -957,6 +957,48 @@ main {
   color: #111;
 }
 
+.route-card--stay {
+  border-color: rgba(20, 58, 74, 0.18);
+  background: linear-gradient(180deg, rgba(244, 247, 244, 0.95), rgba(255, 255, 255, 0.9));
+}
+
+.route-card--stay p,
+.route-card--stay .ride-details dt {
+  color: var(--sea);
+}
+
+.stay-badge {
+  display: inline-grid;
+  min-width: 76px;
+  min-height: 42px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(20, 58, 74, 0.14);
+}
+
+.stay-badge--airbnb {
+  background: #ff385c;
+}
+
+.stay-badge--booking {
+  min-width: 96px;
+  background: #003b95;
+}
+
+.stay-badge--moxy {
+  background: #111;
+  color: #f04e98;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
 .uber-badge {
   display: inline-grid;
   min-width: 72px;

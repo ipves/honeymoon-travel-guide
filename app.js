@@ -201,6 +201,60 @@ const BOLT_RIDES = {
     ],
   },
 };
+const STAY_CARDS = {
+  barn: {
+    badge: "Airbnb",
+    badgeClass: "stay-badge--airbnb",
+    eyebrow: "Check-In Stay",
+    title: "The Barn Loft",
+    note: "Wedding night stay in Carrollton. Keep the evening simple and stage passports, chargers, and travel essentials before bed.",
+    details: [
+      ["Check-in", "Saturday June 20 at 4:00 PM"],
+      ["Check-out", "Sunday June 21 at 1:00 PM"],
+      ["Address", "2545 Tyus Carrollton Road, Carrollton, GA 30117"],
+      ["Parking", "Park directly in front of the barn on the gravel driveway. Do not park in the grass."],
+    ],
+  },
+  paris: {
+    badge: "Airbnb",
+    badgeClass: "stay-badge--airbnb",
+    eyebrow: "Check-In Stay",
+    title: "Apartment on the Seine",
+    note: "Paris Airbnb with host Jade. Exact address, entry details, and lockbox instructions are expected in the Airbnb app about 24 hours before check-in.",
+    details: [
+      ["Check-in", "Monday June 22 at 3:00 PM"],
+      ["Check-out", "Thursday June 25 by 11:00 AM"],
+      ["Area", "Rue Sebastien Mercier, 75015 Paris"],
+      ["Reminder", "Check the Airbnb app 24 hours before arrival, then screenshot the exact address and lockbox instructions immediately."],
+    ],
+  },
+  villa: {
+    badge: "Booking.com",
+    badgeClass: "stay-badge--booking",
+    eyebrow: "Check-In Stay",
+    title: "Villa Gianlica",
+    note: "Praiano home base for the Amalfi Coast portion of the trip.",
+    details: [
+      ["Check-in", "Thursday June 25, 2:00-8:00 PM"],
+      ["Check-out", "Tuesday June 30 by 11:00 AM"],
+      ["Address", "Via Asciola 2, 84010 Praiano SA, Italy"],
+      ["Arrival", "Private transfer from Naples Airport is arranged through Villa Gianlica."],
+    ],
+  },
+  moxy: {
+    badge: "Moxy",
+    badgeClass: "stay-badge--moxy",
+    eyebrow: "Check-In Stay",
+    title: "Moxy Pompeii",
+    note: "Final overnight stay before the early Naples-to-Atlanta flight.",
+    details: [
+      ["Check-in", "Tuesday June 30 at 3:00 PM"],
+      ["Check-out", "Wednesday July 1 by 12:00 PM"],
+      ["Address", "Via Castriota 43, Torre Annunziata, Italy"],
+      ["Room", "King bed; total cost EUR136"],
+    ],
+  },
+};
 
 function mapUrl(label) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_LINKS[label] || label)}`;
@@ -409,6 +463,24 @@ function renderUberReservedCard(kind) {
       <div class="uber-badge" aria-label="Uber">Uber</div>
     </div>
     <dl class="ride-details">${ride.details
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("")}</dl>
+  </aside>`;
+}
+
+function renderStayCard(kind) {
+  const stay = STAY_CARDS[kind];
+  if (!stay) return "";
+  return `<aside class="route-card route-card--stay" aria-label="${stay.title} check-in reminder">
+    <div class="flight-card-head">
+      <div>
+        <p>${stay.eyebrow}</p>
+        <h4>${stay.title}</h4>
+        <span>${stay.note}</span>
+      </div>
+      <div class="stay-badge ${stay.badgeClass}" aria-label="${stay.badge}">${stay.badge}</div>
+    </div>
+    <dl class="ride-details">${stay.details
       .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
       .join("")}</dl>
   </aside>`;
@@ -807,6 +879,15 @@ function renderDays() {
         : title.includes("Return Home")
           ? renderBoltRideCard("naplesAirport")
           : "";
+      const stayCard = title.includes("Wedding Night")
+        ? renderStayCard("barn")
+        : title.includes("Paris Arrival")
+          ? renderStayCard("paris")
+          : title.includes("Paris to Praiano")
+            ? renderStayCard("villa")
+            : title.includes("Pompeii Day")
+              ? renderStayCard("moxy")
+              : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
       const preSummaryCards = title.includes("Departure Day") ? `${uberCard}${deltaCard}` : "";
@@ -817,7 +898,7 @@ function renderDays() {
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${stayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
