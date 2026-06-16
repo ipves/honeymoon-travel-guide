@@ -8,6 +8,9 @@ const SECTION_ORDER = {
   "Amalfi Coast Honeymoon Itinerary.pdf": 6,
   "Transportation Guide.pdf": 7,
   "Dining Guide.pdf": 8,
+  "LouvreTix.pdf": 9,
+  "LouvreConfirmation.pdf": 10,
+  "SeineRiverCruiseTickets.pdf": 11,
 };
 const DOC_SUMMARIES = {
   "AllianzIns.pdf":
@@ -26,6 +29,12 @@ const DOC_SUMMARIES = {
     "Restaurant and food options organized by location and mood, from easy arrival-day choices to romantic Amalfi Coast meals. It helps you choose based on energy level, budget, and what kind of night you want.",
   "Packing Guide and Travel Tips.pdf":
     "Packing lists, daily carry reminders, ticket tracking, and final-week prep for Paris, Amalfi, Capri, Path of the Gods, and Pompeii. It is the practical final check before heading out each day.",
+  "LouvreTix.pdf":
+    "Official Louvre museum tickets for Wednesday, June 24 at 12:00 PM. Open this for the full Lila and Noah ticket passes if the QR card is not enough.",
+  "LouvreConfirmation.pdf":
+    "Louvre order confirmation for the 12:00 PM Wednesday visit. Use this if staff needs booking or order details beyond the scannable ticket passes.",
+  "SeineRiverCruiseTickets.pdf":
+    "Seine Champagne Cruise ticket for Monday, June 22 at 7:15 PM. Open this for the full Viator ticket if the QR card is not enough.",
 };
 const DOC_MAPS = {
   "AllianzIns.pdf": [],
@@ -36,6 +45,9 @@ const DOC_MAPS = {
   "Transportation Guide.pdf": ["Paris Airbnb", "Versailles Chateau Rive Gauche", "Villa Gianlica"],
   "Dining Guide.pdf": ["Cafe de Flore", "Le Volant", "Pink Mamma", "Kasai", "Che Bonta Gastronomia", "Da Gemma", "L'Abside", "Pasticceria Pansa"],
   "Packing Guide and Travel Tips.pdf": ["Paris Airbnb", "Praiano", "Capri", "Path of the Gods", "Pompeii"],
+  "LouvreTix.pdf": ["Louvre"],
+  "LouvreConfirmation.pdf": ["Louvre"],
+  "SeineRiverCruiseTickets.pdf": ["Square du Vert-Galant"],
 };
 const MAP_LINKS = {
   "The Barn Loft": "The Barn Loft 2545 Tyus Carrollton Road Carrollton GA 30117",
@@ -79,8 +91,8 @@ const DAY_THUMBNAILS = [
   ["assets/day-01-wedding-night.jpg", "Rustic barn for wedding night"],
   ["assets/day-02-departure-flight.jpg", "Overnight flight to Paris"],
   ["assets/day-03-paris-arrival-cruise.jpg", "Seine cruise in Paris"],
-  ["assets/day-04-paris-icons.jpg", "Paris landmarks with Eiffel Tower and Louvre"],
   ["assets/day-05-versailles.jpg", "Versailles gardens"],
+  ["assets/day-04-paris-icons.jpg", "Paris landmarks with Eiffel Tower and Louvre"],
   ["assets/day-06-paris-to-praiano.jpg", "Travel from Paris to the Amalfi Coast"],
   ["assets/day-07-cooking-beach.jpg", "Praiano cooking class and beach"],
   ["assets/day-08-positano.jpg", "Positano cliffside village"],
@@ -90,7 +102,10 @@ const DAY_THUMBNAILS = [
   ["assets/day-12-return-home.jpg", "Return home airport morning"],
 ];
 const BIG_BUS_ROUTE_URL = "https://www.bigbustours.com/en/paris/red-classic-route-paris/";
-const BIG_BUS_TICKET_PDF = "docs/ParisBigBus.pdf";
+const BIG_BUS_TICKET_PDF = "docs/ParisBigBus-Jun24.pdf";
+const SEINE_CRUISE_TICKET_PDF = "docs/SeineRiverCruiseTickets.pdf";
+const LOUVRE_TICKET_PDF = "docs/LouvreTix.pdf";
+const LOUVRE_CONFIRMATION_PDF = "docs/LouvreConfirmation.pdf";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
 const BOLT_APP_STORE_URL = "https://apps.apple.com/us/app/bolt-request-a-ride/id675033630";
@@ -124,8 +139,10 @@ const CONFIRMATION_DOCS = {
   weddingNight: ["Wedding Night Airbnb", "WeddingNightAirbnb.pdf"],
   delta: ["Delta Flights", "DeltaHW6MPS.pdf"],
   parisAirbnb: ["Paris Airbnb", "ParisAirbnb.pdf"],
-  champagneCruise: ["Seine Champagne Cruise", "ParisSunsetChampagneCruise.pdf"],
-  bigBus: ["Big Bus Paris", "ParisBigBus.pdf"],
+  champagneCruise: ["Seine Champagne Cruise", "SeineRiverCruiseTickets.pdf"],
+  bigBus: ["Big Bus Paris", "ParisBigBus-Jun24.pdf"],
+  louvreTix: ["Louvre Tickets", "LouvreTix.pdf"],
+  louvreConfirmation: ["Louvre Confirmation", "LouvreConfirmation.pdf"],
   easyJet: ["EasyJet Flight", "EasyJetKC8B7PH.pdf"],
   villa: ["Villa Gianlica", "PraianoVillaGianlica.pdf"],
   cooking: ["Cooking Class", "CookingClass.pdf"],
@@ -136,8 +153,8 @@ const DAY_CONFIRMATIONS = [
   ["weddingNight"],
   ["delta"],
   ["delta", "parisAirbnb", "champagneCruise"],
-  ["bigBus"],
   [],
+  ["bigBus", "louvreTix", "louvreConfirmation"],
   ["easyJet", "villa"],
   ["cooking"],
   [],
@@ -213,9 +230,9 @@ function renderBigBusTicketCard() {
     <div>
       <p>Big Bus Ticket</p>
       <h4>Scan at boarding</h4>
-      <span>Booking reference 1401767595. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
+      <span>Wed Jun 24 ticket. Booking reference 1401767595; operator confirmation A22P3ATK. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
     </div>
-    <img src="assets/big-bus-ticket-qr.png" alt="Scannable Big Bus ticket QR code" />
+    <img src="assets/big-bus-ticket-jun24-qr.png" alt="Scannable Big Bus ticket QR code" />
     <div class="ticket-card-actions">
       <a href="${BIG_BUS_TICKET_PDF}" target="_blank" rel="noopener">Open full Big Bus ticket</a>
       <a href="${BIG_BUS_VIATOR_URL}" target="_blank" rel="noopener">Open Viator booking</a>
@@ -223,16 +240,35 @@ function renderBigBusTicketCard() {
   </aside>`;
 }
 
-function renderViatorBookingCard() {
-  return `<aside class="booking-card" aria-label="Seine Champagne Cruise Viator booking">
-    <div>
-      <p>Viator Booking</p>
-      <h4>Seine Champagne Cruise</h4>
-      <span>Booking reference 1401765745. Open the Viator booking page for the cruise ticket, details, and any day-of updates.</span>
+function renderLouvreTicketCard() {
+  return `<aside class="ticket-card ticket-card--wide" aria-label="Louvre scannable tickets">
+    <div class="ticket-card-head">
+      <div>
+        <p>Louvre Tickets</p>
+        <h4>12:00 PM museum entry</h4>
+        <span>Official Louvre museum tickets for Lila and Noah. Scan the QR codes below at entry, and go to the Mona Lisa first because the line will be long.</span>
+      </div>
+      <div class="louvre-badge" aria-label="Louvre">Louvre</div>
     </div>
-    <div class="booking-card-actions">
+    <img src="assets/louvre-ticket-qrs.png" alt="Scannable Louvre ticket QR codes for Lila and Noah" />
+    <div class="ticket-card-actions">
+      <a href="${LOUVRE_TICKET_PDF}" target="_blank" rel="noopener">Open Louvre tickets</a>
+      <a href="${LOUVRE_CONFIRMATION_PDF}" target="_blank" rel="noopener">Open confirmation</a>
+    </div>
+  </aside>`;
+}
+
+function renderSeineCruiseTicketCard() {
+  return `<aside class="ticket-card" aria-label="Seine Champagne Cruise scannable ticket">
+    <div>
+      <p>Seine Cruise Ticket</p>
+      <h4>Scan at boarding</h4>
+      <span>Mon Jun 22 at 7:15 PM. Booking reference 1410622667; operator confirmation 956656. Arrive 15 minutes before departure and board downstairs below Pont Neuf.</span>
+    </div>
+    <img src="assets/seine-cruise-ticket-qr.png" alt="Scannable Seine Champagne Cruise ticket QR code" />
+    <div class="ticket-card-actions">
+      <a href="${SEINE_CRUISE_TICKET_PDF}" target="_blank" rel="noopener">Open full cruise ticket</a>
       <a href="${SEINE_CRUISE_VIATOR_URL}" target="_blank" rel="noopener">Open Viator booking</a>
-      <a href="${VIATOR_APP_STORE_URL}" target="_blank" rel="noopener">Get Viator app</a>
     </div>
   </aside>`;
 }
@@ -436,7 +472,7 @@ const trip = {
       items: [
         ["June 20", "Wedding Night", "The Barn Loft, Carrollton", ["The Barn Loft"], ["weddingNight"]],
         ["June 21", "Depart Atlanta", "Delta DL84 to Paris at 9:50 PM", [], ["delta"]],
-        ["June 22-25", "Paris", "Airbnb on Rue Sebastien Mercier", ["Paris Airbnb"], ["parisAirbnb", "champagneCruise", "bigBus"]],
+        ["June 22-25", "Paris", "Airbnb on Rue Sebastien Mercier", ["Paris Airbnb"], ["parisAirbnb", "champagneCruise", "bigBus", "louvreTix", "louvreConfirmation"]],
         ["June 25-30", "Praiano", "Villa Gianlica, Amalfi Coast", ["Villa Gianlica", "Praiano"], ["easyJet", "villa", "cooking", "capri"]],
         ["June 30-July 1", "Pompeii", "Moxy Pompeii / Torre Annunziata", ["Pompeii", "Moxy Pompeii"], ["moxy"]],
         ["July 1", "Return Home", "Delta DL279 Naples to Atlanta at 9:05 AM", [], ["delta"]],
@@ -477,7 +513,6 @@ const trip = {
         ["Uber Reserved", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
         ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
-        ["Book", "Louvre timed entry", "Major remaining ticket", ["Louvre"]],
         ["Book", "Versailles Passport", "Use late Palace entry", ["Palace of Versailles"]],
         ["Get", "500 Euros from ATM", "For Cooking Class and Tips"],
         ["Confirm", "Capri boarding and cooking class time", "Pending activity details", ["Capri"]],
@@ -504,31 +539,31 @@ const trip = {
       ["Taxi", "Use only the official taxi line. Destination: Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
       ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when available in the app."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
-      ["Outfits", "Lila: cute A-line black dress with a white cardigan sweater. Noah: black knitted polo with white linen pants."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
-      ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1401765745; confirmation 1784184935. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
+      ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1410622667; operator confirmation 956656. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
       ["After cruise", "Take a short walk near the river if you feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
     ]],
-    ["Tue Jun 23", "Big Bus + Louvre / Eiffel Tower Decision Day", "This day is built around the Big Bus reservation and one main Paris attraction choice unless both tickets are already booked.", ["Louvre", "Eiffel Tower", "Cafe de Flore", "Le Volant", "Pink Mamma"], [
-      ["8:00-8:30 AM", "Wake up and get breakfast near the Eiffel Tower: croissant, pain au chocolat, coffee, orange juice."],
-      ["Morning", "Paris Big Bus Hop-On Hop-Off Tour. Booking reference 1401767595; confirmation 1784186781. Board near the Eiffel Tower area and use the Big Bus app for the closest stop and live tracking."],
-      ["Bus strategy", "Do not immediately hop off. Ride most of the route first to get oriented. Expected sights include Eiffel Tower, Arc de Triomphe, Champs-Elysees, Place de la Concorde, Louvre area, Notre-Dame area, Seine, and Opera district."],
-      ["Option A", "Louvre priority: enter with timed ticket late morning or early afternoon, spend 2-3 hours maximum, and focus on Mona Lisa, Venus de Milo, Winged Victory, then exit before exhaustion."],
-      ["After Louvre", "Tuileries Garden picnic: sandwiches, fruit, pastry, water, optional wine, sit near the fountains."],
-      ["Option B", "Eiffel Tower priority: use pre-booked summit tickets, go to the top, have champagne if available, take photos, then relax on Champ de Mars. If tickets are not booked, do not spend hours waiting in line."],
-      ["Late afternoon", "Cafe de Flore stop for 45-60 minutes. Order coffee, dessert, champagne, or wine."],
-      ["Dinner", "Use one dinner option tonight and the other Wednesday: Le Volant for classic Paris dinner, or Pink Mamma for the interior and younger energy."],
-      ["Evening", "If near Eiffel Tower after dinner, watch the sparkle. Otherwise return to Airbnb."],
-    ]],
-    ["Wed Jun 24", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
+    ["Tue Jun 23", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
-      ["Eiffel window", "Use this time only if Eiffel Tower was not completed Tuesday. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
+      ["Eiffel window", "Use this time only if Eiffel Tower was not completed before Versailles. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
       ["Lunch", "Keep it light before Versailles: bakery sandwich, cafe lunch, or picnic item."],
       ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
       ["4:30 PM", "Timed Palace entry if available. Focus on Hall of Mirrors, King's Apartments, and Queen's Apartments. Do not try to see everything."],
       ["6:00-6:30 PM", "Begin return to Paris."],
+    ]],
+    ["Wed Jun 24", "Big Bus + Louvre / Eiffel Tower Backup", "This day is built around the Big Bus reservation and the official 12:00 PM Louvre museum tickets. Eiffel Tower is backup only if it did not happen Tuesday.", ["Louvre", "Eiffel Tower", "Cafe de Flore", "Le Volant", "Pink Mamma"], [
+      ["8:00-8:30 AM", "Wake up and get breakfast near the Eiffel Tower: croissant, pain au chocolat, coffee, orange juice."],
+      ["Morning", "Paris Big Bus Hop-On Hop-Off Tour. Booking reference 1401767595; operator confirmation A22P3ATK. Board near the Eiffel Tower area and use the Big Bus app for the closest stop and live tracking."],
+      ["Bus strategy", "Do not immediately hop off. Ride most of the route first to get oriented. Expected sights include Eiffel Tower, Arc de Triomphe, Champs-Elysees, Place de la Concorde, Louvre area, Notre-Dame area, Seine, and Opera district."],
+      ["12:00 PM", "Official Louvre museum tickets. Enter with the QR-code passes for Lila and Noah. Go see the Mona Lisa first because the line will be long, then continue to Venus de Milo and Winged Victory."],
+      ["Louvre strategy", "Spend 2-3 hours maximum. Do not try to see the entire museum; focus on the priority route and exit before exhaustion."],
+      ["After Louvre", "Tuileries Garden picnic: sandwiches, fruit, pastry, water, optional wine, sit near the fountains."],
+      ["Eiffel backup", "Only use this if Eiffel Tower did not happen Tuesday. If it was already done, skip this and keep the day focused on Big Bus, Louvre, Tuileries, Cafe de Flore, and dinner."],
+      ["Late afternoon", "Cafe de Flore stop for 45-60 minutes. Order coffee, dessert, champagne, or wine."],
+      ["Dinner", "Use one dinner option tonight: Le Volant for classic Paris dinner, or Pink Mamma for the interior and younger energy. If you already used one Tuesday, choose the other."],
+      ["Evening", "If near Eiffel Tower after dinner, watch the sparkle. Otherwise return to Airbnb."],
     ]],
     ["Thu Jun 25", "Paris to Praiano", "Major travel day: Paris Airbnb to Orly, EasyJet to Naples, then Villa Gianlica private transfer to Praiano.", ["Villa Gianlica"], [
       ["7:30 AM", "Wake up and pack completely. Check passports, chargers, AirPods, toiletries, under bed, outlets, lockbox instructions, and EasyJet boarding passes."],
@@ -751,9 +786,10 @@ function renderDays() {
     .map(([date, title, body, maps, agenda = []], index) => {
       const [src, alt] = DAY_THUMBNAILS[index] || [];
       const thumb = src ? `<img class="day-thumb" src="${src}" alt="${alt}" loading="lazy" />` : "";
-      const viatorCard = title.includes("Seine Champagne Cruise") ? renderViatorBookingCard() : "";
+      const viatorCard = title.includes("Seine Champagne Cruise") ? renderSeineCruiseTicketCard() : "";
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
+      const louvreTicketCard = title.includes("Big Bus") ? renderLouvreTicketCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
       const pompeiiTransferAlert = title.includes("Pompeii Day") ? renderPompeiiTransferAlert() : "";
       const deltaCard = title.includes("Departure Day")
@@ -781,7 +817,7 @@ function renderDays() {
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }

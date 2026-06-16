@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v58";
+const CACHE_NAME = "honeymoon-guide-v66";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=58",
-  "./app.js?v=58",
-  "./data.js?v=58",
+  "./styles.css?v=66",
+  "./app.js?v=66",
+  "./data.js?v=66",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
@@ -21,7 +21,9 @@ const ASSETS = [
   "./assets/day-10-capri-boat.jpg",
   "./assets/day-11-pompeii.jpg",
   "./assets/day-12-return-home.jpg",
-  "./assets/big-bus-ticket-qr.png",
+  "./assets/big-bus-ticket-jun24-qr.png",
+  "./assets/seine-cruise-ticket-qr.png",
+  "./assets/louvre-ticket-qrs.png",
   "./docs/AllianzIns.pdf",
   "./docs/Amalfi%20Coast%20Honeymoon%20Itinerary.pdf",
   "./docs/Dining%20Guide.pdf",
@@ -36,8 +38,10 @@ const ASSETS = [
   "./docs/EasyJetKC8B7PH.pdf",
   "./docs/MarriottHotelPompeii.pdf",
   "./docs/ParisAirbnb.pdf",
-  "./docs/ParisBigBus.pdf",
-  "./docs/ParisSunsetChampagneCruise.pdf",
+  "./docs/ParisBigBus-Jun24.pdf",
+  "./docs/SeineRiverCruiseTickets.pdf",
+  "./docs/LouvreTix.pdf",
+  "./docs/LouvreConfirmation.pdf",
   "./docs/PraianoVillaGianlica.pdf",
   "./docs/WeddingNightAirbnb.pdf",
 ];

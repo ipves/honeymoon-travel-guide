@@ -755,6 +755,29 @@ main {
   line-height: 1.32;
 }
 
+.ticket-card-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.louvre-badge {
+  display: inline-grid;
+  min-width: 82px;
+  min-height: 42px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #1c4c35;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(28, 76, 53, 0.18);
+}
+
 .ticket-card img {
   width: min(190px, 72vw);
   height: auto;
@@ -763,6 +786,10 @@ main {
   border-radius: 8px;
   background: white;
   image-rendering: pixelated;
+}
+
+.ticket-card--wide img {
+  width: min(100%, 560px);
 }
 
 .ticket-card-actions {
