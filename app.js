@@ -336,10 +336,13 @@ function renderVersaillesCard() {
 
 function renderSeineCruiseTicketCard() {
   return `<aside class="ticket-card" aria-label="Seine Champagne Cruise scannable ticket">
-    <div>
-      <p>Seine Cruise Ticket</p>
-      <h4>Scan at boarding</h4>
-      <span>Mon Jun 22 at 7:15 PM. Booking reference 1410622667; operator confirmation 956656. Arrive 15 minutes before departure and board downstairs below Pont Neuf.</span>
+    <div class="ticket-card-head">
+      <div>
+        <p>Seine Cruise Ticket</p>
+        <h4>Scan at boarding</h4>
+        <span>Mon Jun 22 at 7:15 PM. Booking reference 1410622667; operator confirmation 956656. Arrive 15 minutes before departure and board downstairs below Pont Neuf.</span>
+      </div>
+      <div class="attraction-badge attraction-badge--tour" aria-label="Tour">Tour</div>
     </div>
     <img src="assets/seine-cruise-ticket-qr.png" alt="Scannable Seine Champagne Cruise ticket QR code" />
     <div class="ticket-card-actions">
@@ -640,7 +643,7 @@ const trip = {
     ["Tue Jun 23", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
       ["Eiffel window", "Use this time only if Eiffel Tower was not completed before Versailles. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
-      ["Lunch", "Keep it light before Versailles: bakery sandwich, cafe lunch, or picnic item."],
+      ["Lunch", "Pick up a picnic lunch before Versailles if you want. You can eat on the lawn in front of the Eiffel Tower, then keep the afternoon focused on getting to Versailles calmly."],
       ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
@@ -653,7 +656,7 @@ const trip = {
       ["Bus strategy", "Do not immediately hop off. Ride most of the route first to get oriented. Expected sights include Eiffel Tower, Arc de Triomphe, Champs-Elysees, Place de la Concorde, Louvre area, Notre-Dame area, Seine, and Opera district."],
       ["12:00 PM", "Official Louvre museum tickets. Enter with the QR-code passes for Lila and Noah. Go see the Mona Lisa first because the line will be long, then continue to Venus de Milo and Winged Victory."],
       ["Louvre strategy", "Spend 2-3 hours maximum. Do not try to see the entire museum; focus on the priority route and exit before exhaustion."],
-      ["After Louvre", "Tuileries Garden picnic: sandwiches, fruit, pastry, water, optional wine, sit near the fountains."],
+      ["After Louvre", "If you want a picnic lunch, pick up sandwiches, fruit, pastry, water, and optional wine, then eat in the garden at the Louvre / Tuileries and sit near the fountains."],
       ["Eiffel backup", "Only use this if Eiffel Tower did not happen Tuesday. If it was already done, skip this and keep the day focused on Big Bus, Louvre, Tuileries, Cafe de Flore, and dinner."],
       ["Late afternoon", "Cafe de Flore stop for 45-60 minutes. Order coffee, dessert, champagne, or wine."],
       ["Dinner", "Use one dinner option tonight: Le Volant for classic Paris dinner, or Pink Mamma for the interior and younger energy. If you already used one Tuesday, choose the other."],
