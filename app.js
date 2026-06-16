@@ -281,10 +281,13 @@ function renderBigBusRouteCard() {
 
 function renderBigBusTicketCard() {
   return `<aside class="ticket-card" aria-label="Big Bus scannable ticket">
-    <div>
-      <p>Big Bus Ticket</p>
-      <h4>Scan at boarding</h4>
-      <span>Wed Jun 24 ticket. Booking reference 1401767595; operator confirmation A22P3ATK. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
+    <div class="ticket-card-head">
+      <div>
+        <p>Big Bus Ticket</p>
+        <h4>Scan at boarding</h4>
+        <span>Wed Jun 24 ticket. Booking reference 1401767595; operator confirmation A22P3ATK. Use the QR code below, or open the full ticket PDF if staff needs the complete Viator ticket.</span>
+      </div>
+      <div class="attraction-badge attraction-badge--tour" aria-label="Tour">Tour</div>
     </div>
     <img src="assets/big-bus-ticket-jun24-qr.png" alt="Scannable Big Bus ticket QR code" />
     <div class="ticket-card-actions">
@@ -302,13 +305,32 @@ function renderLouvreTicketCard() {
         <h4>12:00 PM museum entry</h4>
         <span>Official Louvre museum tickets for Lila and Noah. Scan the QR codes below at entry, and go to the Mona Lisa first because the line will be long.</span>
       </div>
-      <div class="louvre-badge" aria-label="Louvre">Louvre</div>
+      <div class="attraction-badge attraction-badge--museum" aria-label="Museum">Museum</div>
     </div>
     <img src="assets/louvre-ticket-qrs.png" alt="Scannable Louvre ticket QR codes for Lila and Noah" />
     <div class="ticket-card-actions">
       <a href="${LOUVRE_TICKET_PDF}" target="_blank" rel="noopener">Open Louvre tickets</a>
       <a href="${LOUVRE_CONFIRMATION_PDF}" target="_blank" rel="noopener">Open confirmation</a>
     </div>
+  </aside>`;
+}
+
+function renderVersaillesCard() {
+  return `<aside class="route-card route-card--versailles" aria-label="Versailles visit reminder">
+    <div class="flight-card-head">
+      <div>
+        <p>Versailles Visit</p>
+        <h4>Afternoon palace plan</h4>
+        <span>Use the afternoon for Versailles. Go by train to Versailles Chateau Rive Gauche, walk to the palace gates, and keep the day focused on gardens plus the main palace highlights.</span>
+      </div>
+      <div class="attraction-badge attraction-badge--palace" aria-label="Palace">Palace</div>
+    </div>
+    <dl class="ride-details">
+      <div><dt>Depart Paris</dt><dd>Around 2:00 PM</dd></div>
+      <div><dt>Station</dt><dd>Versailles Chateau Rive Gauche</dd></div>
+      <div><dt>Walk</dt><dd>About 10 minutes to the palace plaza and gold gates</dd></div>
+      <div><dt>Focus</dt><dd>Gardens, Hall of Mirrors, King's Apartments, and Queen's Apartments</dd></div>
+    </dl>
   </aside>`;
 }
 
@@ -862,6 +884,7 @@ function renderDays() {
       const routeCard = title.includes("Big Bus") ? renderBigBusRouteCard() : "";
       const ticketCard = title.includes("Big Bus") ? renderBigBusTicketCard() : "";
       const louvreTicketCard = title.includes("Big Bus") ? renderLouvreTicketCard() : "";
+      const versaillesCard = title.includes("Versailles") ? renderVersaillesCard() : "";
       const sitaCard = title.includes("Positano") ? renderSitaRouteCard("positano") : title.includes("Path of the Gods") ? renderSitaRouteCard("path") : "";
       const pompeiiTransferAlert = title.includes("Pompeii Day") ? renderPompeiiTransferAlert() : "";
       const deltaCard = title.includes("Departure Day")
@@ -898,7 +921,7 @@ function renderDays() {
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${stayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${stayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }

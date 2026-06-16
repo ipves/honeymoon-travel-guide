@@ -762,20 +762,32 @@ main {
   align-items: start;
 }
 
-.louvre-badge {
+.attraction-badge {
   display: inline-grid;
   min-width: 82px;
   min-height: 42px;
   place-items: center;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #1c4c35;
   color: white;
   font-size: 0.95rem;
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1;
-  box-shadow: 0 8px 18px rgba(28, 76, 53, 0.18);
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(20, 58, 74, 0.16);
+}
+
+.attraction-badge--tour {
+  background: #b9565e;
+}
+
+.attraction-badge--museum {
+  background: #1c4c35;
+}
+
+.attraction-badge--palace {
+  background: #8a6f22;
 }
 
 .ticket-card img {
@@ -955,6 +967,16 @@ main {
 .route-card--uber p,
 .route-card--uber .ride-details dt {
   color: #111;
+}
+
+.route-card--versailles {
+  border-color: rgba(138, 111, 34, 0.25);
+  background: linear-gradient(180deg, rgba(224, 179, 90, 0.12), rgba(255, 255, 255, 0.9));
+}
+
+.route-card--versailles p,
+.route-card--versailles .ride-details dt {
+  color: #8a6f22;
 }
 
 .route-card--stay {
