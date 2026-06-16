@@ -927,9 +927,10 @@ function renderDays() {
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const standardStayCard = title.includes("Paris to Praiano") || title.includes("Pompeii Day") ? "" : stayCard;
-      const pompeiiCards = title.includes("Pompeii Day") ? `${pompeiiTransferAlert}${stayCard}` : "";
+      const topPompeiiAlert = title.includes("Pompeii Day") ? pompeiiTransferAlert : "";
+      const pompeiiCards = title.includes("Pompeii Day") ? stayCard : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${preSummaryCards}${transferDayCards}${standardStayCard}${pompeiiCards}${flightDayCards}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${topPompeiiAlert}<p>${body}</p>${agendaHtml}${preSummaryCards}${transferDayCards}${standardStayCard}${pompeiiCards}${flightDayCards}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
