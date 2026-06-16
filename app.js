@@ -646,7 +646,7 @@ const trip = {
     ["Tue Jun 23", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
       ["Eiffel window", "Use this time only if Eiffel Tower was not completed before Versailles. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
-      ["Lunch", "Pick up a picnic lunch before Versailles if you want. You can eat on the lawn in front of the Eiffel Tower, then keep the afternoon focused on getting to Versailles calmly."],
+      ["Lunch", "Pick up a picnic lunch before Versailles if you want. You can eat on the Champ de Mars in front of the Eiffel Tower, then keep the afternoon focused on getting to Versailles calmly."],
       ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
@@ -919,7 +919,6 @@ function renderDays() {
               : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const transferDayCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}${stayCard}` : "";
-      const preBodyStayCard = title.includes("Paris to Praiano") ? "" : stayCard;
       const preSummaryCards = title.includes("Departure Day") ? `${uberCard}${deltaCard}` : "";
       const flightDayCards = title.includes("Return Home")
           ? boltCard
@@ -927,8 +926,10 @@ function renderDays() {
       const agendaInsert = title.includes("Return Home") ? `${deltaCard}${uberCard}` : "";
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
+      const standardStayCard = title.includes("Paris to Praiano") || title.includes("Pompeii Day") ? "" : stayCard;
+      const pompeiiCards = title.includes("Pompeii Day") ? `${pompeiiTransferAlert}${stayCard}` : "";
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${transferDayCards}${preBodyStayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${agendaHtml}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3><p>${body}</p>${agendaHtml}${preSummaryCards}${transferDayCards}${standardStayCard}${pompeiiCards}${flightDayCards}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
