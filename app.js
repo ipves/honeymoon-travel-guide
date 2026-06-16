@@ -918,7 +918,8 @@ function renderDays() {
               ? renderStayCard("moxy")
               : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
-      const topTransferCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}` : "";
+      const transferDayCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}${stayCard}` : "";
+      const preBodyStayCard = title.includes("Paris to Praiano") ? "" : stayCard;
       const preSummaryCards = title.includes("Departure Day") ? `${uberCard}${deltaCard}` : "";
       const flightDayCards = title.includes("Return Home")
           ? boltCard
@@ -927,7 +928,7 @@ function renderDays() {
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const confirmations = renderConfirmations(DAY_CONFIRMATIONS[index] || []);
-      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${stayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${topTransferCards}${agendaHtml}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
+      return `<article class="day"><div class="day-top">${thumb}<time>${date}</time></div><div><h3>${title}</h3>${preSummaryCards}${transferDayCards}${preBodyStayCard}<p>${body}</p>${pompeiiTransferAlert}${flightDayCards}${agendaHtml}${versaillesCard}${viatorCard}${routeCard}${ticketCard}${louvreTicketCard}${sitaCard}${routeTransferCards}${renderMapLinks(maps)}${confirmations}</div></article>`;
     })
     .join("");
 }
