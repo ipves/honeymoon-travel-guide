@@ -372,6 +372,13 @@ main {
   box-shadow: var(--shadow);
 }
 
+.app-card-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
 .app-card p,
 .app-card h3,
 .app-card span {
@@ -400,6 +407,35 @@ main {
   line-height: 1.38;
 }
 
+.app-store-badge {
+  display: grid;
+  min-width: 96px;
+  min-height: 42px;
+  align-content: center;
+  gap: 1px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  line-height: 1;
+  text-align: left;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.app-store-badge span {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.56rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.app-store-badge strong {
+  font-size: 0.98rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
 .app-card a {
   display: inline-flex;
   min-height: 36px;
@@ -412,6 +448,16 @@ main {
   font-size: 0.86rem;
   font-weight: 900;
   text-decoration: none;
+}
+
+@media (max-width: 390px) {
+  .app-card-head {
+    grid-template-columns: 1fr;
+  }
+
+  .app-store-badge {
+    width: max-content;
+  }
 }
 
 .map-links {

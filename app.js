@@ -969,10 +969,16 @@ function renderApps() {
   document.querySelector("#appList").innerHTML = trip.apps
     .map(
       ([name, meta, body, url]) => `<article class="app-card">
-        <div>
-          <p>${meta}</p>
-          <h3>${name}</h3>
-          <span>${body}</span>
+        <div class="app-card-head">
+          <div>
+            <p>${meta}</p>
+            <h3>${name}</h3>
+            <span>${body}</span>
+          </div>
+          <div class="app-store-badge" aria-label="App Store">
+            <span>Download on the</span>
+            <strong>App Store</strong>
+          </div>
         </div>
         <a href="${url}" target="_blank" rel="noopener">Open App Store</a>
       </article>`
