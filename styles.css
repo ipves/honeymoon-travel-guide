@@ -897,6 +897,22 @@ main {
   color: var(--blue);
 }
 
+.bolt-badge {
+  display: inline-grid;
+  min-width: 72px;
+  min-height: 42px;
+  place-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #34d186;
+  color: #071b12;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(52, 209, 134, 0.2);
+}
+
 .route-card--flight {
   border-color: rgba(255, 102, 0, 0.28);
   background: linear-gradient(180deg, rgba(255, 102, 0, 0.09), rgba(255, 255, 255, 0.9));

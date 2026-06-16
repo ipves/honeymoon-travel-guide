@@ -373,10 +373,13 @@ function renderBoltRideCard(kind) {
   const ride = BOLT_RIDES[kind];
   if (!ride) return "";
   return `<aside class="route-card route-card--bolt" aria-label="Bolt ride: ${ride.title}">
-    <div>
-      <p>Bolt / Taxi</p>
-      <h4>${ride.title}</h4>
-      <span>${ride.note}</span>
+    <div class="flight-card-head">
+      <div>
+        <p>Bolt / Taxi</p>
+        <h4>${ride.title}</h4>
+        <span>${ride.note}</span>
+      </div>
+      <div class="bolt-badge" aria-label="Bolt">Bolt</div>
     </div>
     <dl class="ride-details">${ride.details
       .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
