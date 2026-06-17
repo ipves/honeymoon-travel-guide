@@ -465,7 +465,7 @@ function renderLyftReservedCard(kind) {
       details: [
         ["Pickup", "The Barn Loft, Carrollton"],
         ["Destination", "Atlanta Airport International Terminal, Terminal F"],
-        ["Reserved for", "1:00 PM, Sunday June 21"],
+        ["Reserved for", "12:00 PM, Sunday June 21"],
         ["Flight", "Delta DL84 to Paris at 9:50 PM"],
       ],
     },
@@ -631,7 +631,7 @@ const trip = {
       ["Morning", "Sleep in if possible, have an easy breakfast or brunch, and begin packing slowly."],
       ["12:00 PM", "Start final packing. Check bathroom, outlets, under bed, nightstands, closet, car, wedding items, and chargers."],
       ["12:30 PM", "Final walkthrough. Put passports and phones in carry-on, not checked luggage."],
-      ["1:00 PM", "Lyft Scheduled ride to Atlanta Airport International Terminal, Terminal F."],
+      ["12:00 PM", "Lyft Scheduled ride to Atlanta Airport International Terminal, Terminal F."],
       ["2:00-2:30 PM", "Arrival goal at ATL. Enter International Terminal, find Delta international check-in, check the large bag, clear security, find gate area once posted, and eat dinner at the airport."],
       ["9:50 PM", "Delta DL84 departs Atlanta for Paris Charles de Gaulle. Drink water, try to sleep, keep passport and arrival documents accessible."],
     ]],
