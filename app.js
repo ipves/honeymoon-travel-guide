@@ -436,7 +436,7 @@ function renderDeltaFlightCard(kind) {
         ["Time", "9:05 AM-2:31 PM, Wednesday July 1"],
         ["Booking", "HW6MPS"],
         ["Airport", "Naples International Airport"],
-        ["Reminder", "Leave Moxy Pompeii early, keep passports handy, and use the Uber Reserved ride after luggage is collected in Atlanta."],
+        ["Reminder", "Leave Moxy Pompeii early, keep passports handy, and use the Lyft scheduled ride after luggage is collected in Atlanta."],
       ],
     },
   };
@@ -457,7 +457,7 @@ function renderDeltaFlightCard(kind) {
   </aside>`;
 }
 
-function renderUberReservedCard(kind) {
+function renderLyftReservedCard(kind) {
   const rides = {
     atlOutbound: {
       title: "Carrollton to ATL",
@@ -482,14 +482,14 @@ function renderUberReservedCard(kind) {
   };
   const ride = rides[kind];
   if (!ride) return "";
-  return `<aside class="route-card route-card--uber" aria-label="Uber reserved ride: ${ride.title}">
+  return `<aside class="route-card route-card--lyft" aria-label="Lyft scheduled ride: ${ride.title}">
     <div class="flight-card-head">
       <div>
-        <p>Uber Reserved</p>
+        <p>Lyft Scheduled</p>
         <h4>${ride.title}</h4>
         <span>${ride.note}</span>
       </div>
-      <div class="uber-badge" aria-label="Uber">Uber</div>
+      <div class="lyft-badge" aria-label="Lyft">Lyft</div>
     </div>
     <dl class="ride-details">${ride.details
       .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
@@ -611,7 +611,7 @@ const trip = {
       title: "Still Needed",
       items: [
         ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
-        ["Uber Reserved", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
+        ["Lyft Scheduled", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
         ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
         ["Book", "Versailles Passport", "Use late Palace entry", ["Palace of Versailles"]],
@@ -631,7 +631,7 @@ const trip = {
       ["Morning", "Sleep in if possible, have an easy breakfast or brunch, and begin packing slowly."],
       ["12:00 PM", "Start final packing. Check bathroom, outlets, under bed, nightstands, closet, car, wedding items, and chargers."],
       ["12:30 PM", "Final walkthrough. Put passports and phones in carry-on, not checked luggage."],
-      ["1:00 PM", "Uber Reserved to Atlanta Airport International Terminal, Terminal F."],
+      ["1:00 PM", "Lyft Scheduled ride to Atlanta Airport International Terminal, Terminal F."],
       ["2:00-2:30 PM", "Arrival goal at ATL. Enter International Terminal, find Delta international check-in, check the large bag, clear security, find gate area once posted, and eat dinner at the airport."],
       ["9:50 PM", "Delta DL84 departs Atlanta for Paris Charles de Gaulle. Drink water, try to sleep, keep passport and arrival documents accessible."],
     ]],
@@ -739,7 +739,7 @@ const trip = {
       ["6:45-7:00 AM", "Airport arrival goal for a comfortable buffer."],
       ["9:05 AM", "Delta DL279 Naples to Atlanta departs."],
       ["2:31 PM", "Arrive Atlanta. After landing: immigration, collect luggage, customs, exit arrivals area."],
-      ["Final transport", "Uber Reserved after luggage is collected. Destination: Woodstock, Georgia, home."],
+      ["Final transport", "Lyft Scheduled ride after luggage is collected. Destination: Woodstock, Georgia, home."],
     ]],
   ],
   food: [
@@ -769,7 +769,7 @@ const trip = {
     ["Capri Boat Day", ["Swimsuit", "Sunscreen", "Sunglasses", "Waterproof phone pouch", "Towel if desired", "Hat"], ["Capri"]],
     ["Path of the Gods", ["Sneakers", "Water", "Hat", "Sunscreen", "Light clothing"], ["Path of the Gods", "Bomerano", "Amalfi Bus Terminal"]],
     ["Pompeii Packing", ["Sneakers", "Water", "Hat", "Portable charger", "Sunglasses"], ["Pompeii", "Moxy Pompeii"]],
-    ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Uber to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
+    ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Lyft to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
   ],
   apps: [
     ["Airbnb", "Lodging details and check-in", "Use for the Paris Airbnb exact address, lockbox instructions, host messages, and any last-minute stay updates. Check it about 24 hours before Paris arrival.", AIRBNB_APP_STORE_URL],
@@ -900,10 +900,10 @@ function renderDays() {
         : title.includes("Return Home")
           ? renderDeltaFlightCard("return")
           : "";
-      const uberCard = title.includes("Departure Day")
-        ? renderUberReservedCard("atlOutbound")
+      const lyftCard = title.includes("Departure Day")
+        ? renderLyftReservedCard("atlOutbound")
         : title.includes("Return Home")
-          ? renderUberReservedCard("atlReturn")
+          ? renderLyftReservedCard("atlReturn")
           : "";
       const boltCard = title.includes("Paris to Praiano")
         ? renderBoltRideCard("orly")
@@ -921,11 +921,11 @@ function renderDays() {
               : "";
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const transferDayCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}${stayCard}` : "";
-      const preSummaryCards = title.includes("Departure Day") ? `${uberCard}${deltaCard}` : "";
+      const preSummaryCards = title.includes("Departure Day") ? `${lyftCard}${deltaCard}` : "";
       const flightDayCards = title.includes("Return Home")
           ? boltCard
           : "";
-      const agendaInsert = title.includes("Return Home") ? `${deltaCard}${uberCard}` : "";
+      const agendaInsert = title.includes("Return Home") ? `${deltaCard}${lyftCard}` : "";
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const standardStayCard = title.includes("Paris to Praiano") || title.includes("Pompeii Day") ? "" : stayCard;
