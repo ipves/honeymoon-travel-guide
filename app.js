@@ -922,10 +922,8 @@ function renderDays() {
       const easyJetCard = title.includes("Paris to Praiano") ? renderEasyJetTransferCard() : "";
       const transferDayCards = title.includes("Paris to Praiano") ? `${boltCard}${easyJetCard}${stayCard}` : "";
       const preSummaryCards = title.includes("Departure Day") ? `${lyftCard}${deltaCard}` : "";
-      const flightDayCards = title.includes("Return Home")
-          ? boltCard
-          : "";
-      const agendaInsert = title.includes("Return Home") ? `${deltaCard}${lyftCard}` : "";
+      const flightDayCards = "";
+      const agendaInsert = title.includes("Return Home") ? `${boltCard}${deltaCard}${lyftCard}` : "";
       const agendaHtml = renderAgenda(agenda, "Final transport", agendaInsert);
       const routeTransferCards = title.includes("Paris to Praiano") || title.includes("Return Home") ? "" : boltCard;
       const standardStayCard = title.includes("Paris to Praiano") || title.includes("Pompeii Day") ? "" : stayCard;
