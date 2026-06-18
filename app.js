@@ -11,6 +11,7 @@ const SECTION_ORDER = {
   "LouvreTix.pdf": 9,
   "LouvreConfirmation.pdf": 10,
   "SeineRiverCruiseTickets.pdf": 11,
+  "VersaillesTix.pdf": 12,
 };
 const DOC_SUMMARIES = {
   "AllianzIns.pdf":
@@ -35,6 +36,8 @@ const DOC_SUMMARIES = {
     "Louvre order confirmation for the 12:00 PM Wednesday visit. Use this if staff needs booking or order details beyond the scannable ticket passes.",
   "SeineRiverCruiseTickets.pdf":
     "Seine Champagne Cruise ticket for Monday, June 22 at 7:15 PM. Open this for the full Viator ticket if the QR card is not enough.",
+  "VersaillesTix.pdf":
+    "Versailles Passport + VR tickets for Tuesday, June 23 at 4:00 PM. Open this for the full ticket PDF if the barcode card is not enough.",
 };
 const DOC_MAPS = {
   "AllianzIns.pdf": [],
@@ -48,6 +51,7 @@ const DOC_MAPS = {
   "LouvreTix.pdf": ["Louvre"],
   "LouvreConfirmation.pdf": ["Louvre"],
   "SeineRiverCruiseTickets.pdf": ["Square du Vert-Galant"],
+  "VersaillesTix.pdf": ["Palace of Versailles"],
 };
 const MAP_LINKS = {
   "The Barn Loft": "The Barn Loft 2545 Tyus Carrollton Road Carrollton GA 30117",
@@ -106,6 +110,7 @@ const BIG_BUS_TICKET_PDF = "docs/ParisBigBus-Jun24.pdf";
 const SEINE_CRUISE_TICKET_PDF = "docs/SeineRiverCruiseTickets.pdf";
 const LOUVRE_TICKET_PDF = "docs/LouvreTix.pdf";
 const LOUVRE_CONFIRMATION_PDF = "docs/LouvreConfirmation.pdf";
+const VERSAILLES_TICKET_PDF = "docs/VersaillesTix.pdf";
 const SITA_ROUTE_URL = "https://www.ravello.com/sita-bus-schedule/#routes-schedules";
 const UNICO_APP_STORE_URL = "https://apps.apple.com/us/app/unico-campania-app/id1504055273";
 const BOLT_APP_STORE_URL = "https://apps.apple.com/us/app/bolt-request-a-ride/id675033630";
@@ -144,6 +149,7 @@ const CONFIRMATION_DOCS = {
   bigBus: ["Big Bus Paris", "ParisBigBus-Jun24.pdf"],
   louvreTix: ["Louvre Tickets", "LouvreTix.pdf"],
   louvreConfirmation: ["Louvre Confirmation", "LouvreConfirmation.pdf"],
+  versailles: ["Versailles Tickets", "VersaillesTix.pdf"],
   easyJet: ["EasyJet Flight", "EasyJetKC8B7PH.pdf"],
   villa: ["Villa Gianlica", "PraianoVillaGianlica.pdf"],
   cooking: ["Cooking Class", "CookingClass.pdf"],
@@ -154,7 +160,7 @@ const DAY_CONFIRMATIONS = [
   ["weddingNight"],
   ["delta"],
   ["delta", "parisAirbnb", "champagneCruise"],
-  [],
+  ["versailles"],
   ["bigBus", "louvreTix", "louvreConfirmation"],
   ["easyJet", "villa"],
   ["cooking"],
@@ -317,21 +323,19 @@ function renderLouvreTicketCard() {
 }
 
 function renderVersaillesCard() {
-  return `<aside class="route-card route-card--versailles" aria-label="Versailles visit reminder">
-    <div class="flight-card-head">
+  return `<aside class="ticket-card ticket-card--wide" aria-label="Versailles scannable tickets">
+    <div class="ticket-card-head">
       <div>
-        <p>Versailles Visit</p>
-        <h4>Afternoon palace plan</h4>
-        <span>Use the afternoon for Versailles. Go by train to Versailles Chateau Rive Gauche, walk to the palace gates, and keep the day focused on gardens plus the main palace highlights.</span>
+        <p>Versailles Tickets</p>
+        <h4>4:00 PM Passport + VR entry</h4>
+        <span>Valid Tuesday June 23 at 4:00 PM. Entrance is Pavillon d'Orleans, located to the left of entrance A. Use the two barcodes below at ticket control.</span>
       </div>
-      <div class="attraction-badge attraction-badge--palace" aria-label="Palace">Palace</div>
+      <div class="attraction-badge attraction-badge--tour" aria-label="Tour">Tour</div>
     </div>
-    <dl class="ride-details">
-      <div><dt>Depart Paris</dt><dd>Around 2:00 PM</dd></div>
-      <div><dt>Station</dt><dd>Versailles Chateau Rive Gauche</dd></div>
-      <div><dt>Walk</dt><dd>About 10 minutes to the palace plaza and gold gates</dd></div>
-      <div><dt>Focus</dt><dd>Gardens, Hall of Mirrors, King's Apartments, and Queen's Apartments</dd></div>
-    </dl>
+    <img src="assets/versailles-ticket-barcodes.png" alt="Scannable Versailles ticket barcodes" />
+    <div class="ticket-card-actions">
+      <a href="${VERSAILLES_TICKET_PDF}" target="_blank" rel="noopener">Open Versailles tickets</a>
+    </div>
   </aside>`;
 }
 
@@ -614,7 +618,6 @@ const trip = {
         ["Lyft Scheduled", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
         ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
-        ["Book", "Versailles Passport", "Use late Palace entry", ["Palace of Versailles"]],
         ["Get", "500 Euros from ATM", "For Cooking Class and Tips"],
         ["Confirm", "Capri boarding and cooking class time", "Pending activity details", ["Capri"]],
       ],
@@ -651,7 +654,8 @@ const trip = {
       ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
-      ["4:30 PM", "Timed Palace entry if available. Focus on Hall of Mirrors, King's Apartments, and Queen's Apartments. Do not try to see everything."],
+      ["4:00 PM", "Versailles Passport + VR ticket entry at Pavillon d'Orleans, located to the left of entrance A. Use the barcode tickets and keep them available for each checkpoint."],
+      ["Palace focus", "Focus on Hall of Mirrors, King's Apartments, and Queen's Apartments. Do not try to see everything."],
       ["6:00-6:30 PM", "Begin return to Paris."],
     ]],
     ["Wed Jun 24", "Big Bus + Louvre / Eiffel Tower Backup", "This day is built around the Big Bus reservation and the official 12:00 PM Louvre museum tickets. Eiffel Tower is backup only if it did not happen Tuesday.", ["Louvre", "Eiffel Tower", "Cafe de Flore", "Le Volant", "Pink Mamma"], [

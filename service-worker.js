@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v80";
+const CACHE_NAME = "honeymoon-guide-v81";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=80",
-  "./app.js?v=80",
-  "./data.js?v=80",
+  "./styles.css?v=81",
+  "./app.js?v=81",
+  "./data.js?v=81",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
@@ -23,6 +23,7 @@ const ASSETS = [
   "./assets/day-12-return-home.jpg",
   "./assets/big-bus-ticket-jun24-qr.png",
   "./assets/seine-cruise-ticket-qr.png",
+  "./assets/versailles-ticket-barcodes.png",
   "./assets/louvre-ticket-qrs.png",
   "./docs/AllianzIns.pdf",
   "./docs/Amalfi%20Coast%20Honeymoon%20Itinerary.pdf",
@@ -40,6 +41,7 @@ const ASSETS = [
   "./docs/ParisAirbnb.pdf",
   "./docs/ParisBigBus-Jun24.pdf",
   "./docs/SeineRiverCruiseTickets.pdf",
+  "./docs/VersaillesTix.pdf",
   "./docs/LouvreTix.pdf",
   "./docs/LouvreConfirmation.pdf",
   "./docs/PraianoVillaGianlica.pdf",
