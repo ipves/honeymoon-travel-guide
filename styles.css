@@ -864,7 +864,7 @@ main {
 }
 
 .ticket-card-passes img {
-  width: min(100%, 360px);
+  width: min(100%, 180px);
 }
 
 .ticket-card-actions {
