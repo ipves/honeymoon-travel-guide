@@ -850,6 +850,23 @@ main {
   width: min(100%, 560px);
 }
 
+.ticket-card-details {
+  margin: 2px 0 4px;
+}
+
+.ticket-card-passes {
+  display: grid;
+  gap: 8px;
+}
+
+.ticket-card-passes p {
+  color: var(--rose);
+}
+
+.ticket-card-passes img {
+  width: min(100%, 640px);
+}
+
 .ticket-card-actions {
   display: flex;
   flex-wrap: wrap;

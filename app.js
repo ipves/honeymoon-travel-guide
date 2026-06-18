@@ -328,11 +328,19 @@ function renderVersaillesCard() {
       <div>
         <p>Versailles Tickets</p>
         <h4>4:00 PM Passport + VR entry</h4>
-        <span>Valid Tuesday June 23 at 4:00 PM. Entrance is Pavillon d'Orleans, located to the left of entrance A. Use the two barcodes below at ticket control.</span>
+        <span>The tickets are in this card. Valid Tuesday June 23 at 4:00 PM; entrance is Pavillon d'Orleans, located to the left of entrance A.</span>
       </div>
       <div class="attraction-badge attraction-badge--tour" aria-label="Tour">Tour</div>
     </div>
-    <img src="assets/versailles-ticket-barcodes.png" alt="Scannable Versailles ticket barcodes" />
+    <dl class="ride-details ticket-card-details">
+      <div><dt>Ticket type</dt><dd>Passport + VR, skip-the-line, end-of-day rate</dd></div>
+      <div><dt>Entry time</dt><dd>4:00 PM, Tuesday June 23</dd></div>
+      <div><dt>Entrance</dt><dd>Pavillon d'Orleans, left of entrance A</dd></div>
+    </dl>
+    <div class="ticket-card-passes">
+      <p>Scannable tickets</p>
+      <img src="assets/versailles-ticket-barcodes.png" alt="Scannable Versailles ticket barcodes" />
+    </div>
     <div class="ticket-card-actions">
       <a href="${VERSAILLES_TICKET_PDF}" target="_blank" rel="noopener">Open Versailles tickets</a>
     </div>
