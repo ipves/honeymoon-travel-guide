@@ -567,12 +567,16 @@ function renderDashboardActions(maps = [], confirmations = [], links = []) {
   return `<nav class="dash-actions" aria-label="Quick links">${mapLinks}${renderConfirmationButtons(confirmations, "dash-doc-link")}${actionLinks}</nav>`;
 }
 
+function renderInlineBadges(text) {
+  return text.replaceAll("RER C", '<span class="transit-badge transit-badge--rer">RER C</span>');
+}
+
 function renderAgenda(agenda, insertBeforeLabel = "", insertHtml = "") {
   if (!agenda.length) return "";
   const sections = agenda
     .map(([time, detail]) => {
       const insert = insertHtml && time === insertBeforeLabel ? insertHtml : "";
-      return `${insert}<section><strong>${time}</strong><p>${detail}</p></section>`;
+      return `${insert}<section><strong>${time}</strong><p>${renderInlineBadges(detail)}</p></section>`;
     })
     .join("");
   return `<div class="day-agenda">${sections}</div>`;
@@ -955,7 +959,7 @@ function renderFood() {
 
 function renderTransport() {
   document.querySelector("#transportList").innerHTML = trip.transport
-    .map(([title, body, maps]) => `<article class="route"><h3>${title}</h3><p>${body}</p>${renderMapLinks(maps)}</article>`)
+    .map(([title, body, maps]) => `<article class="route"><h3>${title}</h3><p>${renderInlineBadges(body)}</p>${renderMapLinks(maps)}</article>`)
     .join("");
 }
 
