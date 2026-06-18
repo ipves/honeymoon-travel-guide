@@ -659,7 +659,7 @@ const trip = {
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
       ["Eiffel window", "Use this time only if Eiffel Tower was not completed before Versailles. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
       ["Lunch", "Pick up a picnic lunch before Versailles if you want. You can eat on the Champ de Mars in front of the Eiffel Tower, then keep the afternoon focused on getting to Versailles calmly."],
-      ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche. Use Google Maps, purchase round-trip tickets if needed, board the correct train, and keep ticket accessible."],
+      ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche on the RER C. Use Google Maps, purchase round-trip tickets if needed, board the correct RER C train, and keep ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
       ["4:00 PM", "Versailles Passport + VR ticket entry at Pavillon d'Orleans, located to the left of entrance A. Use the barcode tickets and keep them available for each checkpoint."],
@@ -768,7 +768,7 @@ const trip = {
   transport: [
     ["CDG Airport to Paris Airbnb", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell driver Rue Sebastien Mercier, 75015 Paris. Expected EUR50-60 and 45-60 minutes.", ["Paris Airbnb"]],
     ["Paris Airbnb to Orly", "Use Bolt or taxi. Pickup at 10:15 AM. Goal arrival 11:00 AM because EasyJet bag drop opens 11:15 AM and closes 12:35 PM.", ["Paris Airbnb"]],
-    ["Paris to Versailles", "Use Google Maps that morning to Versailles Chateau Rive Gauche. After exiting, follow signs and crowds to the palace gates, about a 10-minute walk.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
+    ["Paris to Versailles", "Take the RER C to Versailles Chateau Rive Gauche. Use Google Maps that morning to confirm the best nearby RER C station and departure, then follow signs and crowds to the palace gates after exiting, about a 10-minute walk.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
     ["Naples Airport to Villa Gianlica", "Use villa-arranged private transfer, EUR190 total for two. Provide flight number, arrival time, passenger names, and mobile number. After baggage claim, exit arrivals and look for the driver holding a sign with your names on it.", ["Villa Gianlica"]],
     ["Amalfi Coast Buses", "Verify timing the morning of travel. Summer traffic and full buses are normal. If a bus is full, wait for the next one.", ["Praiano", "Amalfi Bus Terminal", "Bomerano"]],
     ["Stressful Short Connections", "Use Bolt, taxi, or private transfer. This is a honeymoon, not a transportation challenge.", ["Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"]],
