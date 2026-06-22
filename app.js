@@ -41,13 +41,13 @@ const DOC_SUMMARIES = {
 };
 const DOC_MAPS = {
   "AllianzIns.pdf": [],
-  "Honeymoon Itinerary.pdf": ["The Barn Loft", "Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"],
-  "Pre-Trip Checklist & Travel Preparation.pdf": ["Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"],
-  "Wedding and Honeymoon Itinerary.pdf": ["The Barn Loft", "Paris Airbnb", "Villa Gianlica"],
+  "Honeymoon Itinerary.pdf": ["The Barn Loft", "Hotel Beaugency", "Villa Gianlica", "Moxy Pompeii"],
+  "Pre-Trip Checklist & Travel Preparation.pdf": ["Hotel Beaugency", "Villa Gianlica", "Moxy Pompeii"],
+  "Wedding and Honeymoon Itinerary.pdf": ["The Barn Loft", "Hotel Beaugency", "Villa Gianlica"],
   "Amalfi Coast Honeymoon Itinerary.pdf": ["Path of the Gods", "Amalfi Bus Terminal", "Pompeii"],
-  "Transportation Guide.pdf": ["Paris Airbnb", "Versailles Chateau Rive Gauche", "Villa Gianlica"],
+  "Transportation Guide.pdf": ["Hotel Beaugency", "Versailles Chateau Rive Gauche", "Villa Gianlica"],
   "Dining Guide.pdf": ["Cafe de Flore", "Le Volant", "Pink Mamma", "Kasai", "Che Bonta Gastronomia", "Da Gemma", "L'Abside", "Pasticceria Pansa"],
-  "Packing Guide and Travel Tips.pdf": ["Paris Airbnb", "Praiano", "Capri", "Path of the Gods", "Pompeii"],
+  "Packing Guide and Travel Tips.pdf": ["Hotel Beaugency", "Praiano", "Capri", "Path of the Gods", "Pompeii"],
   "LouvreTix.pdf": ["Louvre"],
   "LouvreConfirmation.pdf": ["Louvre"],
   "SeineRiverCruiseTickets.pdf": ["Square du Vert-Galant"],
@@ -55,8 +55,7 @@ const DOC_MAPS = {
 };
 const MAP_LINKS = {
   "The Barn Loft": "The Barn Loft 2545 Tyus Carrollton Road Carrollton GA 30117",
-  "Paris Airbnb": "19 Rue Sebastien Mercier 75015 Paris France",
-  "Rue Sebastien Mercier": "19 Rue Sebastien Mercier 75015 Paris France",
+  "Hotel Beaugency": "Hotel Beaugency 21 Rue Duvivier 75007 Paris France",
   "Cafe de Flore": "Cafe de Flore Paris France",
   "Square du Vert-Galant": "Square du Vert-Galant 15 Place du Pont Neuf Paris France",
   "Le Volant": "Le Volant Paris France",
@@ -120,6 +119,8 @@ const BIG_BUS_APP_STORE_URL = "https://apps.apple.com/us/app/big-bus-tours/id590
 const DELTA_APP_STORE_URL = "https://apps.apple.com/us/app/fly-delta/id388491656";
 const VIATOR_APP_STORE_URL = "https://apps.apple.com/us/app/viator-tours-attractions/id434832826";
 const AIRBNB_APP_STORE_URL = "https://apps.apple.com/us/app/airbnb/id401626263";
+const PARIS_AIRBNB_LISTING_URL = "https://www.airbnb.com/rooms/1608075935475728190";
+const HOTEL_BEAUGENCY_LOCATION_URL = "https://www.hotel-beaugency.com/en/location/";
 const SEINE_CRUISE_VIATOR_URL = "https://www.viator.com/account/booking/detail/1401765745?m=63070&nid=VR.f2811c2f-d258-499e-928f-5497cefcc358.VT_EMAIL_TRV";
 const BIG_BUS_VIATOR_URL = "https://www.viator.com/account/booking/212033288/1784186781/1401767595";
 const CHATGPT_URL = "https://chatgpt.com/";
@@ -144,7 +145,7 @@ const BIG_BUS_STOPS = [
 const CONFIRMATION_DOCS = {
   weddingNight: ["Wedding Night Airbnb", "WeddingNightAirbnb.pdf"],
   delta: ["Delta Flights", "DeltaHW6MPS.pdf"],
-  parisAirbnb: ["Paris Airbnb", "ParisAirbnb.pdf"],
+  hotelBeaugency: ["Hotel Beaugency Confirmation", "HotelBeaugencyConfirmation.jpg"],
   champagneCruise: ["Seine Champagne Cruise", "SeineRiverCruiseTickets.pdf"],
   bigBus: ["Big Bus Paris", "ParisBigBus-Jun24.pdf"],
   louvreTix: ["Louvre Tickets", "LouvreTix.pdf"],
@@ -159,7 +160,7 @@ const CONFIRMATION_DOCS = {
 const DAY_CONFIRMATIONS = [
   ["weddingNight"],
   ["delta"],
-  ["delta", "parisAirbnb", "champagneCruise"],
+  ["delta", "hotelBeaugency", "champagneCruise"],
   ["versailles"],
   ["bigBus", "louvreTix", "louvreConfirmation"],
   ["easyJet", "villa"],
@@ -186,10 +187,10 @@ const SITA_ROUTES = {
 };
 const BOLT_RIDES = {
   orly: {
-    title: "Paris Airbnb to Orly",
-    note: "Use Bolt or taxi for the transfer from Paris to Orly before the EasyJet flight to Naples.",
+    title: "Hotel Beaugency to Orly",
+    note: "Use Bolt or taxi for the transfer from Hotel Beaugency to Orly before the EasyJet flight to Naples.",
     details: [
-      ["Pickup", "Paris Airbnb, 19 Rue Sebastien Mercier, 75015 Paris"],
+      ["Pickup", "Hotel Beaugency, 21 Rue Duvivier, 75007 Paris"],
       ["Destination", "Paris Orly Airport"],
       ["Pickup time", "10:15 AM"],
       ["Goal arrival", "11:00 AM"],
@@ -226,17 +227,22 @@ const STAY_CARDS = {
     badge: "Airbnb",
     badgeClass: "stay-badge--airbnb",
     eyebrow: "Check-In Stay",
-    title: "Apartment on the Seine",
-    note: "Paris Airbnb with host Jade. The exact address, building codes, apartment location, and keybox code are confirmed below.",
+    title: "Hotel Beaugency",
+    note: "New Paris stay booked through Airbnb in the 7th arrondissement, near Rue Cler and about a 10-minute walk from the Eiffel Tower.",
     details: [
-      ["Check-in", "Monday June 22 at 3:00 PM"],
-      ["Check-out", "Thursday June 25 by 11:00 AM"],
-      ["Address", "19 Rue Sebastien Mercier, 75015 Paris"],
-      ["First building door", "Code 19A04"],
-      ["Second building door", "Code 39B87"],
-      ["Apartment", "Take the stairs on the left to the first floor. The apartment door is on the right."],
-      ["Keybox", "The keybox is to the left of the apartment door. Code 112233."],
-      ["Host guide", '<a href="https://my.styqr.fr/6922d5be7c51f" target="_blank" rel="noopener">Open apartment guide</a>'],
+      ["Reservation", "Confirmed for 2 guests, June 22-25"],
+      ["Room", "The classic double"],
+      ["Check-in", "Monday June 22 after 3:00 PM"],
+      ["Check-out", "Thursday June 25 before 11:00 AM"],
+      ["Address", `<a class="inline-map-link" href="${mapUrl("Hotel Beaugency")}" target="_blank" rel="noopener">21 Rue Duvivier, 75007 Paris</a>`],
+      ["Front desk", '<a href="tel:+33147050163">+33 1 47 05 01 63</a>'],
+      ["Email", '<a href="mailto:infos@hotel-beaugency.com">infos@hotel-beaugency.com</a>'],
+      ["Fee at check-in", "EUR5.53 per person per night; EUR33.18 total for 2 guests over 3 nights"],
+      ["Transit", "Ecole Militaire Metro, line 8, is about 3 minutes away. Invalides RER C is about 10 minutes away."],
+      ["Walking", "Rue Cler 1 minute; Seine 5 minutes; Eiffel Tower, Champ de Mars, and Invalides 8 minutes; Rodin Museum 10 minutes"],
+      ["Amenities", "Air conditioning, Wi-Fi, elevator, luggage dropoff, and optional breakfast"],
+      ["Airbnb listing", `<a href="${PARIS_AIRBNB_LISTING_URL}" target="_blank" rel="noopener">Open Hotel Beaugency listing</a>`],
+      ["Location guide", `<a href="${HOTEL_BEAUGENCY_LOCATION_URL}" target="_blank" rel="noopener">Open official hotel directions</a>`],
     ],
   },
   villa: {
@@ -593,7 +599,7 @@ const trip = {
       items: [
         ["June 20", "Wedding Night", "The Barn Loft, Carrollton", ["The Barn Loft"], ["weddingNight"]],
         ["June 21", "Depart Atlanta", "Delta DL84 to Paris at 9:50 PM", [], ["delta"]],
-        ["June 22-25", "Paris", "Airbnb on Rue Sebastien Mercier", ["Paris Airbnb"], ["parisAirbnb", "champagneCruise", "bigBus", "louvreTix", "louvreConfirmation"]],
+        ["June 22-25", "Paris", `Hotel Beaugency, <a class="inline-map-link" href="${mapUrl("Hotel Beaugency")}" target="_blank" rel="noopener">21 Rue Duvivier</a>`, ["Hotel Beaugency"], ["hotelBeaugency", "champagneCruise", "bigBus", "louvreTix", "louvreConfirmation"], [["Hotel directions", HOTEL_BEAUGENCY_LOCATION_URL], ["Open Airbnb listing", PARIS_AIRBNB_LISTING_URL]]],
         ["June 25-30", "Praiano", "Villa Gianlica, Amalfi Coast", ["Villa Gianlica", "Praiano"], ["easyJet", "villa", "cooking", "capri"]],
         ["June 30-July 1", "Pompeii", "Moxy Pompeii / Torre Annunziata", ["Pompeii", "Moxy Pompeii"], ["moxy"]],
         ["July 1", "Return Home", "Delta DL279 Naples to Atlanta at 9:05 AM", [], ["delta"]],
@@ -622,7 +628,7 @@ const trip = {
       title: "Lodging",
       items: [
         ["The Barn Loft", "2545 Tyus Carrollton Road", "Check-in June 20 at 4:00 PM; check-out June 21 at 1:00 PM", ["The Barn Loft"], ["weddingNight"]],
-        ["Paris Airbnb", "19 Rue Sebastien Mercier, 75015 Paris", "Host Jade; confirmation HMZ2ES5JK9; check-in instructions confirmed", ["Paris Airbnb"], ["parisAirbnb"]],
+        ["Hotel Beaugency", `<a class="inline-map-link" href="${mapUrl("Hotel Beaugency")}" target="_blank" rel="noopener">21 Rue Duvivier, 75007 Paris</a>`, "Classic double confirmed for 2 guests; check-in after 3:00 PM; EUR33.18 fee due at check-in", ["Hotel Beaugency"], ["hotelBeaugency"], [["Call hotel", "tel:+33147050163"], ["Hotel directions", HOTEL_BEAUGENCY_LOCATION_URL], ["Open Airbnb listing", PARIS_AIRBNB_LISTING_URL]]],
         ["Villa Gianlica", "Praiano", "June 25-30 on the Amalfi Coast", ["Villa Gianlica"], ["villa"]],
         ["Moxy Pompeii", "Torre Annunziata", "June 30-July 1", ["Moxy Pompeii"], ["moxy"]],
       ],
@@ -653,20 +659,20 @@ const trip = {
       ["2:00-2:30 PM", "Arrival goal at ATL. Enter International Terminal, find Delta international check-in, check the large bag, clear security, find gate area once posted, and eat dinner at the airport."],
       ["9:50 PM", "Delta DL84 departs Atlanta for Paris Charles de Gaulle. Drink water, try to sleep, keep passport and arrival documents accessible."],
     ]],
-    ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to the Airbnb safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Paris Airbnb", "Square du Vert-Galant"], [
+    ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to Hotel Beaugency safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Hotel Beaugency", "Square du Vert-Galant"], [
       ["12:30 PM", "Arrive at Paris Charles de Gaulle. Follow signs to passport control, collect checked luggage, go through customs, use ATM if convenient, then follow signs to the official taxi queue."],
-      ["Taxi", "Use only the official taxi line. Destination: 19 Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
-      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. First building door code: 19A04. Second building door code: 39B87. Take the stairs on the left to the first floor; the apartment is on the right. The keybox is to the left of the apartment door; code: 112233."],
+      ["Taxi", "Use only the official taxi line. Destination: Hotel Beaugency, 21 Rue Duvivier, 75007 Paris. The hotel estimates about 55 minutes from CDG by taxi."],
+      ["3:00 PM", "Check in at Hotel Beaugency for the confirmed classic double room. Have photo ID and a credit card available if requested at reception, and pay the EUR33.18 total hotel fee for two guests over three nights."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
       ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1410622667; operator confirmation 956656. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
-      ["After cruise", "Take a short walk near the river if you feel good, or go straight back to the Airbnb if tired. Recommended bedtime: 10:00-10:30 PM."],
+      ["After cruise", "Take a short walk near the river if you feel good, or go straight back to Hotel Beaugency if tired. Recommended bedtime: 10:00-10:30 PM."],
     ]],
     ["Tue Jun 23", "Slow Morning + Eiffel Tower + Versailles", "This is the Eiffel Tower backup window and the Versailles day. Versailles is the afternoon priority.", ["Eiffel Tower", "Versailles Chateau Rive Gauche", "Palace of Versailles"], [
       ["Morning", "Wake naturally unless tickets require an alarm. Have coffee and pastries near the Airbnb."],
       ["Eiffel window", "Use this time only if Eiffel Tower was not completed before Versailles. Options are ground photos only, summit, summit plus Champagne Bar, or Champ de Mars picnic. If you do not have tickets, do not burn the whole day in a long line."],
       ["Lunch", "Pick up a picnic lunch before Versailles if you want. You can eat on the Champ de Mars in front of the Eiffel Tower, then keep the afternoon focused on getting to Versailles calmly."],
-      ["Around 2:00 PM", "Depart Paris for Versailles Chateau Rive Gauche on the RER C. Use Google Maps, purchase round-trip tickets if needed, board the correct RER C train, and keep ticket accessible."],
+      ["Around 2:00 PM", "Walk about 10 minutes from Hotel Beaugency to Invalides station, then take the RER C to Versailles Chateau Rive Gauche. Confirm the departure in Google Maps, purchase round-trip tickets if needed, and keep the ticket accessible."],
       ["Arrival", "Exit at Versailles Chateau Rive Gauche, follow signs for Chateau de Versailles and the crowd, walk about 10 minutes, and look for the palace plaza and gold gates. No taxi or shuttle needed."],
       ["3:00 PM", "Gardens first. Walk slowly, take photos, and enjoy the grounds."],
       ["4:00 PM", "Versailles Passport + VR ticket entry at Pavillon d'Orleans, located to the left of entrance A. Use the barcode tickets and keep them available for each checkpoint."],
@@ -683,11 +689,11 @@ const trip = {
       ["Eiffel backup", "Only use this if Eiffel Tower did not happen Tuesday. If it was already done, skip this and keep the day focused on Big Bus, Louvre, Tuileries, Cafe de Flore, and dinner."],
       ["Late afternoon", "Cafe de Flore stop for 45-60 minutes. Order coffee, dessert, champagne, or wine."],
       ["Dinner", "Use one dinner option tonight: Le Volant for classic Paris dinner, or Pink Mamma for the interior and younger energy. If you already used one Tuesday, choose the other."],
-      ["Evening", "If near Eiffel Tower after dinner, watch the sparkle. Otherwise return to Airbnb."],
+      ["Evening", "If near Eiffel Tower after dinner, watch the sparkle. Otherwise return to Hotel Beaugency."],
     ]],
-    ["Thu Jun 25", "Paris to Praiano", "Major travel day: Paris Airbnb to Orly, EasyJet to Naples, then Villa Gianlica private transfer to Praiano.", ["Villa Gianlica"], [
-      ["7:30 AM", "Wake up and pack completely. Check passports, chargers, AirPods, toiletries, under bed, outlets, lockbox instructions, and EasyJet boarding passes."],
-      ["10:15 AM", "Taxi or Bolt pickup to Paris Orly Airport. Airbnb check-out is by 11:00 AM, but leave earlier."],
+    ["Thu Jun 25", "Paris to Praiano", "Major travel day: Hotel Beaugency to Orly, EasyJet to Naples, then Villa Gianlica private transfer to Praiano.", ["Villa Gianlica"], [
+      ["7:30 AM", "Wake up and pack completely. Check passports, chargers, AirPods, toiletries, under bed, outlets, hotel safe, and EasyJet boarding passes."],
+      ["10:15 AM", "Taxi or Bolt pickup from Hotel Beaugency to Paris Orly Airport. Hotel checkout is before 11:00 AM, but leave earlier. The hotel estimates about 30 minutes to Orly by taxi."],
       ["11:00 AM", "Goal arrival at Orly. EasyJet bag drop opens 11:15 AM and closes 12:35 PM."],
       ["1:15-3:30 PM", "EasyJet EJU4953 Paris Orly to Naples. Booking reference KC8B7PH. Seats: Noah 11A, Lila 11B. Checked bags: 2 x 23kg included."],
       ["Naples arrival", "Deplane, collect checked bags, exit baggage claim / arrivals, and look for the private driver holding a sign with your names on it. Get euros from an ATM at the airport or along the way so you have cash for the Praiano cooking class."],
@@ -773,17 +779,17 @@ const trip = {
     ["Pasticceria Pansa", "Amalfi", "Light lunch, pastries, and an easy Piazza del Duomo pause.", ["Pasticceria Pansa"]],
   ],
   transport: [
-    ["CDG Airport to Paris Airbnb", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell the driver 19 Rue Sebastien Mercier, 75015 Paris. Expected EUR50-60 and 45-60 minutes.", ["Paris Airbnb"]],
-    ["Paris Airbnb to Orly", "Use Bolt or taxi. Pickup at 10:15 AM. Goal arrival 11:00 AM because EasyJet bag drop opens 11:15 AM and closes 12:35 PM.", ["Paris Airbnb"]],
-    ["Paris to Versailles", "Take the RER C to Versailles Chateau Rive Gauche. Use Google Maps that morning to confirm the best nearby RER C station and departure, then follow signs and crowds to the palace gates after exiting, about a 10-minute walk.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
+    ["CDG Airport to Hotel Beaugency", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell the driver Hotel Beaugency, 21 Rue Duvivier, 75007 Paris. The hotel estimates about 55 minutes by taxi.", ["Hotel Beaugency"]],
+    ["Hotel Beaugency to Orly", "Use Bolt or taxi. Pickup at 10:15 AM from 21 Rue Duvivier. The hotel estimates about 30 minutes by taxi; goal arrival is 11:00 AM because EasyJet bag drop opens 11:15 AM and closes 12:35 PM.", ["Hotel Beaugency"]],
+    ["Paris to Versailles", "Walk about 10 minutes from Hotel Beaugency to Invalides station, then take the RER C to Versailles Chateau Rive Gauche. Confirm the departure in Google Maps that morning. After exiting, follow signs and crowds to the palace gates, about a 10-minute walk.", ["Hotel Beaugency", "Versailles Chateau Rive Gauche", "Palace of Versailles"]],
     ["Naples Airport to Villa Gianlica", "Use villa-arranged private transfer, EUR190 total for two. Provide flight number, arrival time, passenger names, and mobile number. After baggage claim, exit arrivals and look for the driver holding a sign with your names on it.", ["Villa Gianlica"]],
     ["Amalfi Coast Buses", "Verify timing the morning of travel. Summer traffic and full buses are normal. If a bus is full, wait for the next one.", ["Praiano", "Amalfi Bus Terminal", "Bomerano"]],
-    ["Stressful Short Connections", "Use Bolt, taxi, or private transfer. This is a honeymoon, not a transportation challenge.", ["Paris Airbnb", "Villa Gianlica", "Moxy Pompeii"]],
+    ["Stressful Short Connections", "Use Bolt, taxi, or private transfer. This is a honeymoon, not a transportation challenge.", ["Hotel Beaugency", "Villa Gianlica", "Moxy Pompeii"]],
   ],
   checklists: [
     ["Flight Day Carry-On", ["Passport", "Wallet", "Phone", "Phone charger", "Portable charger", "Medications", "Headphones", "Travel documents", "One change of clothes"], []],
     ["Daily Carry", ["Phone", "Portable charger", "Credit card", "Some cash", "Sunglasses", "Sunscreen", "Water", "Passport photo saved on phone", "Comfortable shoes"]],
-    ["Paris Packing", ["Comfortable walking shoes", "Light jacket", "Small umbrella", "Crossbody or secure day bag", "Dress option for dinner"], ["Paris Airbnb", "Cafe de Flore", "Louvre"]],
+    ["Paris Packing", ["Comfortable walking shoes", "Light jacket", "Small umbrella", "Crossbody or secure day bag", "Dress option for dinner"], ["Hotel Beaugency", "Cafe de Flore", "Louvre"]],
     ["Amalfi Packing", ["Swimsuits", "Cover-up", "Sandals", "Sunscreen", "Sunglasses", "Casual dinner outfits", "Beach tote"], ["Praiano", "Villa Gianlica"]],
     ["Capri Boat Day", ["Swimsuit", "Sunscreen", "Sunglasses", "Waterproof phone pouch", "Towel if desired", "Hat"], ["Capri"]],
     ["Path of the Gods", ["Sneakers", "Water", "Hat", "Sunscreen", "Light clothing"], ["Path of the Gods", "Bomerano", "Amalfi Bus Terminal"]],
@@ -791,8 +797,8 @@ const trip = {
     ["Final Week", ["Screenshot all confirmations", "Save documents to both phones", "Confirm Lyft to ATL", "Confirm villa transfer details", "Confirm ticket bookings", "Get euros from an ATM for the Praiano cooking class"], ["Villa Gianlica"]],
   ],
   apps: [
-    ["Airbnb", "Lodging details and check-in", "Use for the Paris Airbnb exact address, lockbox instructions, host messages, and any last-minute stay updates. Check it about 24 hours before Paris arrival.", AIRBNB_APP_STORE_URL],
-    ["Bolt", "Rides in Paris and Naples", "Use for the Paris Airbnb to Orly ride and the Moxy Pompeii to Naples Airport ride. Schedule ahead where possible and keep taxi backup plans in mind.", BOLT_APP_STORE_URL],
+    ["Airbnb", "Hotel Beaugency booking", "Use for the Hotel Beaugency reservation, room details, booking messages, and any last-minute stay updates.", AIRBNB_APP_STORE_URL],
+    ["Bolt", "Rides in Paris and Naples", "Use for the Hotel Beaugency to Orly ride and the Moxy Pompeii to Naples Airport ride. Schedule ahead where possible and keep taxi backup plans in mind.", BOLT_APP_STORE_URL],
     ["Saily", "eSIM and travel data", "Download before departure, buy the data plan before the trip, and install or activate the eSIM while you still have reliable Wi-Fi.", SAILY_APP_STORE_URL],
     ["G7 Paris Taxi", "Paris taxi backup", "Good backup for official Paris taxis, especially if Bolt availability is poor or you want a licensed taxi option.", G7_APP_STORE_URL],
     ["Big Bus Tours", "Paris bus route and ticket access", "Use for the Paris Big Bus booking, route map, stops, service updates, and bus tracking.", BIG_BUS_APP_STORE_URL],

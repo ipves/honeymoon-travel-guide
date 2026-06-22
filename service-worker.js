@@ -1,10 +1,10 @@
-const CACHE_NAME = "honeymoon-guide-v88";
+const CACHE_NAME = "honeymoon-guide-v93";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=88",
-  "./app.js?v=88",
-  "./data.js?v=88",
+  "./styles.css?v=93",
+  "./app.js?v=93",
+  "./data.js?v=93",
   "./manifest.webmanifest",
   "./assets/amalfi-paris-hero.png",
   "./assets/icon-192.png",
@@ -38,7 +38,7 @@ const ASSETS = [
   "./docs/DeltaHW6MPS.pdf",
   "./docs/EasyJetKC8B7PH.pdf",
   "./docs/MarriottHotelPompeii.pdf",
-  "./docs/ParisAirbnb.pdf",
+  "./docs/HotelBeaugencyConfirmation.jpg",
   "./docs/ParisBigBus-Jun24.pdf",
   "./docs/SeineRiverCruiseTickets.pdf",
   "./docs/VersaillesTix.pdf",
