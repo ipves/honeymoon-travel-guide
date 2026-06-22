@@ -55,8 +55,8 @@ const DOC_MAPS = {
 };
 const MAP_LINKS = {
   "The Barn Loft": "The Barn Loft 2545 Tyus Carrollton Road Carrollton GA 30117",
-  "Paris Airbnb": "Rue Sebastien Mercier 75015 Paris France",
-  "Rue Sebastien Mercier": "Rue Sebastien Mercier 75015 Paris France",
+  "Paris Airbnb": "19 Rue Sebastien Mercier 75015 Paris France",
+  "Rue Sebastien Mercier": "19 Rue Sebastien Mercier 75015 Paris France",
   "Cafe de Flore": "Cafe de Flore Paris France",
   "Square du Vert-Galant": "Square du Vert-Galant 15 Place du Pont Neuf Paris France",
   "Le Volant": "Le Volant Paris France",
@@ -189,7 +189,7 @@ const BOLT_RIDES = {
     title: "Paris Airbnb to Orly",
     note: "Use Bolt or taxi for the transfer from Paris to Orly before the EasyJet flight to Naples.",
     details: [
-      ["Pickup", "Paris Airbnb, Rue Sebastien Mercier, 75015 Paris"],
+      ["Pickup", "Paris Airbnb, 19 Rue Sebastien Mercier, 75015 Paris"],
       ["Destination", "Paris Orly Airport"],
       ["Pickup time", "10:15 AM"],
       ["Goal arrival", "11:00 AM"],
@@ -227,12 +227,16 @@ const STAY_CARDS = {
     badgeClass: "stay-badge--airbnb",
     eyebrow: "Check-In Stay",
     title: "Apartment on the Seine",
-    note: "Paris Airbnb with host Jade. Exact address, entry details, and lockbox instructions are expected in the Airbnb app about 24 hours before check-in.",
+    note: "Paris Airbnb with host Jade. The exact address, building codes, apartment location, and keybox code are confirmed below.",
     details: [
       ["Check-in", "Monday June 22 at 3:00 PM"],
       ["Check-out", "Thursday June 25 by 11:00 AM"],
-      ["Area", "Rue Sebastien Mercier, 75015 Paris"],
-      ["Reminder", "Check the Airbnb app 24 hours before arrival, then screenshot the exact address and lockbox instructions immediately."],
+      ["Address", "19 Rue Sebastien Mercier, 75015 Paris"],
+      ["First building door", "Code 19A04"],
+      ["Second building door", "Code 39B87"],
+      ["Apartment", "Take the stairs on the left to the first floor. The apartment door is on the right."],
+      ["Keybox", "The keybox is to the left of the apartment door. Code 112233."],
+      ["Host guide", '<a href="https://my.styqr.fr/6922d5be7c51f" target="_blank" rel="noopener">Open apartment guide</a>'],
     ],
   },
   villa: {
@@ -618,7 +622,7 @@ const trip = {
       title: "Lodging",
       items: [
         ["The Barn Loft", "2545 Tyus Carrollton Road", "Check-in June 20 at 4:00 PM; check-out June 21 at 1:00 PM", ["The Barn Loft"], ["weddingNight"]],
-        ["Paris Airbnb", "Rue Sebastien Mercier, 75015 Paris", "Host Jade; confirmation HMZ2ES5JK9; exact street number pending", ["Paris Airbnb"], ["parisAirbnb"]],
+        ["Paris Airbnb", "19 Rue Sebastien Mercier, 75015 Paris", "Host Jade; confirmation HMZ2ES5JK9; check-in instructions confirmed", ["Paris Airbnb"], ["parisAirbnb"]],
         ["Villa Gianlica", "Praiano", "June 25-30 on the Amalfi Coast", ["Villa Gianlica"], ["villa"]],
         ["Moxy Pompeii", "Torre Annunziata", "June 30-July 1", ["Moxy Pompeii"], ["moxy"]],
       ],
@@ -628,7 +632,6 @@ const trip = {
       items: [
         ["Verify", "Passports in Delta app", "Confirm passport details are entered and accepted before international check-in.", [], [], [["Fly Delta app", DELTA_APP_STORE_URL]]],
         ["Lyft Scheduled", "To and from ATL airport", "Outbound: June 21 for Delta DL84 ATL to Paris at 9:50 PM. Return: July 1 after Delta DL279 Naples to Atlanta arrives at 2:31 PM."],
-        ["Confirm", "Paris lockbox and exact address", "Pending Airbnb details", ["Paris Airbnb"]],
         ["Book", "Eiffel Tower Summit", "Major remaining ticket", ["Eiffel Tower"]],
         ["Get", "500 Euros from ATM", "For Cooking Class and Tips"],
         ["Confirm", "Capri boarding and cooking class time", "Pending activity details", ["Capri"]],
@@ -652,8 +655,8 @@ const trip = {
     ]],
     ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to the Airbnb safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Paris Airbnb", "Square du Vert-Galant"], [
       ["12:30 PM", "Arrive at Paris Charles de Gaulle. Follow signs to passport control, collect checked luggage, go through customs, use ATM if convenient, then follow signs to the official taxi queue."],
-      ["Taxi", "Use only the official taxi line. Destination: Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
-      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. Screenshot lockbox instructions when available in the app."],
+      ["Taxi", "Use only the official taxi line. Destination: 19 Rue Sebastien Mercier, 75015 Paris. Expected cost EUR50-60; expected time 45-60 minutes depending on traffic."],
+      ["3:00 PM", "Airbnb check-in. Host: Jade. Confirmation: HMZ2ES5JK9. First building door code: 19A04. Second building door code: 39B87. Take the stairs on the left to the first floor; the apartment is on the right. The keybox is to the left of the apartment door; code: 112233."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
       ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1410622667; operator confirmation 956656. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
@@ -770,7 +773,7 @@ const trip = {
     ["Pasticceria Pansa", "Amalfi", "Light lunch, pastries, and an easy Piazza del Duomo pause.", ["Pasticceria Pansa"]],
   ],
   transport: [
-    ["CDG Airport to Paris Airbnb", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell driver Rue Sebastien Mercier, 75015 Paris. Expected EUR50-60 and 45-60 minutes.", ["Paris Airbnb"]],
+    ["CDG Airport to Paris Airbnb", "Use an official airport taxi only. Follow taxi signs after baggage and customs. Tell the driver 19 Rue Sebastien Mercier, 75015 Paris. Expected EUR50-60 and 45-60 minutes.", ["Paris Airbnb"]],
     ["Paris Airbnb to Orly", "Use Bolt or taxi. Pickup at 10:15 AM. Goal arrival 11:00 AM because EasyJet bag drop opens 11:15 AM and closes 12:35 PM.", ["Paris Airbnb"]],
     ["Paris to Versailles", "Take the RER C to Versailles Chateau Rive Gauche. Use Google Maps that morning to confirm the best nearby RER C station and departure, then follow signs and crowds to the palace gates after exiting, about a 10-minute walk.", ["Versailles Chateau Rive Gauche", "Palace of Versailles"]],
     ["Naples Airport to Villa Gianlica", "Use villa-arranged private transfer, EUR190 total for two. Provide flight number, arrival time, passenger names, and mobile number. After baggage claim, exit arrivals and look for the driver holding a sign with your names on it.", ["Villa Gianlica"]],
