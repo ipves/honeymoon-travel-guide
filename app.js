@@ -231,6 +231,7 @@ const STAY_CARDS = {
     note: "New Paris stay booked through Airbnb in the 7th arrondissement, near Rue Cler and about a 10-minute walk from the Eiffel Tower.",
     details: [
       ["Reservation", "Confirmed for 2 guests, June 22-25"],
+      ["Confirmation", "HMB53E4XB5"],
       ["Room", "The classic double"],
       ["Check-in", "Monday June 22 after 3:00 PM"],
       ["Check-out", "Thursday June 25 before 11:00 AM"],
@@ -628,7 +629,7 @@ const trip = {
       title: "Lodging",
       items: [
         ["The Barn Loft", "2545 Tyus Carrollton Road", "Check-in June 20 at 4:00 PM; check-out June 21 at 1:00 PM", ["The Barn Loft"], ["weddingNight"]],
-        ["Hotel Beaugency", `<a class="inline-map-link" href="${mapUrl("Hotel Beaugency")}" target="_blank" rel="noopener">21 Rue Duvivier, 75007 Paris</a>`, "Classic double confirmed for 2 guests; check-in after 3:00 PM; EUR33.18 fee due at check-in", ["Hotel Beaugency"], ["hotelBeaugency"], [["Call hotel", "tel:+33147050163"], ["Hotel directions", HOTEL_BEAUGENCY_LOCATION_URL], ["Open Airbnb listing", PARIS_AIRBNB_LISTING_URL]]],
+        ["Hotel Beaugency", `<a class="inline-map-link" href="${mapUrl("Hotel Beaugency")}" target="_blank" rel="noopener">21 Rue Duvivier, 75007 Paris</a>`, "Confirmation HMB53E4XB5; classic double for 2 guests; check-in after 3:00 PM; EUR33.18 fee due at check-in", ["Hotel Beaugency"], ["hotelBeaugency"], [["Call hotel", "tel:+33147050163"], ["Hotel directions", HOTEL_BEAUGENCY_LOCATION_URL], ["Open Airbnb listing", PARIS_AIRBNB_LISTING_URL]]],
         ["Villa Gianlica", "Praiano", "June 25-30 on the Amalfi Coast", ["Villa Gianlica"], ["villa"]],
         ["Moxy Pompeii", "Torre Annunziata", "June 30-July 1", ["Moxy Pompeii"], ["moxy"]],
       ],
@@ -662,7 +663,7 @@ const trip = {
     ["Mon Jun 22", "Paris Arrival + Seine Champagne Cruise", "This is a booked arrival day: get to Hotel Beaugency safely, reset, eat something easy, and make the Seine Champagne Cruise.", ["Hotel Beaugency", "Square du Vert-Galant"], [
       ["12:30 PM", "Arrive at Paris Charles de Gaulle. Follow signs to passport control, collect checked luggage, go through customs, use ATM if convenient, then follow signs to the official taxi queue."],
       ["Taxi", "Use only the official taxi line. Destination: Hotel Beaugency, 21 Rue Duvivier, 75007 Paris. The hotel estimates about 55 minutes from CDG by taxi."],
-      ["3:00 PM", "Check in at Hotel Beaugency for the confirmed classic double room. Have photo ID and a credit card available if requested at reception, and pay the EUR33.18 total hotel fee for two guests over three nights."],
+      ["3:00 PM", "Check in at Hotel Beaugency for the confirmed classic double room. Confirmation: HMB53E4XB5. Have photo ID and a credit card available if requested at reception, and pay the EUR33.18 total hotel fee for two guests over three nights."],
       ["3:30-5:30 PM", "Rest, unpack lightly, shower, change clothes, and charge phones. Easy arrival dinner plan is McDonald's near Beaugrenelle / Eiffel Tower area, with Cafe du Commerce, Le Volant, or Creperie Contemporaine 142 as backups."],
       ["6:30 PM", "Leave Airbnb for Square du Vert-Galant, 15 Place du Pont Neuf. Meeting point is below Pont Neuf; do not stay at street level on the bridge."],
       ["7:15-8:15 PM", "Seine Champagne Cruise. Booking reference 1410622667; operator confirmation 956656. One-hour cruise with champagne or wine and views of Notre-Dame, Louvre, Musee d'Orsay, Eiffel Tower, and the Seine."],
